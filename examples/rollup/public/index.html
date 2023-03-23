@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Connect embedded UIs</title>
+    <meta name="description" content="A demo of Stripe Connect embedded UIs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="”Content-Security-Policy”"
+      content="script-src
+    'https://connect-js.stripe.com'; 'https://js.stripe.com'; img-src *"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <script type="module" src="index.js" defer></script>
+  </head>
+  <body>
+    <div class="container" id="payments">
+    </div>
+    <div class="error" hidden>Something went wrong!</div>
+  </body>
+</html>
