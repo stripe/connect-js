@@ -6,14 +6,14 @@ import pkg from "./package.json";
 
 const PLUGINS = [
   ts({
-    tsconfigOverride: { exclude: ["**/*.test.ts"] },
+    tsconfigOverride: { exclude: ["**/*.test.ts"] }
   }),
   babel({
-    extensions: [".ts", ".js", ".tsx", ".jsx"],
+    extensions: [".ts", ".js", ".tsx", ".jsx"]
   }),
   replace({
-    _VERSION: JSON.stringify(pkg.version),
-  }),
+    _VERSION: JSON.stringify(pkg.version)
+  })
 ];
 
 export default [
@@ -21,8 +21,8 @@ export default [
     input: "src/index.ts",
     output: [
       { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "es" },
+      { file: pkg.module, format: "es" }
     ],
-    plugins: PLUGINS,
-  },
+    plugins: PLUGINS
+  }
 ];
