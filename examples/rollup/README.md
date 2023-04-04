@@ -1,7 +1,5 @@
-# Integrate with Connect embedded UIs
-
-Build a full, working integration using Connect embedded UIs. Included are some basic
-build and run scripts you can use to start up the application.
+# Simple test app for testing the connect-js package
+This is a simple app that renders the embedded payments component and loads the connect-js script using this npm package. Use this app to test out the library.
 
 ## Replace the following variables
 
