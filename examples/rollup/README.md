@@ -24,9 +24,8 @@ pip3 install -r requirements.txt
 ```
 Run npm pack from connect-js and install the tarball in this folder
 npm install --save stripe-connect-js-1.0.0.tgz
-rollup -c
-export FLASK_APP=server.py
-python3 -m flask run --port=4242
+yarn run build
+yarn run server
 ```
 
 3. Go to [http://localhost:4242/index.html](http://localhost:4242/index.html)

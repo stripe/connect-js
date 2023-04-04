@@ -1,54 +1,24 @@
 export type LoadConnect = (...args: Parameters<any>) => Promise<any | null>;
 
-interface IStripeConnect {
-  onLoad?: () => void;
-  init?: (params: IStripeConnectInit) => void;
-}
-interface IStripeConnectInit {
-  publishableKey: string;
-  clientSecret: string;
-  metaOptions?: IStripeMetaOptions;
-}
-
-export interface IStripeMetaOptions {
-  apiKeyOverride: string;
-  merchantIdOverride: string;
-  platformIdOverride: string;
-  livemodeOverride: boolean;
-  hostApp: string;
-}
 declare global {
   interface Window {
-    StripeConnect?: IStripeConnect;
+    StripeConnect?: any;
   }
 }
 
 interface StripeConnectWrapper {
-  stripeConnect: IStripeConnect;
-  initialize: (params: IStripeConnectInit) => void;
+  stripeConnect: any;
+  initialize: (params: any) => void;
 }
 
 const EXISTING_SCRIPT_MESSAGE =
-  "loadStripe.setLoadParameters was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
-const V0_URL = "https://.stripe.com/v0.1";
-const V0_URL_REGEX = /^https:\/\/connect-js\.stripe\.com\/v0.1\/?(\?.*)?$/;
+  "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
+const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
 
 export const findScript = (): HTMLScriptElement | null => {
-  const scripts = document.querySelectorAll<HTMLScriptElement>(
-    `script[src^="${V0_URL}"]`
-  );
-
-  for (let i = 0; i < scripts.length; i++) {
-    const script = scripts[i];
-
-    if (!V0_URL_REGEX.test(script.src)) {
-      continue;
-    }
-
-    return script;
-  }
-
-  return null;
+  return document.querySelectorAll<HTMLScriptElement>(
+    `script[src="${V0_URL}"]`
+  )[0];
 };
 
 const injectScript = (): HTMLScriptElement => {
@@ -59,7 +29,7 @@ const injectScript = (): HTMLScriptElement => {
 
   if (!head) {
     throw new Error(
-      "Expected document.body not to be null. Connect.js requires a <body> element."
+      "Expected document.head not to be null. Connect.js requires a <head> element."
     );
   }
 
@@ -108,7 +78,7 @@ export const loadScript = (): Promise<any> | null => {
           const wrapper = createWrapper(window.StripeConnect);
           resolve(wrapper);
         } else {
-          reject(new Error("Connect.js not available"));
+          reject(new Error("Connect.js did not load the necessary objects"));
         }
       });
 
@@ -117,7 +87,6 @@ export const loadScript = (): Promise<any> | null => {
       });
     } catch (error) {
       reject(error);
-      return;
     }
   });
 
@@ -134,16 +103,15 @@ export const initStripeConnect = (
   return stripeConnectPromise;
 };
 
-const createWrapper = (stripeConnect: IStripeConnect) => {
+const createWrapper = (stripeConnect: any) => {
   const wrapper: StripeConnectWrapper = {
-    stripeConnect: stripeConnect,
-    initialize: (params: IStripeConnectInit) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      window.StripeConnect!.init!({
+    stripeConnect,
+    initialize: (params: any) => {
+      stripeConnect.init({
         publishableKey: params.publishableKey,
-        clientSecret: params.clientSecret
+        clientSecret: params.clientSecret,
       });
-    }
+    },
   };
   return wrapper;
 };

@@ -18,8 +18,9 @@
     "rollup": "^1.27.14",
     "rollup-plugin-babel": "^4.3.3"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "scripts": {  
+    "build": "rollup -c",
+    "server": "FLASK_APP=server.py python -m flask run --port 4242"
   },
   "author": "",
   "license": "ISC"
