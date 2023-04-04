@@ -109,9 +109,9 @@ const createWrapper = (stripeConnect: any) => {
     initialize: (params: any) => {
       stripeConnect.init({
         publishableKey: params.publishableKey,
-        clientSecret: params.clientSecret,
+        clientSecret: params.clientSecret
       });
-    },
+    }
   };
   return wrapper;
 };
