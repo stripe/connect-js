@@ -1,14 +1,29 @@
 export type LoadConnect = (...args: Parameters<any>) => Promise<any | null>;
 
-declare global {
-  interface Window {
-    StripeConnect?: any;
-  }
+type OverlayOption = "dialog" | "drawer";
+
+type UIConfigOptions = {
+  overlay?: OverlayOption;
+  overlayZIndex?: number;
+};
+
+type AppearanceOptions = {
+  colors?: {
+    primary?: string;
+  };
+  fontFamily?: string;
+};
+
+interface IStripeConnectInitParams {
+  publishableKey: string;
+  clientSecret: string;
+  appearance?: AppearanceOptions;
+  uiConfig?: UIConfigOptions;
+  refreshClientSecret?: () => Promise<string>;
 }
 
 interface StripeConnectWrapper {
-  stripeConnect: any;
-  initialize: (params: any) => void;
+  initialize: (params: IStripeConnectInitParams) => void;
 }
 
 const EXISTING_SCRIPT_MESSAGE =
@@ -54,12 +69,12 @@ export const loadScript = (): Promise<any> | null => {
       return;
     }
 
-    if (window.StripeConnect) {
+    if ((window as any).StripeConnect) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
     }
 
-    if (window.StripeConnect) {
-      const wrapper = createWrapper(window.StripeConnect);
+    if ((window as any).StripeConnect) {
+      const wrapper = createWrapper((window as any).StripeConnect);
       resolve(wrapper);
       return;
     }
@@ -74,8 +89,8 @@ export const loadScript = (): Promise<any> | null => {
       }
 
       script.addEventListener("load", () => {
-        if (window.StripeConnect) {
-          const wrapper = createWrapper(window.StripeConnect);
+        if ((window as any).StripeConnect) {
+          const wrapper = createWrapper((window as any).StripeConnect);
           resolve(wrapper);
         } else {
           reject(new Error("Connect.js did not load the necessary objects"));
@@ -105,11 +120,9 @@ export const initStripeConnect = (
 
 const createWrapper = (stripeConnect: any) => {
   const wrapper: StripeConnectWrapper = {
-    stripeConnect,
-    initialize: (params: any) => {
+    initialize: (params: IStripeConnectInitParams) => {
       stripeConnect.init({
-        publishableKey: params.publishableKey,
-        clientSecret: params.clientSecret
+        ...params
       });
     }
   };

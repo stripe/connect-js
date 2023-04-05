@@ -20,8 +20,8 @@ pip3 install -r requirements.txt
 2. Compile and run the server
 
 ```
-Run npm pack from connect-js and install the tarball in this folder
-npm install --save stripe-connect-js-1.0.0.tgz
+Run yarn pack from connect-js and install the tarball in this folder
+yarn add file:stripe-connect-js-v1.0.0.tgz
 yarn run build
 yarn run server
 ```

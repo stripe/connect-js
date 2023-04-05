@@ -1,7 +1,5 @@
 import { loadConnect } from "@stripe/connect-js";
 
-const stripeConnect = await loadConnect();
-
 const fetchClientSecret = async () => {
   // Fetch the AccountSession client secret
   const response = await fetch("/account_session", { method: "POST" });
@@ -19,8 +17,8 @@ const fetchClientSecret = async () => {
     return clientSecret;
   }
 };
+const stripeConnect = await loadConnect();
 
-window.StripeConnect ||= {};
 (async () => {
   const clientSecret = await fetchClientSecret();
   if (clientSecret) {
