@@ -11,7 +11,7 @@
     "test:types": "zx ./tests/types/scripts/test.mjs",
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
     "typecheck": "tsc --noEmit",
-    "build": "yarn clean && yarn rollup -c",
+    "build": "yarn clean && rollup -c",
     "validate-change": "yarn run typescript && yarn run lint && yarn run test",
     "clean": "rimraf dist",
     "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
