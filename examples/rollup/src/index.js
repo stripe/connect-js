@@ -17,14 +17,11 @@ const fetchClientSecret = async () => {
     return clientSecret;
   }
 };
-const stripeConnect = await loadConnect();
 
-(async () => {
-  const clientSecret = await fetchClientSecret();
-  if (clientSecret) {
-    stripeConnect.initialize({
-      publishableKey: "{{publishable key}}",
-      clientSecret: clientSecret
-    });
-  }
-})();
+const clientSecret = await fetchClientSecret();
+if (clientSecret) {
+  stripeConnect.initialize({
+    publishableKey: "{{publishable key}}",
+    clientSecret: clientSecret
+  });
+}
