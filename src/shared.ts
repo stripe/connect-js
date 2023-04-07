@@ -122,7 +122,10 @@ const createWrapper = (stripeConnect: any) => {
   const wrapper: StripeConnectWrapper = {
     initialize: (params: IStripeConnectInitParams) => {
       stripeConnect.init({
-        ...params
+        ...params,
+        metaOptions: {
+          sdk: true
+        }
       });
     }
   };
