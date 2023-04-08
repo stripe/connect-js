@@ -53,9 +53,9 @@ const injectScript = (): HTMLScriptElement => {
   return script;
 };
 
-let stripePromise: Promise<any> | null = null;
+let stripePromise: Promise<any | null> | null = null;
 
-export const loadScript = (): Promise<any> | null => {
+export const loadScript = (): Promise<any | null> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
     return stripePromise;
