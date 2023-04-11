@@ -121,9 +121,11 @@ export const initStripeConnect = (
 const createWrapper = (stripeConnect: any) => {
   const wrapper: StripeConnectWrapper = {
     initialize: (params: IStripeConnectInitParams) => {
+      const metaOptions = (params as any).metaOptions ?? {};
       stripeConnect.init({
         ...params,
         metaOptions: {
+          ...metaOptions,
           sdk: true
         }
       });
