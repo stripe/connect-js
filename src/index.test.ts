@@ -11,7 +11,7 @@ describe("Stripe module loader", () => {
     jest.resetModules();
   });
 
-  it("injects the Stripe script as a side effect after a tick", () => {
+  it("injects the Connect.js script as a side effect after a tick", () => {
     require("./index");
 
     expect(
