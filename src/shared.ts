@@ -1,30 +1,6 @@
+import { StripeConnectWrapper, IStripeConnectInitParams } from "../types";
+
 export type LoadConnect = (...args: Parameters<any>) => Promise<any | null>;
-
-type OverlayOption = "dialog" | "drawer";
-
-type UIConfigOptions = {
-  overlay?: OverlayOption;
-  overlayZIndex?: number;
-};
-
-type AppearanceOptions = {
-  colors?: {
-    primary?: string;
-  };
-  fontFamily?: string;
-};
-
-interface IStripeConnectInitParams {
-  publishableKey: string;
-  clientSecret: string;
-  appearance?: AppearanceOptions;
-  uiConfig?: UIConfigOptions;
-  refreshClientSecret?: () => Promise<string>;
-}
-
-interface StripeConnectWrapper {
-  initialize: (params: IStripeConnectInitParams) => void;
-}
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
