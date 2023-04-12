@@ -35,5 +35,3 @@ export declare const loadScript: () => Promise<any | null>;
 export declare const initStripeConnect: (
   stripeConnectPromise: StripeConnectWrapper | null
 ) => any | null;
-
-export {};
