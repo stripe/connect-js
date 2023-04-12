@@ -24,5 +24,13 @@ export default [
       { file: pkg.module, format: "es" }
     ],
     plugins: PLUGINS
+  },
+  {
+    input: "src/pure.ts",
+    output: [
+      { file: "dist/pure.js", format: "cjs" },
+      { file: "dist/pure.esm.js", format: "es" }
+    ],
+    plugins: PLUGINS
   }
 ];
