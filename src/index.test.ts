@@ -1,31 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+import { before, after, SCRIPT_SELECTOR } from "./utils/testHelpers";
 
 describe("Stripe module loader", () => {
-  afterEach(() => {
-    const script = document.querySelector(
-      'script[src="https://connect-js.stripe.com/v0.1/connect.js"], script[src="https://connect-js.stripe.com/v0.1/connect.js"]'
-    );
-    if (script && script.parentElement) {
-      script.parentElement.removeChild(script);
-    }
-    jest.resetModules();
-  });
+  beforeEach(() => before());
+  afterEach(() => after());
 
   it("injects the Connect.js script as a side effect after a tick", () => {
     require("./index");
 
-    expect(
-      document.querySelector(
-        'script[src="https://connect-js.stripe.com/v0.1/connect.js"]'
-      )
-    ).toBe(null);
+    expect(document.querySelector(SCRIPT_SELECTOR)).toBe(null);
+
+    jest.runAllTimers();
 
     return Promise.resolve().then(() => {
-      expect(
-        document.querySelector(
-          'script[src="https://connect-js.stripe.com/v0.1/connect.js"]'
-        )
-      ).not.toBe(null);
+      expect(document.querySelector(SCRIPT_SELECTOR)).not.toBe(null);
     });
   });
 });
