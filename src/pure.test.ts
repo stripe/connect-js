@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { SCRIPT_SELECTOR } from "./utils/jestSetup";
+
+import { SCRIPT_SELECTOR } from "./utils/jestHelpers";
 
 describe("pure module", () => {
   test("does not inject the script if loadConnect is not called", async () => {
