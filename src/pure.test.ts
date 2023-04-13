@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { before, after, SCRIPT_SELECTOR } from "./utils/testHelpers";
+import { SCRIPT_SELECTOR } from "./utils/jestSetup";
 
 describe("pure module", () => {
-  beforeEach(() => before());
-  afterEach(() => after());
-
   test("does not inject the script if loadConnect is not called", async () => {
     require("./pure");
 
