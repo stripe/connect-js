@@ -11,5 +11,6 @@ module.exports = {
     // Suppress noise about enabling `esModuleInterop`
     "ts-jest": { diagnostics: { ignoreCodes: [151001] } },
     _VERSION: true
-  }
+  },
+  setupFilesAfterEnv: ["<rootDir>/src/utils/jestSetup.ts"]
 };

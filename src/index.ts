@@ -17,3 +17,5 @@ export const loadConnect: LoadConnect = () => {
 
   return stripePromise.then(maybeConnect => initStripeConnect(maybeConnect));
 };
+
+export {};
