@@ -15,7 +15,7 @@ stripePromise.catch((err: Error) => {
 export const loadConnect: LoadConnect = () => {
   loadCalled = true;
 
-  return stripePromise.then(maybeConnect => initStripeConnect(maybeConnect));
+  return stripePromise.then((maybeConnect) => initStripeConnect(maybeConnect));
 };
 
 export {};
