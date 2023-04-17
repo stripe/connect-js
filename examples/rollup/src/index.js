@@ -19,9 +19,20 @@ const fetchClientSecret = async () => {
 };
 
 const clientSecret = await fetchClientSecret();
+const stripeConnect = await loadConnect();
 if (clientSecret) {
   stripeConnect.initialize({
     publishableKey: "{{publishable key}}",
     clientSecret: clientSecret
+  });
+  const payments = connectInstance.create("stripe-connect-payments");
+  document.getElementById("div1").append(payments);
+  connectInstance.update({
+    appearance: {
+      colorPrimary: "#7F3D73",
+      colors: {
+        primary: "#7F3D73",
+      },
+    },
   });
 }

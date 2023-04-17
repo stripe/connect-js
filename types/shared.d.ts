@@ -25,7 +25,12 @@ export interface IStripeConnectInitParams {
 }
 
 export interface StripeConnectWrapper {
-  initialize: (params: IStripeConnectInitParams) => void;
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
+
+export interface StripeConnectInstance {
+  create: (tagName: string) => HTMLElement | null;
+  update: (options: any) => void;
 }
 
 export declare const findScript: () => HTMLScriptElement | null;

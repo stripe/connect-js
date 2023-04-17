@@ -100,14 +100,14 @@ const createWrapper = (stripeConnect: any) => {
   const wrapper: StripeConnectWrapper = {
     initialize: (params: IStripeConnectInitParams) => {
       const metaOptions = (params as any).metaOptions ?? {};
-      stripeConnect.init({
+      return stripeConnect.init({
         ...params,
         metaOptions: {
           ...metaOptions,
-          sdk: true
-        }
+          sdk: true,
+        },
       });
-    }
+    },
   };
   return wrapper;
 };
