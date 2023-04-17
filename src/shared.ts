@@ -104,10 +104,10 @@ const createWrapper = (stripeConnect: any) => {
         ...params,
         metaOptions: {
           ...metaOptions,
-          sdk: true,
-        },
+          sdk: true
+        }
       });
-    },
+    }
   };
   return wrapper;
 };
