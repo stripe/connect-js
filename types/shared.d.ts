@@ -16,7 +16,6 @@ export declare type AppearanceOptions = {
 
 export type IStripeConnectUpdateParams = {
   appearance?: AppearanceOptions;
-  uiConfig?: UIConfigOptions;
 };
 
 export interface IStripeConnectInitParams {
