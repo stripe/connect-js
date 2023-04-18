@@ -10,10 +10,13 @@ export declare type UIConfigOptions = {
 };
 
 export declare type AppearanceOptions = {
-  colors?: {
-    primary?: string;
-  };
+  colorPrimary?: string;
   fontFamily?: string;
+};
+
+export type IStripeConnectUpdateParams = {
+  appearance?: AppearanceOptions;
+  uiConfig?: UIConfigOptions;
 };
 
 export interface IStripeConnectInitParams {
@@ -25,8 +28,21 @@ export interface IStripeConnectInitParams {
 }
 
 export interface StripeConnectWrapper {
-  initialize: (params: IStripeConnectInitParams) => void;
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
 }
+
+export interface StripeConnectInstance {
+  create: (tagName: ConnectElementTagName) => HTMLElement | null;
+  update: (options: IStripeConnectUpdateParams) => void;
+}
+
+export type ConnectElementTagName =
+  | "stripe-connect-payments"
+  | "stripe-connect-payouts"
+  | "stripe-connect-account-onboarding"
+  | "stripe-connect-account-management"
+  | "stripe-connect-instant-payouts"
+  | "stripe-connect-payment-details";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
