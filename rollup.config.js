@@ -2,7 +2,7 @@ import babel from "rollup-plugin-babel";
 import ts from "rollup-plugin-typescript2";
 import replace from "@rollup/plugin-replace";
 
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json";
 
 const PLUGINS = [
   ts({

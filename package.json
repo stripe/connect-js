@@ -6,7 +6,6 @@
   "module": "dist/connect.esm.js",
   "types": "types/index.d.ts",
   "typings": "types/index.d.ts",
-  "type": "module",
   "scripts": {
     "test": "yarn lint && yarn test:unit --passWithNoTests && yarn typecheck",
     "test:unit": "jest",
