@@ -21,19 +21,17 @@ npm install @stripe/connect-js
 ### `loadConnect`
 
 This function returns a `Promise` that resolves with a newly created `StripeConnect`
-object once Connect.js has loaded. It takes the same parameters passed when
-directly initializing a `StripeConnect` instance. If necessary, it will load Connect.js for you by inserting the Connect.js script tag.
+object once Connect.js has loaded. If necessary, it will load Connect.js for you by inserting the Connect.js script tag.
 
-The `StripeConnect` returns a `ConnectInstance` once you initialize it with a publishable key and a client secret returned from the Account Session API call.
+The `stripeConnect.initalize` function returns a `ConnectInstance` once you initialize it with a publishable key and a client secret returned from the [Account Session API](https://stripe.com/docs/api/account_sessions/create) call.
 
 ```js
 import { loadConnect } from "@stripe/connect-js";
 
-const connect = await loadConnect();
 const stripeConnect = await loadConnect();
 const connectInstance = stripeConnect.initialize({
   publishableKey: "pk test123",
-  clientSecret: "{{client secret}}",
+  clientSecret: "{{client secret}}"
 });
 ```
 
