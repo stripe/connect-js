@@ -5,3 +5,4 @@ dist
 *.log
 .vim
 /examples/rollup/public/index.js
+yalc.lock
