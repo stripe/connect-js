@@ -20,7 +20,9 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "server": "FLASK_APP=server.py python -m flask run --port 4242"
+    "server": "FLASK_APP=server.py python -m flask run --port 4242",
+    "local-install": "yalc add @stripe/connect-js@1.0.0 && yalc add @stripe/react-connect-js@1.0.0",
+    "start": "yarn build && yarn server"
   },
   "author": "",
   "license": "ISC"

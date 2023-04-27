@@ -20,10 +20,9 @@ pip3 install -r requirements.txt
 2. Compile and run the server
 
 ```
-Run yarn pack from connect-js and install the tarball in this folder
-yarn add file:stripe-connect-js-v1.0.0.tgz
-yarn run build
-yarn run server
+Run 
+yarn local-test-install --> download packages from yalc cache
+yarn start --> runs rollup to compile and starts the server
 ```
 
 3. Go to [http://localhost:4242/index.html](http://localhost:4242/index.html)
