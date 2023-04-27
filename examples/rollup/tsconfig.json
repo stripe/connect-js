@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "jsx": "react",
+    "module": "es6",
+    "noImplicitAny": true,
+    "sourceMap": false,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*.tsx", "src/**/*.ts"]
+}

@@ -4,19 +4,28 @@
   "description": "Build a full, working integration using Connect embedded UIs. Included are some basic build and run scripts you can use to start up the application.",
   "main": "index.js",
   "dependencies": {
-    "@stripe/connect-js": "file:stripe-connect-js-1.0.0.tgz",
-    "connect-js": "^0.5.8"
+    "@stripe/connect-js": "file:.yalc/@stripe/connect-js",
+    "@stripe/react-connect-js": "file:.yalc/@stripe/react-connect-js",
+    "connect-js": "^0.5.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.18.6",
     "@babel/runtime": "^7.7.7",
-    "@rollup/plugin-commonjs": "^11.0.0",
-    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/react-dom": "^18.2.1",
     "rimraf": "^3.0.0",
-    "rollup": "^1.27.14",
-    "rollup-plugin-babel": "^4.3.3"
+    "rollup": "^3.21.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "tsc": "^2.0.4"
   },
   "scripts": {
     "build": "rollup -c",
