@@ -1,6 +1,4 @@
-export declare type LoadConnect = (
-  ...args: Parameters<any>
-) => Promise<any | null>;
+export declare type LoadConnect = () => Promise<StripeConnectWrapper>;
 
 export declare type OverlayOption = "dialog" | "drawer";
 

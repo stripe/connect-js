@@ -1,8 +1,6 @@
 import { StripeConnectWrapper, IStripeConnectInitParams } from "../types";
 
-export type LoadConnect = (
-  ...args: Parameters<any>
-) => Promise<StripeConnectWrapper | null>;
+export type LoadConnect = () => Promise<StripeConnectWrapper>;
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
@@ -31,7 +29,7 @@ const injectScript = (): HTMLScriptElement => {
   return script;
 };
 
-let stripePromise: Promise<StripeConnectWrapper | null> | null = null;
+let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
 export const loadScript = (): Promise<StripeConnectWrapper | null> => {
   // Ensure that we only attempt to load Connect.js at most once
@@ -40,13 +38,6 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
   }
 
   stripePromise = new Promise((resolve, reject) => {
-    if (typeof window === "undefined" || typeof document === "undefined") {
-      // Resolve to null when imported server side. This makes the module
-      // safe to import in an isomorphic code base.
-      resolve(null);
-      return;
-    }
-
     if ((window as any).StripeConnect) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
     }
