@@ -5,9 +5,9 @@ This is a simple app that renders the embedded payments component and loads the 
 
 Ensure that you have replaced the following placeholders in the downloaded code sample:
 
-- {{CONNECTED_ACCOUNT_ID}}
-- pk_INSERT_YOUR_PUBLISHABLE_KEY
-- sk_INSERT_YOUR_SECRET_KEY
+- `{{CONNECTED_ACCOUNT_ID}}`
+- `pk_INSERT_YOUR_PUBLISHABLE_KEY`
+- `sk_INSERT_YOUR_SECRET_KEY`
 
 ## Running the sample
 
