@@ -1,7 +1,7 @@
 # Connect.js ES Module
 
-Use Connect.js as an ES module.
-This package contains initialization logic for Connect embedded components along with related types.
+The [Connect.js library](https://stripe.com/docs/connect/get-started-connect-embedded-components) and its supporting API allows you to add connected account dashboard functionality to your website.
+This NPM package contains initialization logic for Connect embedded components along with related types.
 
 ## Installation
 
@@ -11,7 +11,7 @@ Use `npm` to install the Connect.js module:
 npm install @stripe/connect-js
 ```
 
-## Connect.js Documentation
+## Documentation
 
 - [Connect embedded UIs](https://stripe.com/docs/connect/get-started-connect-embedded-uis)
 - [Quickstart guide](https://stripe.com/docs/connect/connect-embedded-uis/quickstart)
@@ -30,7 +30,7 @@ import { loadConnect } from "@stripe/connect-js";
 
 const stripeConnect = await loadConnect();
 const connectInstance = stripeConnect.initialize({
-  publishableKey: "pk test123",
+  publishableKey: "{{pk test123}}",
   clientSecret: "{{client secret}}"
 });
 ```
