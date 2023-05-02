@@ -9,4 +9,4 @@ MarkupSafe==2.0.1
 requests==2.26.0
 stripe==5.1.0b1
 toml==0.10.2
-Werkzeug==2.0.1
+Werkzeug==2.2.3
