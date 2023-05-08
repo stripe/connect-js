@@ -22,6 +22,7 @@ export interface IStripeConnectInitParams {
   appearance?: AppearanceOptions;
   uiConfig?: UIConfigOptions;
   refreshClientSecret?: () => Promise<string>;
+  locale?: string;
 }
 
 export interface StripeConnectWrapper {
