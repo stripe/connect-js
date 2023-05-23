@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Let Babel deal with transpiling new language features
-    "target": "esnext",
+    "target": "ES6",
 
     // These are overridden by the Rollup plugin, but are left here in case you
     // run `tsc` directly for typechecking or debugging purposes

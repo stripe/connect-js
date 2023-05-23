@@ -126,7 +126,7 @@ echo "Installing dependencies according to lockfile"
 yarn -s install --frozen-lockfile
 
 echo "Linting, testing, and building"
-yarn -s run ci
+yarn -s run test
 
 echo "Tagging and publishing $RELEASE_TYPE release"
 yarn -s --ignore-scripts publish --$RELEASE_TYPE --access=public
