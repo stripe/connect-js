@@ -41,8 +41,7 @@ export type ConnectElementTagName =
   | "stripe-connect-account-management"
   | "stripe-connect-instant-payouts"
   | "stripe-connect-payment-details"
-  | "stripe-connect-notification-banner"
-  | "stripe-connect-transactions";
+  | "stripe-connect-notification-banner";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
