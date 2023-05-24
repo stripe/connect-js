@@ -30,20 +30,9 @@ export interface StripeConnectWrapper {
 }
 
 export interface StripeConnectInstance {
-  create: (tagName: ConnectElementTagName) => HTMLElement | null;
+  create: (tagName: string) => HTMLElement | null;
   update: (options: IStripeConnectUpdateParams) => void;
 }
-
-export type ConnectElementTagName =
-  | "stripe-connect-payments"
-  | "stripe-connect-payouts"
-  | "stripe-connect-account-onboarding"
-  | "stripe-connect-account-management"
-  | "stripe-connect-instant-payouts"
-  | "stripe-connect-payment-details"
-  | "stripe-connect-notification-banner"
-  | "stripe-connect-transactions";
-
 export declare const findScript: () => HTMLScriptElement | null;
 
 export declare const loadScript: () => Promise<any | null>;
