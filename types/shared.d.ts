@@ -127,11 +127,7 @@ export interface StripeConnectInstance {
 export type ConnectElementTagName =
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
-  | "stripe-connect-account-onboarding"
-  | "stripe-connect-account-management"
-  | "stripe-connect-instant-payouts"
-  | "stripe-connect-payment-details"
-  | "stripe-connect-notification-banner";
+  | "stripe-connect-payment-details";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
