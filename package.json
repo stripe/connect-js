@@ -1,6 +1,6 @@
 {
   "name": "@stripe/connect-js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Connect.js loading utility package",
   "main": "dist/connect.js",
   "module": "dist/connect.esm.js",
