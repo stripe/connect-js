@@ -98,6 +98,9 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true
         }
       });
+    },
+    logout: async () => {
+      await stripeConnect.logout();
     }
   };
   return wrapper;
