@@ -117,6 +117,7 @@ export interface IStripeConnectInitParams {
 
 export interface StripeConnectWrapper {
   initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+  logout: () => Promise<void>;
 }
 
 export interface StripeConnectInstance {
