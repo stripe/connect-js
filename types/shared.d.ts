@@ -123,7 +123,6 @@ export interface StripeConnectWrapper {
 export interface StripeConnectInstance {
   create: (tagName: ConnectElementTagName) => HTMLElement | null;
   update: (options: IStripeConnectUpdateParams) => void;
-  setReactSdkAnalytics: (version: string) => void;
 }
 
 export type ConnectElementTagName =
