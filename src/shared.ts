@@ -98,14 +98,14 @@ const createWrapper = (stripeConnect: any) => {
           ...metaOptions,
           sdk: true,
           sdkOptions: {
-            sdkVersion: version,
-          },
-        },
+            sdkVersion: version
+          }
+        }
       });
     },
     logout: async () => {
       await stripeConnect.logout();
-    },
+    }
   };
   return wrapper;
 };
