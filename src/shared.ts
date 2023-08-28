@@ -1,3 +1,4 @@
+import { version } from ".././package.json";
 import { StripeConnectWrapper, IStripeConnectInitParams } from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
@@ -95,7 +96,10 @@ const createWrapper = (stripeConnect: any) => {
         ...params,
         metaOptions: {
           ...metaOptions,
-          sdk: true
+          sdk: true,
+          sdkOptions: {
+            sdkVersion: version
+          }
         }
       });
     },

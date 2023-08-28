@@ -6,7 +6,6 @@
     // These are overridden by the Rollup plugin, but are left here in case you
     // run `tsc` directly for typechecking or debugging purposes
     "outDir": "./dist",
-    "rootDir": "./src",
     "declaration": true,
     "declarationDir": "types",
     "module": "esnext",
@@ -15,7 +14,8 @@
     "allowJs": false,
     "removeComments": false,
     "strict": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
   "include": ["src", "types/index.d.ts", "types/shared.d.ts"]
 }
