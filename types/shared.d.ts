@@ -116,12 +116,32 @@ export interface IStripeConnectInitParams {
 }
 
 export interface StripeConnectWrapper {
+  /**
+   * Initializes a Connect JS instance that can be used to create and update Connect elements.
+   * @param params Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
+   * @returns A Connect JS instance.
+   */
   initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+
+  /**
+   * Logs the user out of Connect JS sessions
+   * @returns A promise that resolves when the user is logged out.
+   */
   logout: () => Promise<void>;
 }
 
 export interface StripeConnectInstance {
+  /**
+   * Creates a Connect element.
+   * @tagName Name of the Connect element to create.
+   * @returns An HTML Connect element
+   */
   create: (tagName: ConnectElementTagName) => HTMLElement | null;
+
+  /**
+   * Updates the Connect instance with new parameters.
+   * @options New parameters to update the Connect instance with.
+   */
   update: (options: IStripeConnectUpdateParams) => void;
 }
 
