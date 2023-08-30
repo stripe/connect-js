@@ -137,7 +137,8 @@ export interface StripeConnectInstance {
    * @options New parameters to update the Connect instance with.
    */
   update: (options: IStripeConnectUpdateParams) => void;
-    /**
+
+  /**
    * Logs the user out of Connect JS sessions
    * @returns A promise that resolves when the user is logged out.
    */
