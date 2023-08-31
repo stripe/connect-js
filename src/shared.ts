@@ -102,9 +102,6 @@ const createWrapper = (stripeConnect: any) => {
           }
         }
       });
-    },
-    logout: async () => {
-      await stripeConnect.logout();
     }
   };
   return wrapper;

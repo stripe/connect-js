@@ -122,12 +122,6 @@ export interface StripeConnectWrapper {
    * @returns A Connect JS instance.
    */
   initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
-
-  /**
-   * Logs the user out of Connect JS sessions
-   * @returns A promise that resolves when the user is logged out.
-   */
-  logout: () => Promise<void>;
 }
 
 export interface StripeConnectInstance {
@@ -143,6 +137,12 @@ export interface StripeConnectInstance {
    * @options New parameters to update the Connect instance with.
    */
   update: (options: IStripeConnectUpdateParams) => void;
+
+  /**
+   * Logs the user out of Connect JS sessions
+   * @returns A promise that resolves when the user is logged out.
+   */
+  logout: () => Promise<void>;
 }
 
 export type ConnectElementHTMLName =
