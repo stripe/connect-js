@@ -145,12 +145,11 @@ export interface StripeConnectInstance {
   logout: () => Promise<void>;
 }
 
-export type ConnectElementHTMLName =
-  | "stripe-connect-payments"
-  | "stripe-connect-payouts"
-  | "stripe-connect-payment-details";
-
-export type ConnectElementTagName = "payments" | "payouts" | "payment-details";
+export type ConnectElementTagName =
+  | "payments"
+  | "payouts"
+  | "payment-details"
+  | "account-onboarding";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
