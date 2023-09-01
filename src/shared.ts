@@ -3,7 +3,7 @@ import {
   StripeConnectWrapper,
   IStripeConnectInitParams,
   ConnectElementTagName,
-  ConnectElementHTMLName
+  ConnectElementHTMLName,
 } from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
@@ -15,7 +15,7 @@ const componentNameMapping: Record<
   payments: "stripe-connect-payments",
   payouts: "stripe-connect-payouts",
   "payment-details": "stripe-connect-payment-details",
-  onboarding: "stripe-connect-account-onboarding"
+  "account-onboarding": "stripe-connect-account-onboarding",
 };
 
 const EXISTING_SCRIPT_MESSAGE =
@@ -113,9 +113,9 @@ const createWrapper = (stripeConnect: any) => {
           ...metaOptions,
           sdk: true,
           sdkOptions: {
-            sdkVersion: version
-          }
-        }
+            sdkVersion: version,
+          },
+        },
       });
       const oldCreate = stripeConnectInstance.create.bind(
         stripeConnectInstance
@@ -125,7 +125,7 @@ const createWrapper = (stripeConnect: any) => {
         return oldCreate(htmlName);
       };
       return stripeConnectInstance;
-    }
+    },
   };
   return wrapper;
 };
