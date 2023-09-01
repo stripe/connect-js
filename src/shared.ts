@@ -2,11 +2,16 @@ import { version } from ".././package.json";
 import {
   StripeConnectWrapper,
   IStripeConnectInitParams,
-  ConnectElementTagName,
-  ConnectElementHTMLName
+  ConnectElementTagName
 } from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
+
+type ConnectElementHTMLName =
+  | "stripe-connect-payments"
+  | "stripe-connect-payouts"
+  | "stripe-connect-payment-details"
+  | "stripe-connect-account-onboarding";
 
 const componentNameMapping: Record<
   ConnectElementTagName,
@@ -117,11 +122,16 @@ const createWrapper = (stripeConnect: any) => {
           }
         }
       });
+
+      // We wrap create so we can map its different strings to supported components
       const oldCreate = stripeConnectInstance.create.bind(
         stripeConnectInstance
       );
       stripeConnectInstance.create = (tagName: ConnectElementTagName) => {
-        const htmlName = componentNameMapping[tagName];
+        let htmlName = componentNameMapping[tagName];
+        if (!htmlName) {
+          htmlName = tagName as ConnectElementHTMLName;
+        }
         return oldCreate(htmlName);
       };
       return stripeConnectInstance;
