@@ -10,28 +10,28 @@ export declare type UIConfigOptions = {
 export declare type AppearanceOptions = {
   colorPrimary?: string;
   // Primary Button
-  colorPrimaryButtonBorder?: string;
-  colorPrimaryButtonBackground?: string;
-  colorPrimaryButtonText?: string;
+  buttonPrimaryColorBorder?: string;
+  buttonPrimaryColorBackground?: string;
+  buttonPrimaryColorText?: string;
   // Secondary Button
-  colorSecondaryButtonBorder?: string;
-  colorSecondaryButtonBackground?: string;
-  colorSecondaryButtonText?: string;
+  buttonSecondaryColorBorder?: string;
+  buttonSecondaryColorBackground?: string;
+  buttonSecondaryColorText?: string;
   // Link
-  colorPrimaryLinkText?: string;
-  colorSecondaryLinkText?: string;
+  actionPrimaryColorText?: string;
+  actionSecondaryColorText?: string;
   // Border
   colorBorder?: string;
   // Form
-  colorFormHighlightBorder?: string;
-  colorFormAccent?: string;
+  formHighlightColorBorder?: string;
+  formAccentColor?: string;
   // Text
   colorText?: string;
   colorSecondaryText?: string;
   // Background
   colorBackground?: string;
-  colorOffsetBackground?: string;
-  colorFormBackground?: string;
+  offsetBackgroundColor?: string;
+  formBackgroundColor?: string;
 
   // Feedback Colors
   colorDanger?: string;
@@ -58,48 +58,52 @@ export declare type AppearanceOptions = {
 
   // Border Sizing
   borderRadius?: string;
-  borderRadiusButton?: string;
-  borderRadiusForm?: string;
-  borderRadiusBadge?: string;
+  buttonBorderRadius?: string;
+  formBorderRadius?: string;
+  badgeBorderRadius?: string;
+  overlayBorderRadius?: string;
 
-  // Body Typography
-  bodyLargeFontSize?: string;
-  bodyLargeFontWeight?: string;
-  bodyMediumFontSize?: string;
-  bodyMediumFontWeight?: string;
-  bodySmallFontSize?: string;
-  bodySmallFontWeight?: string;
-
-  // Label Typography
-  labelLargeFontSize?: string;
-  labelLargeFontWeight?: string;
-  labelLargeTextTransform?: string;
-  labelMediumFontSize?: string;
-  labelMediumFontWeight?: string;
-  labelMediumTextTransform?: string;
-  labelSmallFontSize?: string;
-  labelSmallFontWeight?: string;
-  labelSmallTextTransform?: string;
-
-  // Heading Typography
-  headingXLargeFontSize?: string;
-  headingXLargeFontWeight?: string;
-  headingXLargeTextTransform?: string;
-  headingLargeFontSize?: string;
-  headingLargeFontWeight?: string;
-  headingLargeTextTransform?: string;
-  headingMediumFontSize?: string;
-  headingMediumFontWeight?: string;
-  headingMediumTextTransform?: string;
-  headingSmallFontSize?: string;
-  headingSmallFontWeight?: string;
-  headingSmallTextTransform?: string;
-  headingXSmallFontSize?: string;
-  headingXSmallFontWeight?: string;
-  headingXSmallTextTransform?: string;
+  // Font Sizing
+  fontSizeBase?: string;
 
   // Spacing
-  spacingScale?: string;
+  spacingUnit?: string;
+
+  // Body Typography
+  bodyLgFontSize?: string;
+  bodyLgFontWeight?: string;
+  bodyMdFontSize?: string;
+  bodyMdFontWeight?: string;
+  bodySmFontSize?: string;
+  bodySmFontWeight?: string;
+
+  // Label Typography
+  labelLgFontSize?: string;
+  labelLgFontWeight?: string;
+  labelLgTextTransform?: string;
+  labelMdFontSize?: string;
+  labelMdFontWeight?: string;
+  labelMdTextTransform?: string;
+  labelSmFontSize?: string;
+  labelSmFontWeight?: string;
+  labelSmTextTransform?: string;
+
+  // Heading Typography
+  headingXlFontSize?: string;
+  headingXlFontWeight?: string;
+  headingXlTextTransform?: string;
+  headingLgFontSize?: string;
+  headingLgFontWeight?: string;
+  headingLgTextTransform?: string;
+  headingMdFontSize?: string;
+  headingMdFontWeight?: string;
+  headingMdTextTransform?: string;
+  headingSmFontSize?: string;
+  headingSmFontWeight?: string;
+  headingSmTextTransform?: string;
+  headingXsFontSize?: string;
+  headingXsFontWeight?: string;
+  headingXsTextTransform?: string;
 };
 
 export type IStripeConnectUpdateParams = {
