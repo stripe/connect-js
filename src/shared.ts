@@ -1,7 +1,22 @@
 import { version } from ".././package.json";
-import { StripeConnectWrapper, IStripeConnectInitParams } from "../types";
+import {
+  StripeConnectWrapper,
+  IStripeConnectInitParams,
+  ConnectElementTagName,
+  ConnectElementHTMLName,
+} from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
+
+const componentNameMapping: Record<
+  ConnectElementTagName,
+  ConnectElementHTMLName
+> = {
+  payments: "stripe-connect-payments",
+  payouts: "stripe-connect-payouts",
+  "payment-details": "stripe-connect-payment-details",
+  onboarding: "stripe-connect-account-onboarding",
+};
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
@@ -92,17 +107,25 @@ const createWrapper = (stripeConnect: any) => {
   const wrapper: StripeConnectWrapper = {
     initialize: (params: IStripeConnectInitParams) => {
       const metaOptions = (params as any).metaOptions ?? {};
-      return stripeConnect.init({
+      const stripeConnectInstance = stripeConnect.init({
         ...params,
         metaOptions: {
           ...metaOptions,
           sdk: true,
           sdkOptions: {
-            sdkVersion: version
-          }
-        }
+            sdkVersion: version,
+          },
+        },
       });
-    }
+      const oldCreate = stripeConnectInstance.create.bind(
+        stripeConnectInstance
+      );
+      stripeConnectInstance.create = (tagName: ConnectElementTagName) => {
+        const htmlName = componentNameMapping[tagName];
+        return oldCreate(htmlName);
+      };
+      return stripeConnectInstance;
+    },
   };
   return wrapper;
 };

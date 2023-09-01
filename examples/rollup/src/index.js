@@ -28,7 +28,7 @@ if (clientSecret) {
       colorPrimary: "#228403",
     }
   });
-  const payments = connectInstance.create("stripe-connect-payments");
+  const payments = connectInstance.create("payments");
   document.getElementById("payments").append(payments);
   connectInstance.update({
     appearance: {

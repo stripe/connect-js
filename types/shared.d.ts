@@ -148,9 +148,14 @@ export interface StripeConnectInstance {
 export type ConnectElementHTMLName =
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
-  | "stripe-connect-payment-details";
+  | "stripe-connect-payment-details"
+  | "stripe-connect-account-onboarding";
 
-export type ConnectElementTagName = "payments" | "payouts" | "payment-details";
+export type ConnectElementTagName =
+  | "payments"
+  | "payouts"
+  | "payment-details"
+  | "onboarding";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
