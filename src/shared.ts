@@ -2,7 +2,7 @@ import { version } from ".././package.json";
 import {
   StripeConnectWrapper,
   IStripeConnectInitParams,
-  ConnectElementTagName
+  ConnectElementTagName,
 } from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
@@ -20,7 +20,7 @@ const componentNameMapping: Record<
   payments: "stripe-connect-payments",
   payouts: "stripe-connect-payouts",
   "payment-details": "stripe-connect-payment-details",
-  "account-onboarding": "stripe-connect-account-onboarding"
+  "account-onboarding": "stripe-connect-account-onboarding",
 };
 
 const EXISTING_SCRIPT_MESSAGE =
@@ -118,10 +118,10 @@ const createWrapper = (stripeConnect: any) => {
           ...metaOptions,
           sdk: true,
           sdkOptions: {
-            sdkVersion: version
-          }
-        }
-      });
+            sdkVersion: version,
+          },
+        },
+      }).connect;
 
       // We wrap create so we can map its different strings to supported components
       const oldCreate = stripeConnectInstance.create.bind(
@@ -135,7 +135,7 @@ const createWrapper = (stripeConnect: any) => {
         return oldCreate(htmlName);
       };
       return stripeConnectInstance;
-    }
+    },
   };
   return wrapper;
 };
