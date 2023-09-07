@@ -2,11 +2,17 @@ export declare type LoadConnect = () => Promise<StripeConnectWrapper>;
 
 export declare type OverlayOption = "dialog" | "drawer";
 
+/**
+ * UI configuration options for the Connect instance.
+ */
 export declare type UIConfigOptions = {
   overlay?: OverlayOption;
   overlayZIndex?: number;
 };
 
+/**
+ * Appearance options for the Connect instance.
+ */
 export declare type AppearanceOptions = {
   colorPrimary?: string;
   // Primary Button
@@ -110,12 +116,39 @@ export type IStripeConnectUpdateParams = {
   appearance?: AppearanceOptions;
 };
 
+/**
+ * Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
+ */
 export interface IStripeConnectInitParams {
+  /**
+   * The publishable key for the connected account.
+   */
   publishableKey: string;
+
+  /**
+   * The client secret for the connected account.
+   */
   clientSecret: string;
+
+  /**
+   * Appearance options for the Connect instance.
+   * @see https://stripe.com/docs/connect/customize-connect-embedded-components
+   */
   appearance?: AppearanceOptions;
+
+  /**
+   * UI configuration options for the Connect instance.
+   */
   uiConfig?: UIConfigOptions;
+
+  /**
+   * Callback function that returns a new client secret. Used to support long running sessions and called on account session expiry.
+   */
   refreshClientSecret?: () => Promise<string>;
+
+  /**
+   * The locale to use for the Connect instance.
+   */
   locale?: string;
 }
 
@@ -149,6 +182,9 @@ export interface StripeConnectInstance {
   logout: () => Promise<void>;
 }
 
+/**
+ * Tagnames to be used with the `create` method of the Connect instance.
+ */
 export type ConnectElementTagName =
   | "payments"
   | "payouts"
