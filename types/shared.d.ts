@@ -142,7 +142,7 @@ export interface IStripeConnectInitParams {
   uiConfig?: UIConfigOptions;
 
   /**
-   * Callback function that returns a new client secret on expiry.
+   * Callback function that returns a new client secret. Used to support long running sessions and called on account session expiry.
    */
   refreshClientSecret?: () => Promise<string>;
 
