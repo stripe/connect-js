@@ -3,17 +3,14 @@ export declare type LoadConnect = () => Promise<StripeConnectWrapper>;
 export declare type OverlayOption = "dialog" | "drawer";
 
 /**
- * UI configuration options for the Connect instance.
- */
-export declare type UIConfigOptions = {
-  overlay?: OverlayOption;
-  overlayZIndex?: number;
-};
-
-/**
  * Appearance options for the Connect instance.
  */
 export declare type AppearanceOptions = {
+  overlays?: OverlayOption;
+  variables?: AppearanceVariables;
+};
+
+export declare type AppearanceVariables = {
   colorPrimary?: string;
   // Primary Button
   buttonPrimaryColorBorder?: string;
@@ -43,24 +40,24 @@ export declare type AppearanceOptions = {
   colorDanger?: string;
 
   // Neutral Badge Colors
-  badgeNeutralBorderColor?: string;
-  badgeNeutralBackgroundColor?: string;
-  badgeNeutralTextColor?: string;
+  badgeNeutralColorBorder?: string;
+  badgeNeutralColorBackground?: string;
+  badgeNeutralColorText?: string;
 
   // Success Badge Colors
-  badgeSuccessBorderColor?: string;
-  badgeSuccessBackgroundColor?: string;
-  badgeSuccessTextColor?: string;
+  badgeSuccessColorBorder?: string;
+  badgeSuccessColorBackground?: string;
+  badgeSuccessColorText?: string;
 
   // Warning Badge Colors
-  badgeWarningBorderColor?: string;
-  badgeWarningBackgroundColor?: string;
-  badgeWarningTextColor?: string;
+  badgeWarningColorBorder?: string;
+  badgeWarningColorBackground?: string;
+  badgeWarningColorText?: string;
 
   // Danger Badge Colors
-  badgeDangerBorderColor?: string;
-  badgeDangerBackgroundColor?: string;
-  badgeDangerTextColor?: string;
+  badgeDangerColorBorder?: string;
+  badgeDangerColorBackground?: string;
+  badgeDangerColorText?: string;
 
   // Border Sizing
   borderRadius?: string;
@@ -68,6 +65,9 @@ export declare type AppearanceOptions = {
   formBorderRadius?: string;
   badgeBorderRadius?: string;
   overlayBorderRadius?: string;
+
+  // Overlay
+  overlayZIndex?: number;
 
   // Font Sizing
   fontSizeBase?: string;
@@ -135,11 +135,6 @@ export interface IStripeConnectInitParams {
    * @see https://stripe.com/docs/connect/customize-connect-embedded-components
    */
   appearance?: AppearanceOptions;
-
-  /**
-   * UI configuration options for the Connect instance.
-   */
-  uiConfig?: UIConfigOptions;
 
   /**
    * Callback function that returns a new client secret. Used to support long running sessions and called on account session expiry.
