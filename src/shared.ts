@@ -7,19 +7,12 @@ import {
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
 
-type ConnectElementHTMLName =
-  | "stripe-connect-payments"
-  | "stripe-connect-payouts"
-  | "stripe-connect-payment-details"
-  | "stripe-connect-account-onboarding";
+type ConnectElementHTMLName = "stripe-connect-account-onboarding";
 
 const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
-  payments: "stripe-connect-payments",
-  payouts: "stripe-connect-payouts",
-  "payment-details": "stripe-connect-payment-details",
   "account-onboarding": "stripe-connect-account-onboarding"
 };
 
