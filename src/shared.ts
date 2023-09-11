@@ -2,7 +2,7 @@ import { version } from ".././package.json";
 import {
   StripeConnectWrapper,
   IStripeConnectInitParams,
-  ConnectElementTagName
+  ConnectElementTagName,
 } from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
@@ -20,12 +20,12 @@ const componentNameMapping: Record<
   payments: "stripe-connect-payments",
   payouts: "stripe-connect-payouts",
   "payment-details": "stripe-connect-payment-details",
-  "account-onboarding": "stripe-connect-account-onboarding"
+  "account-onboarding": "stripe-connect-account-onboarding",
 };
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
-const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
+const V0_URL = "https://connect-js.stripe.com/v1.0/connect.js";
 
 export const findScript = (): HTMLScriptElement | null => {
   return document.querySelectorAll<HTMLScriptElement>(
@@ -125,9 +125,9 @@ const createWrapper = (stripeConnect: any) => {
           ...metaOptions,
           sdk: true,
           sdkOptions: {
-            sdkVersion: version
-          }
-        }
+            sdkVersion: version,
+          },
+        },
       });
 
       // We wrap create so we can map its different strings to supported components
@@ -142,7 +142,7 @@ const createWrapper = (stripeConnect: any) => {
         return oldCreate(htmlName);
       };
       return stripeConnectInstance;
-    }
+    },
   };
   return wrapper;
 };
