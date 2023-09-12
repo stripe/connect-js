@@ -180,11 +180,7 @@ export interface StripeConnectInstance {
 /**
  * Tagnames to be used with the `create` method of the Connect instance.
  */
-export type ConnectElementTagName =
-  | "payments"
-  | "payouts"
-  | "payment-details"
-  | "account-onboarding";
+export type ConnectElementTagName = "account-onboarding";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
