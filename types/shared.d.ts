@@ -114,6 +114,7 @@ export declare type AppearanceVariables = {
 
 export type IStripeConnectUpdateParams = {
   appearance?: AppearanceOptions;
+  locale?: String;
 };
 
 /**
