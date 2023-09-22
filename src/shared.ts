@@ -118,7 +118,7 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: '_NPM_PACKAGE_VERSION_'
+            sdkVersion: "_NPM_PACKAGE_VERSION_"
           }
         }
       });
