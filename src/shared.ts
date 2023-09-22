@@ -1,4 +1,3 @@
-import { version } from ".././package.json";
 import {
   StripeConnectWrapper,
   IStripeConnectInitParams,
@@ -118,7 +117,8 @@ const createWrapper = (stripeConnect: any) => {
           ...metaOptions,
           sdk: true,
           sdkOptions: {
-            sdkVersion: version
+            // This will be replaced by the npm package version when bundling
+            sdkVersion: "_NPM_PACKAGE_VERSION_"
           }
         }
       });
