@@ -1,5 +1,9 @@
+import { IStripeConnectInitParams, StripeConnectInstance } from "../types";
 import { loadScript, initStripeConnect, LoadConnect } from "./shared";
 
-export const loadConnect: LoadConnect = () => {
-  return loadScript().then(maybeStripe => initStripeConnect(maybeStripe));
+export const loadConnectAndInitialize: LoadConnect = (
+  initParams: IStripeConnectInitParams
+): StripeConnectInstance => {
+  const maybeConnect = loadScript();
+  return initStripeConnect(maybeConnect, initParams);
 };

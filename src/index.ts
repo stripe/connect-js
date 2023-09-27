@@ -1,3 +1,4 @@
+import { IStripeConnectInitParams, StripeConnectInstance } from "../types";
 import { loadScript, initStripeConnect, LoadConnect } from "./shared";
 
 // Execute our own script injection after a tick to give users time to do their
@@ -12,10 +13,9 @@ stripePromise.catch((err: Error) => {
   }
 });
 
-export const loadConnect: LoadConnect = () => {
+export const loadConnectAndInitialize: LoadConnect = (
+  initParams: IStripeConnectInitParams
+): StripeConnectInstance => {
   loadCalled = true;
-
-  return stripePromise.then(maybeConnect => initStripeConnect(maybeConnect));
+  return initStripeConnect(stripePromise, initParams);
 };
-
-export {};
