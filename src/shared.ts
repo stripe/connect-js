@@ -10,7 +10,8 @@ type ConnectElementHTMLName =
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
   | "stripe-connect-payment-details"
-  | "stripe-connect-account-onboarding";
+  | "stripe-connect-account-onboarding"
+  | "stripe-connect-payment-method-settings";
 
 const componentNameMapping: Record<
   ConnectElementTagName,
@@ -19,7 +20,8 @@ const componentNameMapping: Record<
   payments: "stripe-connect-payments",
   payouts: "stripe-connect-payouts",
   "payment-details": "stripe-connect-payment-details",
-  "account-onboarding": "stripe-connect-account-onboarding"
+  "account-onboarding": "stripe-connect-account-onboarding",
+  "payment-method-settings": "stripe-connect-payment-method-settings"
 };
 
 const EXISTING_SCRIPT_MESSAGE =
