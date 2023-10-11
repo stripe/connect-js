@@ -21,6 +21,7 @@ pip3 install -r requirements.txt
 
 ```
 Run 
+yarn install --> installs all packages
 yarn start --> runs rollup to compile and starts the server
 ```
 
