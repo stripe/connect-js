@@ -4,7 +4,7 @@ Python 3.6 or newer required.
 """
 import stripe
 
-stripe.api_key = ''
+stripe.api_key = 'sk_test_sample_key'
 
 from flask import Flask, jsonify
 

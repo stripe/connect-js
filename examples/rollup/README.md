@@ -21,7 +21,6 @@ pip3 install -r requirements.txt
 
 ```
 Run 
-yarn local-test-install --> download packages from yalc cache
 yarn start --> runs rollup to compile and starts the server
 ```
 
