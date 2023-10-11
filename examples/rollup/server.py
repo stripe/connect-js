@@ -4,12 +4,9 @@ Python 3.6 or newer required.
 """
 import stripe
 
-stripe.api_key = 'sk_test_sample_key'
-
-stripe.api_version = '2022-08-01; embedded_connect_beta=v1'
+stripe.api_key = ''
 
 from flask import Flask, jsonify
-
 
 app = Flask(__name__, static_folder='public',
             static_url_path='', template_folder='public')
@@ -18,9 +15,13 @@ app = Flask(__name__, static_folder='public',
 def create_account_session():
     try:
         account_session = stripe.AccountSession.create(
-          account="{{account_ID}}"
+          account="{{CONNECTED_ACCOUNT_ID}}",
+          components={
+            "account_onboarding": {
+              "enabled": True
+            },
+          },
         )
-
         return jsonify({
           'client_secret': account_session.client_secret,
         })
