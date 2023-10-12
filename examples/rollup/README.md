@@ -21,8 +21,13 @@ pip3 install -r requirements.txt
 
 ```
 Run 
-yarn local-test-install --> download packages from yalc cache
-yarn start --> runs rollup to compile and starts the server
+yarn install # installs all packages
+yarn start # runs rollup to compile and starts the server
 ```
 
 3. Go to [http://localhost:4242/index.html](http://localhost:4242/index.html)
+
+Note: if you are doing local development, you can use yalc to test local changes
+
+1. yalc add @stripe/connect-js # in this sample
+2. yarn build && yalc push #from connect-js after you've made changes 
