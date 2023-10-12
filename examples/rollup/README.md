@@ -29,5 +29,7 @@ yarn start # runs rollup to compile and starts the server
 
 Note: if you are doing local development, you can use yalc to test local changes
 
-1. yalc add @stripe/connect-js # in this sample
-2. yarn build && yalc push #from connect-js after you've made changes 
+1. yarn build # from the root of this repository
+2. yalc publish # from the root of this repository
+3. yalc add @stripe/connect-js # in this sample
+4. Repeat this process whenever there are any changes to the package
