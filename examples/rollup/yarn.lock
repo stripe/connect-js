@@ -974,6 +974,13 @@
     magic-string "^0.25.2"
     resolve "^1.11.0"
 
+"@rollup/plugin-json@^6.0.0":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-json/-/plugin-json-6.0.1.tgz#7e2efcf5ed549963f1444e010611d22f463931c0"
+  integrity sha512-RgVfl5hWMkxN1h/uZj8FVESvPuBJ/uf6ly6GTj0GONnkfoBN5KC0MSz+PN2OLDgYXMhtG0mWpTrkiOjoxAIevw==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.1"
+
 "@rollup/plugin-node-resolve@^6.0.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-6.1.0.tgz#0d2909f4bf606ae34d43a9bc8be06a9b0c850cf0"
@@ -994,9 +1001,21 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@stripe/connect-js@file:stripe-connect-js-1.0.0.tgz":
-  version "1.0.0"
-  resolved "file:stripe-connect-js-1.0.0.tgz#0cb624a24939f91ef926b672deaff35284469d3f"
+"@rollup/pluginutils@^5.0.1":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.0.5.tgz#bbb4c175e19ebfeeb8c132c2eea0ecb89941a66c"
+  integrity sha512-6aEYR910NyP73oHiJglti74iRyOwgFU4x3meH/H8OJx6Ry0j6cOVZ5X/wTvub7G7Ao6qaHBEaNsV3GLJkSsF+Q==
+  dependencies:
+    "@types/estree" "^1.0.0"
+    estree-walker "^2.0.2"
+    picomatch "^2.3.1"
+
+"@stripe/connect-js@>=2.0.1":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@stripe/connect-js/-/connect-js-2.0.4.tgz#1a957fdac59b28082b4aa9deefee43a73bfb3057"
+  integrity sha512-DQ6qqyMQgJiwNOP9JBSPav8fA7sjr7tjoNVl08qwLkWot7+o7XxircJFcs8YQBuOT+Hq9PxMW4NbTS//T1Pd9Q==
+  dependencies:
+    "@rollup/plugin-json" "^6.0.0"
 
 "@types/estree@*":
   version "1.0.1"
@@ -1007,6 +1026,11 @@
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
+
+"@types/estree@^1.0.0":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.2.tgz#ff02bc3dc8317cd668dfec247b750ba1f1d62453"
+  integrity sha512-VeiPZ9MMwXjO32/Xu7+OwflfmeoRwkE/qzndw42gGtgJwZopBnzy2gD//NN1+go1mADzkDcqf/KnFRSjTJ8xJA==
 
 "@types/node@*":
   version "18.16.3"
@@ -1163,6 +1187,11 @@ estree-walker@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-1.0.1.tgz#31bc5d612c96b704106b477e6dd5d8aa138cb700"
   integrity sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==
+
+estree-walker@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-2.0.2.tgz#52f010178c2a4c117a7757cfe942adb7d2da4cac"
+  integrity sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==
 
 esutils@^2.0.2:
   version "2.0.3"
@@ -1323,7 +1352,7 @@ picocolors@^1.0.0:
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
   integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
 
-picomatch@^2.2.2:
+picomatch@^2.2.2, picomatch@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==

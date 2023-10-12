@@ -22,17 +22,21 @@ const clientSecret = await fetchClientSecret();
 const stripeConnect = await loadConnect();
 if (clientSecret) {
   const connectInstance = stripeConnect.initialize({
-    publishableKey: "{{publishable key}}",
+    publishableKey: "{{pk test123}}",
     clientSecret: clientSecret,
     appearance: {
-      colorPrimary: "#228403",
+      variables: {
+        colorPrimary: "#FF3333",
+      },
     }
   });
-  const payments = connectInstance.create("payments");
-  document.getElementById("payments").append(payments);
+  const onboarding = connectInstance.create("account-onboarding");
+  document.getElementById("onboarding").append(onboarding);
   connectInstance.update({
     appearance: {
-      colorPrimary: "#7F3D73",
+      variables: {
+        colorPrimary: "#7F3D73",
+      },
     },
   });
 }

@@ -4,7 +4,7 @@
   "description": "Build a full, working integration using Connect embedded UIs. Included are some basic build and run scripts you can use to start up the application.",
   "main": "index.js",
   "dependencies": {
-    "@stripe/connect-js": "file:stripe-connect-js-1.0.0.tgz"
+    "@stripe/connect-js": ">=2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -20,7 +20,6 @@
   "scripts": {
     "build": "rollup -c",
     "server": "FLASK_APP=server.py python -m flask run --port 4242",
-    "local-install": "yalc add @stripe/connect-js@1.0.0 && yalc add @stripe/react-connect-js@1.0.0",
     "start": "yarn build && yarn server"
   },
   "author": "",
