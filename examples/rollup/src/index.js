@@ -25,14 +25,18 @@ if (clientSecret) {
     publishableKey: "{{publishable key}}",
     clientSecret: clientSecret,
     appearance: {
-      colorPrimary: "#228403",
+      variables: {
+        colorPrimary: "#FF3333",
+      },
     }
   });
   const payments = connectInstance.create("payments");
   document.getElementById("payments").append(payments);
   connectInstance.update({
     appearance: {
-      colorPrimary: "#7F3D73",
+      variables: {
+        colorPrimary: "#7F3D73",
+      },
     },
   });
 }
