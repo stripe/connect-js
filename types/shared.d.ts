@@ -414,7 +414,10 @@ export type ConnectElementTagName =
   | "payouts"
   | "payment-details"
   | "account-onboarding"
-  | "payment-method-settings";
+  | "payment-method-settings"
+  | "account-management"
+  | "notification-banner"
+  | "instant-payouts";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
