@@ -22,7 +22,7 @@ const clientSecret = await fetchClientSecret();
 const stripeConnect = await loadConnect();
 if (clientSecret) {
   const connectInstance = stripeConnect.initialize({
-    publishableKey: "",
+    publishableKey: "{{pk test123}}",
     clientSecret: clientSecret,
     appearance: {
       variables: {
