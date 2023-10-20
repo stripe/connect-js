@@ -208,14 +208,6 @@ export declare type AppearanceVariables = {
 
   // Body Typography
   /**
-   * The font size for the large body typography. Body typography variables accept a valid font size value.
-   */
-  bodyLgFontSize?: string;
-  /**
-   * The font weight for the large body typography. Body typography variables accept a valid font weight value.
-   */
-  bodyLgFontWeight?: string;
-  /**
    * The font size for the medium body typography. Body typography variables accept a valid font size value.
    */
   bodyMdFontSize?: string;
@@ -295,18 +287,6 @@ export declare type AppearanceVariables = {
   headingXsTextTransform?: string;
 
   // Label Typography
-  /**
-   * The font size for the large label typography. Label typography variables accept a valid font size value.
-   */
-  labelLgFontSize?: string;
-  /**
-   * The font weight for the large label typography. Label typography variables accept a valid font weight value.
-   */
-  labelLgFontWeight?: string;
-  /**
-   * The text transform for the large label typography. Label typography variables accept a valid text transform value.
-   */
-  labelLgTextTransform?: string;
   /**
    * The font size for the medium label typography. Label typography variables accept a valid font size value.
    */
