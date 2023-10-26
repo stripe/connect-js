@@ -1,7 +1,7 @@
 import {
   StripeConnectWrapper,
   IStripeConnectInitParams,
-  ConnectElementTagName,
+  ConnectElementTagName
 } from "../types";
 
 export type LoadConnect = () => Promise<StripeConnectWrapper>;
@@ -27,7 +27,7 @@ const componentNameMapping: Record<
   "payment-method-settings": "stripe-connect-payment-method-settings",
   "account-management": "stripe-connect-account-management",
   "notification-banner": "stripe-connect-notification-banner",
-  "instant-payouts": "stripe-connect-instant-payouts",
+  "instant-payouts": "stripe-connect-instant-payouts"
 };
 
 const EXISTING_SCRIPT_MESSAGE =
@@ -133,9 +133,9 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_",
-          },
-        },
+            sdkVersion: "_NPM_PACKAGE_VERSION_"
+          }
+        }
       });
 
       // We wrap create so we can map its different strings to supported components
@@ -150,7 +150,7 @@ const createWrapper = (stripeConnect: any) => {
         return oldCreate(htmlName);
       };
       return stripeConnectInstance;
-    },
+    }
   };
   return wrapper;
 };
