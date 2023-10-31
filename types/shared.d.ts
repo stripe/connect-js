@@ -178,7 +178,11 @@ export type ConnectElementTagName =
   | "payments"
   | "payouts"
   | "payment-details"
-  | "account-onboarding";
+  | "account-onboarding"
+  | "payment-method-settings"
+  | "account-management"
+  | "notification-banner"
+  | "instant-payouts";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
@@ -192,4 +196,8 @@ export type ConnectElementHTMLName =
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
   | "stripe-connect-payment-details"
-  | "stripe-connect-account-onboarding";
+  | "stripe-connect-account-onboarding"
+  | "stripe-connect-payment-method-settings"
+  | "stripe-connect-account-management"
+  | "stripe-connect-notification-banner"
+  | "stripe-connect-instant-payouts";
