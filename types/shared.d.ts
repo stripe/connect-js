@@ -419,13 +419,3 @@ export declare const loadScript: () => Promise<any | null>;
 export declare const initStripeConnect: (
   stripeConnectPromise: StripeConnectWrapper | null
 ) => any | null;
-
-export type ConnectElementHTMLName =
-  | "stripe-connect-payments"
-  | "stripe-connect-payouts"
-  | "stripe-connect-payment-details"
-  | "stripe-connect-account-onboarding"
-  | "stripe-connect-payment-method-settings"
-  | "stripe-connect-account-management"
-  | "stripe-connect-notification-banner"
-  | "stripe-connect-instant-payouts";
