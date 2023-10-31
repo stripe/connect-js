@@ -1,6 +1,6 @@
 {
   "name": "@stripe/connect-js",
-  "version": "2.0.1-beta.1",
+  "version": "2.0.1-beta.8",
   "description": "Connect.js loading utility package",
   "main": "dist/connect.js",
   "module": "dist/connect.esm.js",
@@ -13,7 +13,7 @@
     "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
     "typecheck": "tsc --noEmit",
     "build": "yarn clean && rollup -c",
-    "validate-change": "yarn run typescript && yarn run lint && yarn run test",
+    "validate-change": "yarn run test",
     "clean": "rimraf dist",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check"

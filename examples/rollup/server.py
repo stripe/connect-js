@@ -6,7 +6,7 @@ import stripe
 
 stripe.api_key = 'sk_test_sample_key'
 
-stripe.api_version = '2022-08-01; embedded_connect_beta=v1'
+stripe.api_version = '2022-08-01; embedded_connect_beta=v2'
 
 from flask import Flask, jsonify
 
@@ -18,7 +18,17 @@ app = Flask(__name__, static_folder='public',
 def create_account_session():
     try:
         account_session = stripe.AccountSession.create(
-          account="{{account_ID}}"
+          account="{{account_ID}}",
+          components={
+            "payments": {
+              "enabled": True,
+              "features": {
+                "refund_management": True,
+                "dispute_management": True,
+                "capture_payments": True
+              }
+            },
+          },
         )
 
         return jsonify({
