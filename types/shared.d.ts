@@ -359,14 +359,18 @@ type ConnectHTMLElementRecordFallback = {
 };
 type ConnectHTMLElementRecordBase = {
   [tagName in ConnectElementTagName]: HTMLElement;
-}
+};
 
 interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase, ConnectHTMLElementRecordFallback {
   'account-onboarding': HTMLElement & {
     setFullTermsOfServiceUrl: (termOfServiceUrl: string | undefined) => void;
-    setRecipientTermsOfServiceUrl: (recipientTermsOfServiceUrl: string | undefined) => void;
+    setRecipientTermsOfServiceUrl: (
+      recipientTermsOfServiceUrl: string | undefined
+    ) => void;
     setPrivacyPolicyUrl: (privacyPolicyUrl: string | undefined) => void;
-    setSkipTermsOfServiceCollection: (skipTermsOfServiceCollection: boolean | undefined) => void;
+    setSkipTermsOfServiceCollection: (
+      skipTermsOfServiceCollection: boolean | undefined
+    ) => void;
     setOnExit: (listener: () => void) => void;
   };
 }
@@ -377,7 +381,9 @@ export interface StripeConnectInstance {
    * @tagName Name of the Connect component to create.
    * @returns An HTML component corresponding to that connect component
    */
-  create: <T extends ConnectElementTagName>(tagName: T) => ConnectHTMLElementRecord[T];
+  create: <T extends ConnectElementTagName>(
+    tagName: T
+  ) => ConnectHTMLElementRecord[T];
 
   /**
    * Updates the Connect instance with new parameters.
