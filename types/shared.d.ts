@@ -374,13 +374,28 @@ export interface IStripeConnectInitParams {
   locale?: string;
 }
 
+type ConnectHTMLElementRecordBase = {
+  [tagName in ConnectElementTagName]: HTMLElement;
+}
+
+interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase {
+  'payment-details': HTMLElement & {setPayment: (payment: string | undefined) => void; setOnClose: (listener: () => void) => void};
+  'account-onboarding': HTMLElement & {
+    setFullTermsOfServiceUrl: (termOfServiceUrl: string | undefined) => void;
+    setRecipientTermsOfServiceUrl: (recipientTermsOfServiceUrl: string | undefined) => void;
+    setPrivacyPolicyUrl: (privacyPolicyUrl: string | undefined) => void;
+    setSkipTermsOfServiceCollection: (skipTermsOfServiceCollection: boolean | undefined) => void;
+    setOnExit: (listener: () => void) => void;
+  };
+}
+
 export interface StripeConnectInstance {
   /**
    * Creates a Connect element.
    * @tagName Name of the Connect component to create.
    * @returns An HTML component corresponding to that connect component
    */
-  create: (tagName: ConnectElementTagName) => HTMLElement;
+  create: <T extends ConnectElementTagName>(tagName: T) => ConnectHTMLElementRecord[T];
 
   /**
    * Updates the Connect instance with new parameters.
