@@ -1,4 +1,4 @@
-export declare type LoadConnect = (
+export declare type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
@@ -374,10 +374,6 @@ export interface IStripeConnectInitParams {
   locale?: string;
 }
 
-export interface StripeConnectWrapper {
-  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
-}
-
 export interface StripeConnectInstance {
   /**
    * Creates a Connect element.
@@ -415,7 +411,3 @@ export type ConnectElementTagName =
 export declare const findScript: () => HTMLScriptElement | null;
 
 export declare const loadScript: () => Promise<any | null>;
-
-export declare const initStripeConnect: (
-  stripeConnectPromise: StripeConnectWrapper | null
-) => any | null;

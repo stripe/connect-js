@@ -1,4 +1,4 @@
-import { LoadConnect } from "./src/shared";
+import { LoadConnectAndInitialize } from "./src/shared";
 
-export declare const loadConnect: LoadConnect;
+export declare const loadConnectAndInitialize: LoadConnectAndInitialize;
 export * from "./types/shared";

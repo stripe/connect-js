@@ -1,11 +1,10 @@
 import {
-  StripeConnectWrapper,
   IStripeConnectInitParams,
   StripeConnectInstance,
   ConnectElementTagName,
 } from "../types";
 
-export type LoadConnect = (
+export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
@@ -36,6 +35,10 @@ export const componentNameMapping: Record<
 type StripeConnectInstanceExtended = StripeConnectInstance & {
   debugInstance: () => Promise<StripeConnectInstance | undefined>;
 };
+
+interface StripeConnectWrapper {
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
@@ -168,9 +171,9 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_"
-          }
-        }
+            sdkVersion: "_NPM_PACKAGE_VERSION_",
+          },
+        },
       });
       return stripeConnectInstance;
     },

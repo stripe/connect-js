@@ -1,5 +1,9 @@
 import { IStripeConnectInitParams, StripeConnectInstance } from "../types";
-import { loadScript, initStripeConnect, LoadConnect } from "./shared";
+import {
+  loadScript,
+  initStripeConnect,
+  LoadConnectAndInitialize,
+} from "./shared";
 
 // Execute our own script injection after a tick to give users time to do their
 // own script injection.
@@ -13,7 +17,7 @@ stripePromise.catch((err: Error) => {
   }
 });
 
-export const loadConnectAndInitialize: LoadConnect = (
+export const loadConnectAndInitialize: LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ): StripeConnectInstance => {
   loadCalled = true;
