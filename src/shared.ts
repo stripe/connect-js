@@ -1,7 +1,7 @@
 import {
   IStripeConnectInitParams,
   StripeConnectInstance,
-  ConnectElementTagName,
+  ConnectElementTagName
 } from "../types";
 
 export type LoadConnectAndInitialize = (
@@ -14,7 +14,7 @@ export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
-  "account-onboarding": "stripe-connect-account-onboarding",
+  "account-onboarding": "stripe-connect-account-onboarding"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
@@ -111,24 +111,24 @@ export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper | null>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
-  const stripeConnectInstance = stripePromise.then((wrapper) =>
+  const stripeConnectInstance = stripePromise.then(wrapper =>
     wrapper?.initialize(initParams)
   );
   return {
-    create: (tagName) => {
+    create: tagName => {
       let htmlName = componentNameMapping[tagName];
       if (!htmlName) {
         htmlName = tagName as ConnectElementHTMLName;
       }
       const element = document.createElement(htmlName);
-      stripeConnectInstance.then((instance) => {
+      stripeConnectInstance.then(instance => {
         (element as any).setConnector((instance as any).connect);
       });
 
       return element;
     },
-    update: (updateOptions) => {
-      stripeConnectInstance.then((instance) => {
+    update: updateOptions => {
+      stripeConnectInstance.then(instance => {
         instance?.update(updateOptions);
       });
     },
@@ -136,10 +136,10 @@ export const initStripeConnect = (
       return stripeConnectInstance;
     },
     logout: () => {
-      return stripeConnectInstance.then((instance) => {
+      return stripeConnectInstance.then(instance => {
         instance?.logout();
       });
-    },
+    }
   };
 };
 
@@ -156,12 +156,12 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_",
-          },
-        },
+            sdkVersion: "_NPM_PACKAGE_VERSION_"
+          }
+        }
       });
       return stripeConnectInstance;
-    },
+    }
   };
   return wrapper;
 };
