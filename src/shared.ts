@@ -1,12 +1,14 @@
 import {
-  StripeConnectWrapper,
   IStripeConnectInitParams,
-  ConnectElementTagName
+  StripeConnectInstance,
+  ConnectElementTagName,
 } from "../types";
 
-export type LoadConnect = () => Promise<StripeConnectWrapper>;
+export type LoadConnectAndInitialize = (
+  initParams: IStripeConnectInitParams
+) => StripeConnectInstance;
 
-type ConnectElementHTMLName =
+export type ConnectElementHTMLName =
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
   | "stripe-connect-payment-details"
@@ -16,7 +18,7 @@ type ConnectElementHTMLName =
   | "stripe-connect-notification-banner"
   | "stripe-connect-instant-payouts";
 
-const componentNameMapping: Record<
+export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
@@ -27,8 +29,16 @@ const componentNameMapping: Record<
   "payment-method-settings": "stripe-connect-payment-method-settings",
   "account-management": "stripe-connect-account-management",
   "notification-banner": "stripe-connect-notification-banner",
-  "instant-payouts": "stripe-connect-instant-payouts"
+  "instant-payouts": "stripe-connect-instant-payouts",
 };
+
+type StripeConnectInstanceExtended = StripeConnectInstance & {
+  debugInstance: () => Promise<StripeConnectInstance | undefined>;
+};
+
+interface StripeConnectWrapper {
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
@@ -113,16 +123,44 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
 };
 
 export const initStripeConnect = (
-  stripeConnectPromise: StripeConnectWrapper | null
-): any | null => {
-  if (stripeConnectPromise === null) {
-    return null;
-  }
+  stripePromise: Promise<StripeConnectWrapper | null>,
+  initParams: IStripeConnectInitParams
+): StripeConnectInstanceExtended => {
+  const stripeConnectInstance = stripePromise.then((wrapper) =>
+    wrapper?.initialize(initParams)
+  );
+  return {
+    create: (tagName) => {
+      let htmlName = componentNameMapping[tagName];
+      if (!htmlName) {
+        htmlName = tagName as ConnectElementHTMLName;
+      }
+      const element = document.createElement(htmlName);
+      stripeConnectInstance.then((instance) => {
+        (element as any).setConnector((instance as any).connect);
+      });
 
-  return stripeConnectPromise;
+      return element;
+    },
+    update: (updateOptions) => {
+      stripeConnectInstance.then((instance) => {
+        instance?.update(updateOptions);
+      });
+    },
+    debugInstance: () => {
+      return stripeConnectInstance;
+    },
+    logout: () => {
+      return stripeConnectInstance.then((instance) => {
+        instance?.logout();
+      });
+    },
+  };
 };
 
 const createWrapper = (stripeConnect: any) => {
+  (window as any).StripeConnect = (window as any).StripeConnect || {};
+  (window as any).StripeConnect.optimizedLoading = true;
   const wrapper: StripeConnectWrapper = {
     initialize: (params: IStripeConnectInitParams) => {
       const metaOptions = (params as any).metaOptions ?? {};
@@ -133,24 +171,12 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_"
-          }
-        }
+            sdkVersion: "_NPM_PACKAGE_VERSION_",
+          },
+        },
       });
-
-      // We wrap create so we can map its different strings to supported components
-      const oldCreate = stripeConnectInstance.create.bind(
-        stripeConnectInstance
-      );
-      stripeConnectInstance.create = (tagName: ConnectElementTagName) => {
-        let htmlName = componentNameMapping[tagName];
-        if (!htmlName) {
-          htmlName = tagName as ConnectElementHTMLName;
-        }
-        return oldCreate(htmlName);
-      };
       return stripeConnectInstance;
-    }
+    },
   };
   return wrapper;
 };

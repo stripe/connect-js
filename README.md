@@ -35,7 +35,7 @@ import { loadConnect } from "@stripe/connect-js";
 const stripeConnect = await loadConnect();
 const connectInstance = stripeConnect.initialize({
   publishableKey: "{{pk test123}}",
-  clientSecret: "{{client secret}}"
+  clientSecret: "{{client secret}}",
 });
 ```
 
