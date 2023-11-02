@@ -3,9 +3,11 @@
 The [Connect.js library](https://stripe.com/docs/connect/get-started-connect-embedded-components) and its supporting API allows you to add connected account dashboard functionality to your website.
 This NPM package contains initialization logic for Connect embedded components along with related types.
 
-Calling `loadConnect` always loads the latest version of Connect.js, regardless of which version of `@stripe/connect-js` you use. Updates for this package only impact tooling around the `loadConnect` helper itself and the TypeScript type definitions provided for Connect.js. Updates do not affect runtime availability of features of Connect.js.
+Calling `loadConnectAndInitialize` always loads the latest version of Connect.js, regardless of which version of `@stripe/connect-js` you use. Updates for this package only impact tooling around the `loadConnectAndInitialize` helper itself and the TypeScript type definitions provided for Connect.js. Updates do not affect runtime availability of features of Connect.js.
 
-Note: Connect embedded components is currently still in beta. Please [contact us](https://stripe.com/docs/connect/get-started-connect-embedded-components#access) to request beta access.
+The embedded onboarding component is generally available now. Please refer to our [documentation](https://stripe.com/docs/connect/get-started-connect-embedded-components#account-onboarding) for more information.
+
+Note: Majority of Connect embedded components are currently still in beta. Please [contact us](https://stripe.com/docs/connect/get-started-connect-embedded-components#access) to request beta access.
 
 ## Installation
 
@@ -17,25 +19,25 @@ npm install @stripe/connect-js
 
 ## Documentation
 
-- [Connect embedded components](https://stripe.com/docs/connect/get-started-connect-embedded-uis)
-- [Quickstart guide](https://stripe.com/docs/connect/connect-embedded-uis/quickstart)
+- [Connect embedded components](https://stripe.com/docs/connect/get-started-connect-embedded-components)
+- [Quickstart guide for GA](https://stripe.com/docs/connect/connect-embedded-components/quickstart)
+- [Quickstart guide for beta](https://stripe.com/docs/connect/connect-embedded-components/beta-quickstart)
 
 ## Usage
 
-### `loadConnect`
+### `loadConnectAndInitialize`
 
-This function returns a `Promise` that resolves with a newly created `StripeConnect`
-object once Connect.js has loaded. If necessary, it will load Connect.js for you by inserting the Connect.js script tag.
-
-The `stripeConnect.initialize` function returns a `ConnectInstance` once you initialize it with a publishable key and a client secret returned from the [Account Session API](https://stripe.com/docs/api/account_sessions/create) call.
+This synchronous function takes in a publishable key, a function to retrieve the client secret returned from the [Account Session API](https://stripe.com/docs/api/account_sessions/create), and other [initialization parameters](https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js). It returns a `StripeConnectInstance`. If necessary, it will load Connect.js for you by inserting the Connect.js script tag.
 
 ```js
-import { loadConnect } from "@stripe/connect-js";
+import { loadConnectAndInitialize } from "@stripe/connect-js";
+const fetchClientSecret = async () => {
+  // Fetch the AccountSession client secret
+};
 
-const stripeConnect = await loadConnect();
-const connectInstance = stripeConnect.initialize({
+const instance = loadConnectAndInitialize({
   publishableKey: "{{pk test123}}",
-  clientSecret: "{{client secret}}"
+  fetchClientSecret: fetchClientSecret
 });
 ```
 
@@ -62,22 +64,25 @@ import "@stripe/connect-js";
 
 Manually add the Connect.js script tag to the `<head>` of each page on your site.
 If an existing script tag is already present, this module will not insert a new
-one. When you call `loadConnect`, it will use the existing script tag.
+one. When you call `loadConnectAndInitialize`, it will use the existing script tag.
 
 ```html
 <!-- Somewhere in your site's <head> -->
 <script src="https://connect-js.stripe.com/v0.1/connect.js" async></script>
 ```
 
-### Importing `loadConnect` without side effects
+### Importing `loadConnectAndInitialize` without side effects
 
-If you would like to use `loadConnect` in your application, but defer loading the
-Connect.js script until `loadConnect` is first called, use the alternative
+If you would like to use `loadConnectAndInitialize` in your application, but defer loading the
+Connect.js script until `loadConnectAndInitialize` is first called, use the alternative
 `@stripe/connect-js/pure` import path:
 
 ```js
-import { loadConnect } from "@stripe/connect-js/pure";
+import { loadConnectAndInitialize } from "@stripe/connect-js/pure";
 
 // Connect.js will not be loaded until `loadConnect` is called
-const stripeConnect = await loadConnect();
+const instance = loadConnectAndInitialize({
+  publishableKey: "{{pk test123}}",
+  fetchClientSecret: fetchClientSecret
+});
 ```
