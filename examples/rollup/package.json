@@ -4,7 +4,7 @@
   "description": "Build a full, working integration using Connect embedded UIs. Included are some basic build and run scripts you can use to start up the application.",
   "main": "index.js",
   "dependencies": {
-    "@stripe/connect-js": ">=2.0.1-beta.4"
+    "@stripe/connect-js": ">=3.0.0-beta.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

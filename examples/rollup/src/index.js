@@ -1,4 +1,4 @@
-import { loadConnect } from "@stripe/connect-js";
+import { loadConnectAndInitialize } from "@stripe/connect-js";
 
 const fetchClientSecret = async () => {
   // Fetch the AccountSession client secret
@@ -18,17 +18,14 @@ const fetchClientSecret = async () => {
   }
 };
 
-const clientSecret = await fetchClientSecret();
-const stripeConnect = await loadConnect();
-if (clientSecret) {
-  const connectInstance = stripeConnect.initialize({
-    publishableKey: "{{publishable key}}",
-    clientSecret: clientSecret,
-    appearance: {
-      variables: {
-        colorPrimary: "#FF3333",
-      },
-    }
+const connectInstance = loadConnectAndInitialize({
+  publishableKey: "{{pk test123}}",
+   fetchClientSecret: fetchClientSecret,
+   appearance: {
+    variables: {
+      colorPrimary: "#FF3333",
+    },
+  }
   });
   const payments = connectInstance.create("payments");
   document.getElementById("payments").append(payments);
@@ -39,4 +36,4 @@ if (clientSecret) {
       },
     },
   });
-}
+
