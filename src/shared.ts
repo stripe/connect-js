@@ -1,7 +1,8 @@
 import {
   IStripeConnectInitParams,
   StripeConnectInstance,
-  ConnectElementTagName
+  ConnectElementTagName,
+  ConnectHTMLElementRecord
 } from "../types";
 
 export type LoadConnectAndInitialize = (
@@ -145,7 +146,7 @@ export const initStripeConnect = (
         (element as any).setConnector((instance as any).connect);
       });
 
-      return element;
+      return element as ConnectHTMLElementRecord[typeof tagName];
     },
     update: updateOptions => {
       stripeConnectInstance.then(instance => {
