@@ -33,7 +33,7 @@ export const componentNameMapping: Record<
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
-  debugInstance: () => Promise<StripeConnectInstance | undefined>;
+  debugInstance: () => Promise<StripeConnectInstance>;
 };
 
 interface StripeConnectWrapper {
@@ -44,7 +44,7 @@ const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
 const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
 
-export const findScript = (): HTMLScriptElement | null => {
+export const findScript = (): HTMLScriptElement => {
   return document.querySelectorAll<HTMLScriptElement>(
     `script[src="${V0_URL}"]`
   )[0];
@@ -69,7 +69,7 @@ const injectScript = (): HTMLScriptElement => {
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
-export const loadScript = (): Promise<StripeConnectWrapper | null> => {
+export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
     return stripePromise;
@@ -123,12 +123,13 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
 };
 
 export const initStripeConnect = (
-  stripePromise: Promise<StripeConnectWrapper | null>,
+  stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
   const stripeConnectInstance = stripePromise.then((wrapper) =>
-    wrapper?.initialize(initParams)
+    wrapper.initialize(initParams)
   );
+
   return {
     create: (tagName) => {
       let htmlName = componentNameMapping[tagName];
@@ -144,7 +145,7 @@ export const initStripeConnect = (
     },
     update: (updateOptions) => {
       stripeConnectInstance.then((instance) => {
-        instance?.update(updateOptions);
+        instance.update(updateOptions);
       });
     },
     debugInstance: () => {
@@ -152,7 +153,7 @@ export const initStripeConnect = (
     },
     logout: () => {
       return stripeConnectInstance.then((instance) => {
-        instance?.logout();
+        instance.logout();
       });
     },
   };
