@@ -1,19 +1,29 @@
 import {
-  StripeConnectWrapper,
   IStripeConnectInitParams,
+  StripeConnectInstance,
   ConnectElementTagName
 } from "../types";
 
-export type LoadConnect = () => Promise<StripeConnectWrapper>;
+export type LoadConnectAndInitialize = (
+  initParams: IStripeConnectInitParams
+) => StripeConnectInstance;
 
 type ConnectElementHTMLName = "stripe-connect-account-onboarding";
 
-const componentNameMapping: Record<
+export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
   "account-onboarding": "stripe-connect-account-onboarding"
 };
+
+type StripeConnectInstanceExtended = StripeConnectInstance & {
+  debugInstance: () => Promise<StripeConnectInstance>;
+};
+
+interface StripeConnectWrapper {
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
@@ -44,13 +54,13 @@ const injectScript = (): HTMLScriptElement => {
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
-export const loadScript = (): Promise<StripeConnectWrapper | null> => {
+export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
     return stripePromise;
   }
 
-  stripePromise = new Promise((resolve, reject) => {
+  stripePromise = new Promise<StripeConnectWrapper>((resolve, reject) => {
     if (typeof window === "undefined") {
       reject(
         "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects."
@@ -98,16 +108,45 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
 };
 
 export const initStripeConnect = (
-  stripeConnectPromise: StripeConnectWrapper | null
-): any | null => {
-  if (stripeConnectPromise === null) {
-    return null;
-  }
+  stripePromise: Promise<StripeConnectWrapper>,
+  initParams: IStripeConnectInitParams
+): StripeConnectInstanceExtended => {
+  const stripeConnectInstance = stripePromise.then(wrapper =>
+    wrapper.initialize(initParams)
+  );
 
-  return stripeConnectPromise;
+  return {
+    create: tagName => {
+      let htmlName = componentNameMapping[tagName];
+      if (!htmlName) {
+        htmlName = tagName as ConnectElementHTMLName;
+      }
+      const element = document.createElement(htmlName);
+      stripeConnectInstance.then(instance => {
+        (element as any).setConnector((instance as any).connect);
+      });
+
+      return element;
+    },
+    update: updateOptions => {
+      stripeConnectInstance.then(instance => {
+        instance.update(updateOptions);
+      });
+    },
+    debugInstance: () => {
+      return stripeConnectInstance;
+    },
+    logout: () => {
+      return stripeConnectInstance.then(instance => {
+        instance.logout();
+      });
+    }
+  };
 };
 
 const createWrapper = (stripeConnect: any) => {
+  (window as any).StripeConnect = (window as any).StripeConnect || {};
+  (window as any).StripeConnect.optimizedLoading = true;
   const wrapper: StripeConnectWrapper = {
     initialize: (params: IStripeConnectInitParams) => {
       const metaOptions = (params as any).metaOptions ?? {};
@@ -122,18 +161,6 @@ const createWrapper = (stripeConnect: any) => {
           }
         }
       });
-
-      // We wrap create so we can map its different strings to supported components
-      const oldCreate = stripeConnectInstance.create.bind(
-        stripeConnectInstance
-      );
-      stripeConnectInstance.create = (tagName: ConnectElementTagName) => {
-        let htmlName = componentNameMapping[tagName];
-        if (!htmlName) {
-          htmlName = tagName as ConnectElementHTMLName;
-        }
-        return oldCreate(htmlName);
-      };
       return stripeConnectInstance;
     }
   };

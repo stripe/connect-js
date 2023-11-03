@@ -1,4 +1,6 @@
-export declare type LoadConnect = () => Promise<StripeConnectWrapper>;
+export declare type LoadConnectAndInitialize = (
+  initParams: IStripeConnectInitParams
+) => StripeConnectInstance;
 
 export declare type OverlayOption = "dialog" | "drawer";
 
@@ -335,9 +337,10 @@ export interface IStripeConnectInitParams {
   publishableKey: string;
 
   /**
-   * The client secret for the connected account.
+   * Function that fetches client secret
+   * @returns A promise that resolves with a new client secret.
    */
-  clientSecret: string;
+  fetchClientSecret: () => Promise<string>;
 
   /**
    * Appearance options for the Connect instance.
@@ -346,23 +349,9 @@ export interface IStripeConnectInitParams {
   appearance?: AppearanceOptions;
 
   /**
-   * Callback function that returns a new client secret. Used to support long running sessions and called on account session expiry.
-   */
-  refreshClientSecret?: () => Promise<string>;
-
-  /**
    * The locale to use for the Connect instance.
    */
   locale?: string;
-}
-
-export interface StripeConnectWrapper {
-  /**
-   * Initializes a Connect JS instance that can be used to create and update Connect components.
-   * @param params Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
-   * @returns A Connect JS instance.
-   */
-  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
 }
 
 export interface StripeConnectInstance {
@@ -371,7 +360,7 @@ export interface StripeConnectInstance {
    * @tagName Name of the Connect component to create.
    * @returns An HTML component corresponding to that connect component
    */
-  create: (tagName: ConnectElementTagName) => HTMLElement | null;
+  create: (tagName: ConnectElementTagName) => HTMLElement;
 
   /**
    * Updates the Connect instance with new parameters.
@@ -390,11 +379,3 @@ export interface StripeConnectInstance {
  * Tagnames to be used with the `create` method of the Connect instance.
  */
 export type ConnectElementTagName = "account-onboarding";
-
-export declare const findScript: () => HTMLScriptElement | null;
-
-export declare const loadScript: () => Promise<any | null>;
-
-export declare const initStripeConnect: (
-  stripeConnectPromise: StripeConnectWrapper | null
-) => any | null;
