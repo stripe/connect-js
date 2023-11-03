@@ -406,4 +406,10 @@ export type ConnectElementTagName =
   | "payment-method-settings"
   | "account-management"
   | "notification-banner"
-  | "instant-payouts";
+  | "instant-payouts"
+  | "issuing-card"
+  | "issuing-cards-list";
+
+export declare const findScript: () => HTMLScriptElement | null;
+
+export declare const loadScript: () => Promise<any | null>;
