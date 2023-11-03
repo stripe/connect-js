@@ -16,7 +16,7 @@ describe("pure module", () => {
       publishableKey: "pk_123",
       fetchClientSecret: async () => {
         return "secret_123";
-      },
+      }
     };
     loadConnectAndInitialize(mockInitParams);
 

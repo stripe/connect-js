@@ -2,7 +2,7 @@ import { IStripeConnectInitParams, StripeConnectInstance } from "../types";
 import {
   loadScript,
   initStripeConnect,
-  LoadConnectAndInitialize,
+  LoadConnectAndInitialize
 } from "./shared";
 
 export const loadConnectAndInitialize: LoadConnectAndInitialize = (

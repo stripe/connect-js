@@ -1,7 +1,7 @@
 import {
   IStripeConnectInitParams,
   StripeConnectInstance,
-  ConnectElementTagName,
+  ConnectElementTagName
 } from "../types";
 
 export type LoadConnectAndInitialize = (
@@ -29,11 +29,11 @@ export const componentNameMapping: Record<
   "payment-method-settings": "stripe-connect-payment-method-settings",
   "account-management": "stripe-connect-account-management",
   "notification-banner": "stripe-connect-notification-banner",
-  "instant-payouts": "stripe-connect-instant-payouts",
+  "instant-payouts": "stripe-connect-instant-payouts"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
-  debugInstance: () => Promise<StripeConnectInstance | undefined>;
+  debugInstance: () => Promise<StripeConnectInstance>;
 };
 
 interface StripeConnectWrapper {
@@ -69,13 +69,13 @@ const injectScript = (): HTMLScriptElement => {
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
-export const loadScript = (): Promise<StripeConnectWrapper | null> => {
+export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
     return stripePromise;
   }
 
-  stripePromise = new Promise((resolve, reject) => {
+  stripePromise = new Promise<StripeConnectWrapper>((resolve, reject) => {
     if (typeof window === "undefined") {
       reject(
         "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects."
@@ -123,38 +123,39 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
 };
 
 export const initStripeConnect = (
-  stripePromise: Promise<StripeConnectWrapper | null>,
+  stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
-  const stripeConnectInstance = stripePromise.then((wrapper) =>
-    wrapper?.initialize(initParams)
+  const stripeConnectInstance = stripePromise.then(wrapper =>
+    wrapper.initialize(initParams)
   );
+
   return {
-    create: (tagName) => {
+    create: tagName => {
       let htmlName = componentNameMapping[tagName];
       if (!htmlName) {
         htmlName = tagName as ConnectElementHTMLName;
       }
       const element = document.createElement(htmlName);
-      stripeConnectInstance.then((instance) => {
+      stripeConnectInstance.then(instance => {
         (element as any).setConnector((instance as any).connect);
       });
 
       return element;
     },
-    update: (updateOptions) => {
-      stripeConnectInstance.then((instance) => {
-        instance?.update(updateOptions);
+    update: updateOptions => {
+      stripeConnectInstance.then(instance => {
+        instance.update(updateOptions);
       });
     },
     debugInstance: () => {
       return stripeConnectInstance;
     },
     logout: () => {
-      return stripeConnectInstance.then((instance) => {
-        instance?.logout();
+      return stripeConnectInstance.then(instance => {
+        instance.logout();
       });
-    },
+    }
   };
 };
 
@@ -171,12 +172,12 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_",
-          },
-        },
+            sdkVersion: "_NPM_PACKAGE_VERSION_"
+          }
+        }
       });
       return stripeConnectInstance;
-    },
+    }
   };
   return wrapper;
 };
