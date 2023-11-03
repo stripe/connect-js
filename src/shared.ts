@@ -44,7 +44,7 @@ const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
 const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
 
-export const findScript = (): HTMLScriptElement => {
+export const findScript = (): HTMLScriptElement | null => {
   return document.querySelectorAll<HTMLScriptElement>(
     `script[src="${V0_URL}"]`
   )[0];
@@ -75,7 +75,7 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
     return stripePromise;
   }
 
-  stripePromise = new Promise((resolve, reject) => {
+  stripePromise = new Promise<StripeConnectWrapper>((resolve, reject) => {
     if (typeof window === "undefined") {
       reject(
         "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects."
