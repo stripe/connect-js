@@ -406,4 +406,6 @@ export type ConnectElementTagName =
   | "payment-method-settings"
   | "account-management"
   | "notification-banner"
-  | "instant-payouts";
+  | "instant-payouts"
+  | "issuing-card"
+  | "issuing-cards-list";
