@@ -14,18 +14,7 @@ export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
-<<<<<<< HEAD
   "account-onboarding": "stripe-connect-account-onboarding"
-=======
-  payments: "stripe-connect-payments",
-  payouts: "stripe-connect-payouts",
-  "payment-details": "stripe-connect-payment-details",
-  "account-onboarding": "stripe-connect-account-onboarding",
-  "payment-method-settings": "stripe-connect-payment-method-settings",
-  "account-management": "stripe-connect-account-management",
-  "notification-banner": "stripe-connect-notification-banner",
-  "instant-payouts": "stripe-connect-instant-payouts"
->>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
@@ -123,11 +112,7 @@ export const initStripeConnect = (
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
   const stripeConnectInstance = stripePromise.then(wrapper =>
-<<<<<<< HEAD
-    wrapper?.initialize(initParams)
-=======
     wrapper.initialize(initParams)
->>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
   );
 
   return {
@@ -145,11 +130,7 @@ export const initStripeConnect = (
     },
     update: updateOptions => {
       stripeConnectInstance.then(instance => {
-<<<<<<< HEAD
-        instance?.update(updateOptions);
-=======
         instance.update(updateOptions);
->>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
       });
     },
     debugInstance: () => {
@@ -157,11 +138,7 @@ export const initStripeConnect = (
     },
     logout: () => {
       return stripeConnectInstance.then(instance => {
-<<<<<<< HEAD
-        instance?.logout();
-=======
         instance.logout();
->>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
       });
     }
   };
