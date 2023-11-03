@@ -1,9 +1,9 @@
 name: build
 on:
   push:
-    branches: [master]
+    branches: [master, beta]
   pull_request:
-    branches: [master]
+    branches: [master, beta]
 jobs:
   test:
     runs-on: ubuntu-latest
