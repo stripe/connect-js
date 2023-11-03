@@ -32,7 +32,7 @@ This synchronous function takes in a publishable key, a function to retrieve the
 ```js
 import { loadConnectAndInitialize } from "@stripe/connect-js";
 const fetchClientSecret = async () => {
-  // Fetch the AccountSession client secret
+  // Fetch the AccountSession client secret by making an API call to your service
 };
 
 const instance = loadConnectAndInitialize({
