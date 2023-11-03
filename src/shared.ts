@@ -33,7 +33,7 @@ export const componentNameMapping: Record<
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
-  debugInstance: () => Promise<StripeConnectInstance | undefined>;
+  debugInstance: () => Promise<StripeConnectInstance>;
 };
 
 interface StripeConnectWrapper {
@@ -69,13 +69,13 @@ const injectScript = (): HTMLScriptElement => {
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
-export const loadScript = (): Promise<StripeConnectWrapper | null> => {
+export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
     return stripePromise;
   }
 
-  stripePromise = new Promise((resolve, reject) => {
+  stripePromise = new Promise<StripeConnectWrapper>((resolve, reject) => {
     if (typeof window === "undefined") {
       reject(
         "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects."
@@ -123,12 +123,13 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
 };
 
 export const initStripeConnect = (
-  stripePromise: Promise<StripeConnectWrapper | null>,
+  stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
   const stripeConnectInstance = stripePromise.then(wrapper =>
-    wrapper?.initialize(initParams)
+    wrapper.initialize(initParams)
   );
+
   return {
     create: tagName => {
       let htmlName = componentNameMapping[tagName];
@@ -144,7 +145,7 @@ export const initStripeConnect = (
     },
     update: updateOptions => {
       stripeConnectInstance.then(instance => {
-        instance?.update(updateOptions);
+        instance.update(updateOptions);
       });
     },
     debugInstance: () => {
@@ -152,7 +153,7 @@ export const initStripeConnect = (
     },
     logout: () => {
       return stripeConnectInstance.then(instance => {
-        instance?.logout();
+        instance.logout();
       });
     }
   };

@@ -380,7 +380,7 @@ export interface StripeConnectInstance {
    * @tagName Name of the Connect component to create.
    * @returns An HTML component corresponding to that connect component
    */
-  create: (tagName: ConnectElementTagName) => HTMLElement | null;
+  create: (tagName: ConnectElementTagName) => HTMLElement;
 
   /**
    * Updates the Connect instance with new parameters.
@@ -407,7 +407,3 @@ export type ConnectElementTagName =
   | "account-management"
   | "notification-banner"
   | "instant-payouts";
-
-export declare const findScript: () => HTMLScriptElement | null;
-
-export declare const loadScript: () => Promise<any | null>;
