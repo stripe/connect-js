@@ -2,7 +2,7 @@ import { IStripeConnectInitParams, StripeConnectInstance } from "../types";
 import {
   loadScript,
   initStripeConnect,
-  LoadConnectAndInitialize,
+  LoadConnectAndInitialize
 } from "./shared";
 
 // Execute our own script injection after a tick to give users time to do their
