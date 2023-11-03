@@ -360,7 +360,7 @@ export interface StripeConnectInstance {
    * @tagName Name of the Connect component to create.
    * @returns An HTML component corresponding to that connect component
    */
-  create: (tagName: ConnectElementTagName) => HTMLElement | null;
+  create: (tagName: ConnectElementTagName) => HTMLElement;
 
   /**
    * Updates the Connect instance with new parameters.
@@ -378,8 +378,20 @@ export interface StripeConnectInstance {
 /**
  * Tagnames to be used with the `create` method of the Connect instance.
  */
+<<<<<<< HEAD
 export type ConnectElementTagName = "account-onboarding";
 
 export declare const findScript: () => HTMLScriptElement | null;
 
 export declare const loadScript: () => Promise<any | null>;
+=======
+export type ConnectElementTagName =
+  | "payments"
+  | "payouts"
+  | "payment-details"
+  | "account-onboarding"
+  | "payment-method-settings"
+  | "account-management"
+  | "notification-banner"
+  | "instant-payouts";
+>>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))

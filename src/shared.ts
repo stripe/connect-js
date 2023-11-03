@@ -14,11 +14,22 @@ export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
+<<<<<<< HEAD
   "account-onboarding": "stripe-connect-account-onboarding"
+=======
+  payments: "stripe-connect-payments",
+  payouts: "stripe-connect-payouts",
+  "payment-details": "stripe-connect-payment-details",
+  "account-onboarding": "stripe-connect-account-onboarding",
+  "payment-method-settings": "stripe-connect-payment-method-settings",
+  "account-management": "stripe-connect-account-management",
+  "notification-banner": "stripe-connect-notification-banner",
+  "instant-payouts": "stripe-connect-instant-payouts"
+>>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
-  debugInstance: () => Promise<StripeConnectInstance | undefined>;
+  debugInstance: () => Promise<StripeConnectInstance>;
 };
 
 interface StripeConnectWrapper {
@@ -54,13 +65,13 @@ const injectScript = (): HTMLScriptElement => {
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
-export const loadScript = (): Promise<StripeConnectWrapper | null> => {
+export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
     return stripePromise;
   }
 
-  stripePromise = new Promise((resolve, reject) => {
+  stripePromise = new Promise<StripeConnectWrapper>((resolve, reject) => {
     if (typeof window === "undefined") {
       reject(
         "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects."
@@ -108,12 +119,17 @@ export const loadScript = (): Promise<StripeConnectWrapper | null> => {
 };
 
 export const initStripeConnect = (
-  stripePromise: Promise<StripeConnectWrapper | null>,
+  stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
   const stripeConnectInstance = stripePromise.then(wrapper =>
+<<<<<<< HEAD
     wrapper?.initialize(initParams)
+=======
+    wrapper.initialize(initParams)
+>>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
   );
+
   return {
     create: tagName => {
       let htmlName = componentNameMapping[tagName];
@@ -129,7 +145,11 @@ export const initStripeConnect = (
     },
     update: updateOptions => {
       stripeConnectInstance.then(instance => {
+<<<<<<< HEAD
         instance?.update(updateOptions);
+=======
+        instance.update(updateOptions);
+>>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
       });
     },
     debugInstance: () => {
@@ -137,7 +157,11 @@ export const initStripeConnect = (
     },
     logout: () => {
       return stripeConnectInstance.then(instance => {
+<<<<<<< HEAD
         instance?.logout();
+=======
+        instance.logout();
+>>>>>>> aa7bc71 (Remove additional null typing and additional exports from package (#65))
       });
     }
   };
