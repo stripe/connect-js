@@ -34,7 +34,7 @@ export const componentNameMapping: Record<
   "notification-banner": "stripe-connect-notification-banner",
   "instant-payouts": "stripe-connect-instant-payouts",
   "issuing-card": "stripe-connect-issuing-card",
-  "issuing-cards-list": "stripe-connect-issuing-cards-list",
+  "issuing-cards-list": "stripe-connect-issuing-cards-list"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {

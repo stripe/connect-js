@@ -376,15 +376,17 @@ export interface IStripeConnectInitParams {
 
 type ConnectHTMLElementRecordFallback = {
   [key in string]: HTMLElement | null;
-}
+};
 type ConnectHTMLElementRecordBase = {
   [tagName in ConnectElementTagName]: HTMLElement;
 };
 
-interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase, ConnectHTMLElementRecordFallback {
+interface ConnectHTMLElementRecord
+  extends ConnectHTMLElementRecordBase,
+    ConnectHTMLElementRecordFallback {
   "payment-details": HTMLElement & {
     setPayment: (payment: string | undefined) => void;
-    setOnClose: (listener: () => void) => void;
+    setOnClose: (listener: (() => void) | undefined) => void;
   };
   "account-onboarding": HTMLElement & {
     setFullTermsOfServiceUrl: (termOfServiceUrl: string | undefined) => void;
@@ -395,7 +397,7 @@ interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase, Connect
     setSkipTermsOfServiceCollection: (
       skipTermsOfServiceCollection: boolean | undefined
     ) => void;
-    setOnExit: (listener: () => void) => void;
+    setOnExit: (listener: (() => void) | undefined) => void;
   };
 }
 
