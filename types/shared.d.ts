@@ -361,8 +361,10 @@ type ConnectHTMLElementRecordBase = {
   [tagName in ConnectElementTagName]: HTMLElement;
 };
 
-interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase, ConnectHTMLElementRecordFallback {
-  'account-onboarding': HTMLElement & {
+interface ConnectHTMLElementRecord
+  extends ConnectHTMLElementRecordBase,
+    ConnectHTMLElementRecordFallback {
+  "account-onboarding": HTMLElement & {
     setFullTermsOfServiceUrl: (termOfServiceUrl: string | undefined) => void;
     setRecipientTermsOfServiceUrl: (
       recipientTermsOfServiceUrl: string | undefined
