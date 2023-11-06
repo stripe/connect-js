@@ -374,11 +374,14 @@ export interface IStripeConnectInitParams {
   locale?: string;
 }
 
+type ConnectHTMLElementRecordFallback = {
+  [key in string]: HTMLElement | null;
+}
 type ConnectHTMLElementRecordBase = {
   [tagName in ConnectElementTagName]: HTMLElement;
 };
 
-interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase {
+interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase, ConnectHTMLElementRecordFallback {
   "payment-details": HTMLElement & {
     setPayment: (payment: string | undefined) => void;
     setOnClose: (listener: () => void) => void;
