@@ -4,6 +4,7 @@ import {
   ConnectElementTagName,
   ConnectHTMLElementRecord
 } from "../types";
+import {ConnectElementCustomMethodConfig} from '../types/config';
 
 export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -36,6 +37,13 @@ export const componentNameMapping: Record<
   "issuing-card": "stripe-connect-issuing-card",
   "issuing-cards-list": "stripe-connect-issuing-cards-list"
 };
+
+export const ComponentHTMLToTagNameMapping: Record<ConnectElementHTMLName, ConnectElementTagName> = 
+  Object.keys(componentNameMapping).reduce((acc, curr) => {
+    const tagName = curr as ConnectElementTagName;
+    acc[componentNameMapping[tagName]] = tagName;
+    return acc;
+  }, {} as Record<ConnectElementHTMLName, ConnectElementTagName>);
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
   debugInstance: () => Promise<StripeConnectInstance>;
@@ -127,6 +135,16 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
   return stripePromise;
 };
 
+const hasCustomMethod = (tagName: ConnectElementTagName): tagName is keyof typeof ConnectElementCustomMethodConfig => {
+  return tagName in ConnectElementCustomMethodConfig;
+}
+
+const proxyMethodCallToChild = (el: HTMLElement, methodName: string) => {
+  (el as any)[methodName] = function(...args: any[]) {
+    ((this as HTMLElement).children.item(0) as any)[methodName](...args);
+  }
+}
+
 export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
@@ -140,13 +158,62 @@ export const initStripeConnect = (
       let htmlName = componentNameMapping[tagName];
       if (!htmlName) {
         htmlName = tagName as ConnectElementHTMLName;
+        tagName = ComponentHTMLToTagNameMapping[htmlName] as typeof tagName;
       }
-      const element = document.createElement(htmlName);
+
+      const wrapper = document.createElement(`${htmlName}-wrapper`);
+      proxyMethodCallToChild(wrapper, 'setAttribute');
+      proxyMethodCallToChild(wrapper, 'addEventListener');
+
+      // create temporary placeholder element with same set of custom methods that store called values
+      let element = document.createElement(`${htmlName}-loading`);
+      wrapper.appendChild(element);
+
+      (element as any).eventListeners = [];
+      (element as any).addEventListener = function (event: string, listener: () => void) {
+        (this as any).eventListeners.push([event, listener]);
+      }
+      if(hasCustomMethod(tagName)) {
+        const methods = ConnectElementCustomMethodConfig[tagName];
+        for(const method in methods) {
+          // proxy wrapper custom methods calls to child
+          proxyMethodCallToChild(wrapper, method);
+
+          // temporarily store called values
+          (element as any)[`${method}_value`] = undefined;
+          (element as any)[`${method}`] = function(value: string) {
+            this[`${method}_value`] = value;
+          };
+        }
+      }
+
       stripeConnectInstance.then(instance => {
-        (element as any).setConnector((instance as any).connect);
+        const newElement = document.createElement(htmlName);
+
+        for(const eventAndListener of (element as any).eventListeners) {
+          const [event, listener] = eventAndListener;
+          newElement.addEventListener(event, listener);
+        }
+        if(hasCustomMethod(tagName)) {
+          const methods = ConnectElementCustomMethodConfig[tagName];
+          for(const method in methods) {
+            const el = element as any;
+            if(el[`${method}_value`] !== undefined) {
+              // calls custom method on real connect element with stored values
+              (newElement as any)[`${method}`](el[`${method}_value`]);
+            }
+          }
+        }
+        for(const attr of element.attributes) {
+          newElement.setAttribute(attr.name, attr.value);
+        }
+        element.replaceWith(newElement);
+
+        (newElement as any).setConnector((instance as any).connect);
+        element = newElement;
       });
 
-      return element as ConnectHTMLElementRecord[typeof tagName];
+      return wrapper as ConnectHTMLElementRecord[typeof tagName];
     },
     update: updateOptions => {
       stripeConnectInstance.then(instance => {

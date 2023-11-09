@@ -1,3 +1,5 @@
+import {ConnectElementCustomMethodConfig} from './config';
+
 export declare type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
@@ -374,31 +376,16 @@ export interface IStripeConnectInitParams {
   locale?: string;
 }
 
-type ConnectHTMLElementRecordFallback = {
-  [key in string]: HTMLElement | null;
-};
+type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
+
 type ConnectHTMLElementRecordBase = {
+  [K in keyof ConnectElementCustomMethods]: HTMLElement & ConnectElementCustomMethods[K];
+} & {
   [tagName in ConnectElementTagName]: HTMLElement;
 };
 
-interface ConnectHTMLElementRecord
-  extends ConnectHTMLElementRecordBase,
-    ConnectHTMLElementRecordFallback {
-  "payment-details": HTMLElement & {
-    setPayment: (payment: string | undefined) => void;
-    setOnClose: (listener: (() => void) | undefined) => void;
-  };
-  "account-onboarding": HTMLElement & {
-    setFullTermsOfServiceUrl: (termOfServiceUrl: string | undefined) => void;
-    setRecipientTermsOfServiceUrl: (
-      recipientTermsOfServiceUrl: string | undefined
-    ) => void;
-    setPrivacyPolicyUrl: (privacyPolicyUrl: string | undefined) => void;
-    setSkipTermsOfServiceCollection: (
-      skipTermsOfServiceCollection: boolean | undefined
-    ) => void;
-    setOnExit: (listener: (() => void) | undefined) => void;
-  };
+interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase {
+  [key: string]: HTMLElement | null;
 }
 
 export interface StripeConnectInstance {
