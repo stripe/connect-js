@@ -2,9 +2,9 @@ import {
   IStripeConnectInitParams,
   StripeConnectInstance,
   ConnectElementTagName,
-  ConnectHTMLElementRecord,
+  ConnectHTMLElementRecord
 } from "../types";
-import {ConnectElementCustomMethodConfig} from '../types/config';
+import { ConnectElementCustomMethodConfig } from "../types/config";
 
 export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -38,12 +38,14 @@ export const componentNameMapping: Record<
   "issuing-cards-list": "stripe-connect-issuing-cards-list"
 };
 
-const ComponentHTMLToTagNameMapping: Record<ConnectElementHTMLName, ConnectElementTagName> = 
-  Object.keys(componentNameMapping).reduce((acc, curr) => {
-    const tagName = curr as ConnectElementTagName;
-    acc[componentNameMapping[tagName]] = tagName;
-    return acc;
-  }, {} as Record<ConnectElementHTMLName, ConnectElementTagName>);
+const ComponentHTMLToTagNameMapping: Record<
+  ConnectElementHTMLName,
+  ConnectElementTagName
+> = Object.keys(componentNameMapping).reduce((acc, curr) => {
+  const tagName = curr as ConnectElementTagName;
+  acc[componentNameMapping[tagName]] = tagName;
+  return acc;
+}, {} as Record<ConnectElementHTMLName, ConnectElementTagName>);
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
   debugInstance: () => Promise<StripeConnectInstance>;
@@ -135,40 +137,48 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
   return stripePromise;
 };
 
-const hasCustomMethod = (tagName: ConnectElementTagName): tagName is keyof typeof ConnectElementCustomMethodConfig => {
+const hasCustomMethod = (
+  tagName: ConnectElementTagName
+): tagName is keyof typeof ConnectElementCustomMethodConfig => {
   return tagName in ConnectElementCustomMethodConfig;
-}
+};
 
 const proxyMethodCallToChild = (el: HTMLElement, methodName: string) => {
   (el as any)[methodName] = function(...args: any[]) {
     ((this as HTMLElement).children.item(0) as any)[methodName](...args);
-  }
-}
+  };
+};
 
-const createConnectElementWrapper = (tagName: ConnectElementTagName, htmlName: ConnectElementHTMLName) => {
+const createConnectElementWrapper = (
+  tagName: ConnectElementTagName,
+  htmlName: ConnectElementHTMLName
+) => {
   const wrapper = document.createElement(`${htmlName}-wrapper`);
-  proxyMethodCallToChild(wrapper, 'setAttribute');
-  proxyMethodCallToChild(wrapper, 'addEventListener');
-  if(hasCustomMethod(tagName)) {
+  proxyMethodCallToChild(wrapper, "setAttribute");
+  proxyMethodCallToChild(wrapper, "addEventListener");
+  if (hasCustomMethod(tagName)) {
     const methods = ConnectElementCustomMethodConfig[tagName];
-    for(const method in methods) {
+    for (const method in methods) {
       proxyMethodCallToChild(wrapper, method);
     }
   }
   return wrapper;
-}
+};
 
-const createPlaceholderConnectElement = <T extends ConnectElementTagName>(tagName: T, htmlName: typeof componentNameMapping[T]) => {
+const createPlaceholderConnectElement = <T extends ConnectElementTagName>(
+  tagName: T,
+  htmlName: typeof componentNameMapping[T]
+) => {
   const placeholder = document.createElement(`${htmlName}-loading`);
   (placeholder as any).storedEventListeners = [];
-  placeholder.addEventListener = function (event: string, listener: any) {
+  placeholder.addEventListener = function(event: string, listener: any) {
     (this as any).storedEventListeners.push([event, listener]);
-  }
-  if(hasCustomMethod(tagName)) {
+  };
+  if (hasCustomMethod(tagName)) {
     const methods = ConnectElementCustomMethodConfig[tagName];
-    for(const method in methods) {
+    for (const method in methods) {
       (placeholder as any)[`${method}_value`] = undefined;
-      (placeholder as any)[`${method}`] = function(value: string) {
+      (placeholder as any)[method] = function(value: string) {
         // temporarily store called values
         this[`${method}_value`] = value;
       };
@@ -177,26 +187,30 @@ const createPlaceholderConnectElement = <T extends ConnectElementTagName>(tagNam
   return placeholder as ConnectHTMLElementRecord[T];
 };
 
-const replacePlaceholderConnectElement = <T extends ConnectElementTagName>(tagName: T, htmlName: typeof componentNameMapping[T], placeholder: ConnectHTMLElementRecord[T]) => {
+const replacePlaceholderConnectElement = <T extends ConnectElementTagName>(
+  tagName: T,
+  htmlName: typeof componentNameMapping[T],
+  placeholder: ConnectHTMLElementRecord[T]
+) => {
   const element = document.createElement(htmlName);
 
   // call custom setters methods on real connect elements
-  if(hasCustomMethod(tagName)) {
+  if (hasCustomMethod(tagName)) {
     const methods = ConnectElementCustomMethodConfig[tagName];
-    for(const method in methods) {
+    for (const method in methods) {
       const el = placeholder as any;
-      if(el[`${method}_value`] !== undefined) {
+      if (el[`${method}_value`] !== undefined) {
         // calls custom method on real connect element with stored values
-        (element as any)[`${method}`](el[`${method}_value`]);
+        (element as any)[method](el[`${method}_value`]);
       }
     }
   }
   // move attributes to real connect element
-  for(const attr of placeholder.attributes) {
+  for (const attr of placeholder.attributes) {
     element.setAttribute(attr.name, attr.value);
   }
   // move event listeners to real connect element
-  for(const eventAndListener of (placeholder as any).storedEventListeners) {
+  for (const eventAndListener of (placeholder as any).storedEventListeners) {
     const [event, listener] = eventAndListener;
     element.addEventListener(event, listener);
   }
@@ -225,7 +239,11 @@ export const initStripeConnect = (
       wrapper.appendChild(placeholder);
 
       stripeConnectInstance.then(instance => {
-        const element = replacePlaceholderConnectElement(tagName, htmlName, placeholder);
+        const element = replacePlaceholderConnectElement(
+          tagName,
+          htmlName,
+          placeholder
+        );
         (element as any).setConnector((instance as any).connect);
       });
       return wrapper as ConnectHTMLElementRecord[typeof tagName];
