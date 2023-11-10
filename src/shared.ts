@@ -165,43 +165,52 @@ const createConnectElementWrapper = (
   return wrapper;
 };
 
+type ConnectHTMLElementPlaceholderRecord = {
+  [tagName in ConnectElementTagName]: ConnectHTMLElementRecord[tagName] & {
+    storedEventListeners: ([string, () => any])[];
+    storedCustomSetterValue: {
+      [setterMethodName in Exclude<keyof ConnectHTMLElementRecord[tagName], keyof HTMLElement>]?: string | boolean | undefined;
+    }
+  }
+}
+
 const createPlaceholderConnectElement = <T extends ConnectElementTagName>(
   tagName: T,
   htmlName: typeof componentNameMapping[T]
 ) => {
-  const placeholder = document.createElement(`${htmlName}-loading`);
-  (placeholder as any).storedEventListeners = [];
+  const placeholder = document.createElement(`${htmlName}-loading`) as ConnectHTMLElementPlaceholderRecord[T];
+  placeholder.storedEventListeners = [];
   placeholder.addEventListener = function(event: string, listener: any) {
-    (this as any).storedEventListeners.push([event, listener]);
+    this.storedEventListeners.push([event, listener]);
   };
+  placeholder.storedCustomSetterValue = {};
   if (hasCustomMethod(tagName)) {
     const methods = ConnectElementCustomMethodConfig[tagName];
     for (const method in methods) {
-      (placeholder as any)[`${method}_value`] = undefined;
+      (placeholder.storedCustomSetterValue as any)[method] = undefined;
       (placeholder as any)[method] = function(value: string) {
         // temporarily store called values
-        this[`${method}_value`] = value;
+        (placeholder.storedCustomSetterValue as any)[method] = value;
       };
     }
   }
-  return placeholder as ConnectHTMLElementRecord[T];
+  return placeholder;
 };
 
 const replacePlaceholderConnectElement = <T extends ConnectElementTagName>(
   tagName: T,
   htmlName: typeof componentNameMapping[T],
-  placeholder: ConnectHTMLElementRecord[T]
+  placeholder: ConnectHTMLElementPlaceholderRecord[T]
 ) => {
   const element = document.createElement(htmlName);
-
   // call custom setters methods on real connect elements
   if (hasCustomMethod(tagName)) {
     const methods = ConnectElementCustomMethodConfig[tagName];
     for (const method in methods) {
-      const el = placeholder as any;
-      if (el[`${method}_value`] !== undefined) {
+      const storedValue = (placeholder.storedCustomSetterValue as any)[method];
+      if (storedValue !== undefined) {
         // calls custom method on real connect element with stored values
-        (element as any)[method](el[`${method}_value`]);
+        (element as any)[method](storedValue);
       }
     }
   }
