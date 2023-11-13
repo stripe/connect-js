@@ -399,6 +399,29 @@ interface ConnectHTMLElementRecord
     ) => void;
     setOnExit: (listener: (() => void) | undefined) => void;
   };
+  "issuing-card": HTMLElement & {
+    setDefaultCard: (defaultCard: string | undefined) => void;
+    setCardArtFileLink: (cardArtFileLink: string | undefined) => void;
+    setCardSwitching: (cardSwitching: boolean | undefined) => void;
+    setFetchEphemeralKey: (fetchParams: {
+      nonce: string;
+      issuingCard: string;
+    }) => Promise<{
+      ephemeralKeySecret: string;
+      nonce: string;
+      issuingCard: string;
+    }>;
+  };
+  "issuing-cards-list": HTMLElement & {
+    setFetchEphemeralKey: (fetchParams: {
+      nonce: string;
+      issuingCard: string;
+    }) => Promise<{
+      ephemeralKeySecret: string;
+      nonce: string;
+      issuingCard: string;
+    }>;
+  };
 }
 
 export interface StripeConnectInstance {
