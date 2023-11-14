@@ -155,7 +155,6 @@ export const initStripeConnect = (
         for (const method in methods) {
           (element as any)[method] = function(value: any) {
             stripeConnectInstance.then(() => {
-              console.log((element as any)[`${method}InternalOnly`]);
               this[`${method}InternalOnly`](value);
             });
           };

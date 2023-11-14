@@ -378,17 +378,13 @@ export interface IStripeConnectInitParams {
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
 
-type ConnectHTMLElementRecordBase = {
+type ConnectHTMLElementRecord = {
   [K in keyof ConnectElementCustomMethods]: HTMLElement &
     ConnectElementCustomMethods[K];
 } &
   {
-    [tagName in ConnectElementTagName]: HTMLElement;
+    [key: string]: HTMLElement;
   };
-
-interface ConnectHTMLElementRecord extends ConnectHTMLElementRecordBase {
-  [key: string]: HTMLElement | null;
-}
 
 export interface StripeConnectInstance {
   /**
