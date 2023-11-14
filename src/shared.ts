@@ -38,15 +38,6 @@ export const componentNameMapping: Record<
   "issuing-cards-list": "stripe-connect-issuing-cards-list"
 };
 
-const ComponentHTMLToTagNameMapping: Record<
-  ConnectElementHTMLName,
-  ConnectElementTagName
-> = Object.keys(componentNameMapping).reduce((acc, curr) => {
-  const tagName = curr as ConnectElementTagName;
-  acc[componentNameMapping[tagName]] = tagName;
-  return acc;
-}, {} as Record<ConnectElementHTMLName, ConnectElementTagName>);
-
 type StripeConnectInstanceExtended = StripeConnectInstance & {
   debugInstance: () => Promise<StripeConnectInstance>;
 };
@@ -143,90 +134,6 @@ const hasCustomMethod = (
   return tagName in ConnectElementCustomMethodConfig;
 };
 
-const proxyMethodCallToChild = (el: HTMLElement, methodName: string) => {
-  (el as any)[methodName] = function(...args: any[]) {
-    ((this as HTMLElement).children.item(0) as any)[methodName](...args);
-  };
-};
-
-const createConnectElementWrapper = (
-  tagName: ConnectElementTagName,
-  htmlName: ConnectElementHTMLName
-) => {
-  const wrapper = document.createElement(`${htmlName}-wrapper`);
-  proxyMethodCallToChild(wrapper, "setAttribute");
-  proxyMethodCallToChild(wrapper, "addEventListener");
-  if (hasCustomMethod(tagName)) {
-    const methods = ConnectElementCustomMethodConfig[tagName];
-    for (const method in methods) {
-      proxyMethodCallToChild(wrapper, method);
-    }
-  }
-  return wrapper;
-};
-
-type ConnectHTMLElementPlaceholderRecord = {
-  [tagName in ConnectElementTagName]: ConnectHTMLElementRecord[tagName] & {
-    storedEventListeners: ([string, () => any])[];
-    storedCustomSetterValue: {
-      [setterMethodName in Exclude<keyof ConnectHTMLElementRecord[tagName], keyof HTMLElement>]?: string | boolean | undefined;
-    }
-  }
-}
-
-const createPlaceholderConnectElement = <T extends ConnectElementTagName>(
-  tagName: T,
-  htmlName: typeof componentNameMapping[T]
-) => {
-  const placeholder = document.createElement(`${htmlName}-loading`) as ConnectHTMLElementPlaceholderRecord[T];
-  placeholder.storedEventListeners = [];
-  placeholder.addEventListener = function(event: string, listener: any) {
-    this.storedEventListeners.push([event, listener]);
-  };
-  placeholder.storedCustomSetterValue = {};
-  if (hasCustomMethod(tagName)) {
-    const methods = ConnectElementCustomMethodConfig[tagName];
-    for (const method in methods) {
-      (placeholder.storedCustomSetterValue as any)[method] = undefined;
-      (placeholder as any)[method] = function(value: string) {
-        // temporarily store called values
-        (placeholder.storedCustomSetterValue as any)[method] = value;
-      };
-    }
-  }
-  return placeholder;
-};
-
-const replacePlaceholderConnectElement = <T extends ConnectElementTagName>(
-  tagName: T,
-  htmlName: typeof componentNameMapping[T],
-  placeholder: ConnectHTMLElementPlaceholderRecord[T]
-) => {
-  const element = document.createElement(htmlName);
-  // call custom setters methods on real connect elements
-  if (hasCustomMethod(tagName)) {
-    const methods = ConnectElementCustomMethodConfig[tagName];
-    for (const method in methods) {
-      const storedValue = (placeholder.storedCustomSetterValue as any)[method];
-      if (storedValue !== undefined) {
-        // calls custom method on real connect element with stored values
-        (element as any)[method](storedValue);
-      }
-    }
-  }
-  // move attributes to real connect element
-  for (const attr of placeholder.attributes) {
-    element.setAttribute(attr.name, attr.value);
-  }
-  // move event listeners to real connect element
-  for (const eventAndListener of (placeholder as any).storedEventListeners) {
-    const [event, listener] = eventAndListener;
-    element.addEventListener(event, listener);
-  }
-  placeholder.replaceWith(element);
-  return element as ConnectHTMLElementRecord[T];
-};
-
 export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
@@ -239,23 +146,27 @@ export const initStripeConnect = (
     create: tagName => {
       let htmlName = componentNameMapping[tagName];
       if (!htmlName) {
-        htmlName = tagName as ConnectElementHTMLName;
-        tagName = ComponentHTMLToTagNameMapping[htmlName] as typeof tagName;
+        htmlName = (tagName as unknown) as ConnectElementHTMLName;
+      }
+      const element = document.createElement(htmlName);
+
+      if (hasCustomMethod(tagName)) {
+        const methods = ConnectElementCustomMethodConfig[tagName];
+        for (const method in methods) {
+          (element as any)[method] = function(value: any) {
+            stripeConnectInstance.then(() => {
+              console.log((element as any)[`${method}InternalOnly`]);
+              this[`${method}InternalOnly`](value);
+            });
+          };
+        }
       }
 
-      const wrapper = createConnectElementWrapper(tagName, htmlName);
-      const placeholder = createPlaceholderConnectElement(tagName, htmlName);
-      wrapper.appendChild(placeholder);
-
       stripeConnectInstance.then(instance => {
-        const element = replacePlaceholderConnectElement(
-          tagName,
-          htmlName,
-          placeholder
-        );
         (element as any).setConnector((instance as any).connect);
       });
-      return wrapper as ConnectHTMLElementRecord[typeof tagName];
+
+      return element as ConnectHTMLElementRecord[typeof tagName];
     },
     update: updateOptions => {
       stripeConnectInstance.then(instance => {
