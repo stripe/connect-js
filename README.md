@@ -60,17 +60,6 @@ script tag is inserted immediately upon page load.
 import "@stripe/connect-js";
 ```
 
-### Manually include the script tag
-
-Manually add the Connect.js script tag to the `<head>` of each page on your site.
-If an existing script tag is already present, this module will not insert a new
-one. When you call `loadConnectAndInitialize`, it will use the existing script tag.
-
-```html
-<!-- Somewhere in your site's <head> -->
-<script src="https://connect-js.stripe.com/v0.1/connect.js" async></script>
-```
-
 ### Importing `loadConnectAndInitialize` without side effects
 
 If you would like to use `loadConnectAndInitialize` in your application, but defer loading the
