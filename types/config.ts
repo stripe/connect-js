@@ -20,6 +20,14 @@ export const ConnectElementCustomMethodConfig = {
       skipTermsOfServiceCollection: boolean | undefined
     ): void => {},
     setOnExit: (listener: (() => void) | undefined): void => {}
+  },
+  "issuing-card": {
+    setDefaultCard: (defaultCard: string | undefined): void => {},
+    setCardArtFileLink: (cardArtFileLink: string | undefined): void => {},
+    setCardSwitching: (cardSwitching: boolean | undefined): void => {}
+  },
+  "issuing-cards-list": {
+    setCardArtFileLink: (cardArtFileLink: string | undefined): void => {}
   }
 };
 
