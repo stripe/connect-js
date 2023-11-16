@@ -361,10 +361,9 @@ type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
 type ConnectHTMLElementRecord = {
   [K in keyof ConnectElementCustomMethods]: HTMLElement &
     ConnectElementCustomMethods[K];
-} &
-  {
-    [key: string]: HTMLElement;
-  };
+} & {
+  [key: string]: HTMLElement;
+};
 
 export interface StripeConnectInstance {
   /**
