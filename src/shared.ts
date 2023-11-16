@@ -4,6 +4,7 @@ import {
   ConnectElementTagName,
   ConnectHTMLElementRecord
 } from "../types";
+import { ConnectElementCustomMethodConfig } from "../types/config";
 
 export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -108,6 +109,12 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
   return stripePromise;
 };
 
+const hasCustomMethod = (
+  tagName: ConnectElementTagName
+): tagName is keyof typeof ConnectElementCustomMethodConfig => {
+  return tagName in ConnectElementCustomMethodConfig;
+};
+
 export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
@@ -123,6 +130,18 @@ export const initStripeConnect = (
         htmlName = (tagName as unknown) as ConnectElementHTMLName;
       }
       const element = document.createElement(htmlName);
+
+      if (hasCustomMethod(tagName)) {
+        const methods = ConnectElementCustomMethodConfig[tagName];
+        for (const method in methods) {
+          (element as any)[method] = function(value: any) {
+            stripeConnectInstance.then(() => {
+              this[`${method}InternalOnly`](value);
+            });
+          };
+        }
+      }
+
       stripeConnectInstance.then(instance => {
         (element as any).setConnector((instance as any).connect);
       });
