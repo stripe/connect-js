@@ -6,7 +6,6 @@ export declare type LoadConnectAndInitialize = (
 
 export declare type OverlayOption = "dialog" | "drawer";
 
-
 /*
  * Use a `CssFontSource` to pass custom fonts via a stylesheet URL when initializing a Connect instance.
  */
@@ -24,7 +23,7 @@ export declare type CssFontSource = {
 /*
  * Use a `CustomFontSource` to pass custom fonts when initializing a Connect instance.
  */
-export declare type CustomFontSource =  {
+export declare type CustomFontSource = {
   /**
    * The name to give the font
    */
@@ -44,7 +43,7 @@ export declare type CustomFontSource =  {
   /**
    * Defaults to `normal`.
    */
-  style?: 'normal' | 'italic' | 'oblique';
+  style?: "normal" | "italic" | "oblique";
 
   /**
    * A valid [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) value.
@@ -406,7 +405,7 @@ export interface IStripeConnectInitParams {
    */
   locale?: string;
 
-   /**
+  /**
    * An array of custom fonts, which embedded components created from a ConnectInstance can use.
    */
   fonts?: Array<CssFontSource | CustomFontSource>;
