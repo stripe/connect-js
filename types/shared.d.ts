@@ -6,6 +6,56 @@ export declare type LoadConnectAndInitialize = (
 
 export declare type OverlayOption = "dialog" | "drawer";
 
+/*
+ * Use a `CssFontSource` to pass custom fonts via a stylesheet URL when initializing a Connect instance.
+ */
+export declare type CssFontSource = {
+  /**
+   * A relative or absolute URL pointing to a CSS file with [@font-face](https://developer.mozilla.org/en/docs/Web/CSS/@font-face) definitions, for example:
+   *
+   *     https://fonts.googleapis.com/css?family=Open+Sans
+   *
+   * Note that if you are using a [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) (CSP), [additional directives](https://stripe.com/docs/security#content-security-policy) may be necessary.
+   */
+  cssSrc: string;
+};
+
+/*
+ * Use a `CustomFontSource` to pass custom fonts when initializing a Connect instance.
+ */
+export declare type CustomFontSource = {
+  /**
+   * The name to give the font
+   */
+  family: string;
+
+  /**
+   * A valid [src](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/src) value pointing to your custom font file.
+   * This is usually (though not always) a link to a file with a `.woff` , `.otf`, or `.svg` suffix.
+   */
+  src: string;
+
+  /**
+   * A valid [font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display) value.
+   */
+  display?: string;
+
+  /**
+   * Defaults to `normal`.
+   */
+  style?: "normal" | "italic" | "oblique";
+
+  /**
+   * A valid [unicode-range](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range) value.
+   */
+  unicodeRange?: string;
+
+  /**
+   * A valid [font-weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight), as a string.
+   */
+  weight?: string;
+};
+
 /**
  * Appearance options for the Connect instance.
  */
@@ -374,6 +424,11 @@ export interface IStripeConnectInitParams {
    * The locale to use for the Connect instance.
    */
   locale?: string;
+
+  /**
+   * An array of custom fonts, which embedded components created from a ConnectInstance can use.
+   */
+  fonts?: Array<CssFontSource | CustomFontSource>;
 }
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
