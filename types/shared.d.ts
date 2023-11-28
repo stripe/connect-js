@@ -76,7 +76,7 @@ export declare type AppearanceVariables = {
   fontFamily?: string;
 
   /**
-   * The baseline font size set on the embedded component root. This scales the value of other font size variables. This supports pixel values only ranging from 1px to 40px, 1em to 4em, and 1rem to 4rem.
+   * The baseline font size set on the embedded component root. This scales the value of other font size variables. This supports pixel values only ranging from 1px to 40px, 0.1em to 4em, and 0.1rem to 4rem.
    */
   fontSizeBase?: string;
 
@@ -262,7 +262,7 @@ export declare type AppearanceVariables = {
 
   // Body Typography
   /**
-   * The font size for the medium body typography. Body typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the medium body typography. Body typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   bodyMdFontSize?: string;
   /**
@@ -270,7 +270,7 @@ export declare type AppearanceVariables = {
    */
   bodyMdFontWeight?: string;
   /**
-   * The font size for the small body typography. Body typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the small body typography. Body typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   bodySmFontSize?: string;
   /**
@@ -280,7 +280,7 @@ export declare type AppearanceVariables = {
 
   // Heading Typography
   /**
-   * The font size for the extra large heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the extra large heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   headingXlFontSize?: string;
   /**
@@ -292,7 +292,7 @@ export declare type AppearanceVariables = {
    */
   headingXlTextTransform?: string;
   /**
-   * The font size for the large heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the large heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   headingLgFontSize?: string;
   /**
@@ -304,7 +304,7 @@ export declare type AppearanceVariables = {
    */
   headingLgTextTransform?: string;
   /**
-   * The font size for the medium heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the medium heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   headingMdFontSize?: string;
   /**
@@ -316,7 +316,7 @@ export declare type AppearanceVariables = {
    */
   headingMdTextTransform?: string;
   /**
-   * The font size for the small heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the small heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   headingSmFontSize?: string;
   /**
@@ -328,7 +328,7 @@ export declare type AppearanceVariables = {
    */
   headingSmTextTransform?: string;
   /**
-   * The font size for the extra small heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the extra small heading typography. Heading typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   headingXsFontSize?: string;
   /**
@@ -342,7 +342,7 @@ export declare type AppearanceVariables = {
 
   // Label Typography
   /**
-   * The font size for the medium label typography. Label typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the medium label typography. Label typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   labelMdFontSize?: string;
   /**
@@ -354,7 +354,7 @@ export declare type AppearanceVariables = {
    */
   labelMdTextTransform?: string;
   /**
-   * The font size for the small label typography. Label typography variables accept a valid font size value ranging from 1px to 200px, 1em to 12em, and 1rem to 12rem.
+   * The font size for the small label typography. Label typography variables accept a valid font size value ranging from 1px to 200px, 0.1em to 12em, and 0.1rem to 12rem.
    */
   labelSmFontSize?: string;
   /**
