@@ -16,7 +16,7 @@ def create_account_session():
     try:
         account_session = stripe.AccountSession.create(
           # We currently only support US custom accounts for onboarding
-          # https://stripe.com/docs/connect/get-started-connect-embedded-components#account-onboarding for more info
+          # https://stripe.com/docs/connect/supported-embedded-components#account-onboarding for more info
           account="{{CONNECTED_ACCOUNT_ID}}",
           components={
             "account_onboarding": {
