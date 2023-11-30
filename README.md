@@ -5,7 +5,7 @@ This NPM package contains initialization logic for Connect embedded components a
 
 Calling `loadConnectAndInitialize` always loads the latest version of Connect.js, regardless of which version of `@stripe/connect-js` you use. Updates for this package only impact tooling around the `loadConnectAndInitialize` helper itself and the TypeScript type definitions provided for Connect.js. Updates do not affect runtime availability of features of Connect.js.
 
-The embedded onboarding component is generally available now. Please refer to our [documentation](https://stripe.com/docs/connect/get-started-connect-embedded-components#account-onboarding) for more information.
+The embedded onboarding component is generally available now. Please refer to our [documentation](https://stripe.com/docs/connect/supported-embedded-components#account-onboarding) for more information.
 
 Note: Majority of Connect embedded components are currently still in beta. Please [contact us](https://stripe.com/docs/connect/get-started-connect-embedded-components#access) to request beta access.
 
