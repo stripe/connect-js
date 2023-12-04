@@ -1,27 +1,18 @@
-import { ConnectElementTagName } from "./shared.d";
-
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 export const ConnectElementCustomMethodConfig = {
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
-      termOfServiceUrl: string | undefined
+      _termOfServiceUrl: string | undefined
     ): void => {},
     setRecipientTermsOfServiceUrl: (
-      recipientTermsOfServiceUrl: string | undefined
+      _recipientTermsOfServiceUrl: string | undefined
     ): void => {},
-    setPrivacyPolicyUrl: (privacyPolicyUrl: string | undefined): void => {},
+    setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setSkipTermsOfServiceCollection: (
-      skipTermsOfServiceCollection: boolean | undefined
+      _skipTermsOfServiceCollection: boolean | undefined
     ): void => {},
-    setOnExit: (listener: (() => void) | undefined): void => {}
+    setOnExit: (_listener: (() => void) | undefined): void => {}
   }
 };
-
-// ensure that keys of ConnectElementCustomMethodConfig are from ConnectElementTagName
-type HasType<T, Q extends T> = Q;
-type CustomMethodConfigValidation = HasType<
-  ConnectElementTagName,
-  keyof typeof ConnectElementCustomMethodConfig
->;
