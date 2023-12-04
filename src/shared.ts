@@ -51,9 +51,11 @@ const EXISTING_SCRIPT_MESSAGE =
 const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
 
 export const findScript = (): HTMLScriptElement | null => {
-  return document.querySelectorAll<HTMLScriptElement>(
-    `script[src="${V0_URL}"]`
-  )[0];
+  return (
+    document.querySelectorAll<HTMLScriptElement>(
+      `script[src="${V0_URL}"]`
+    )[0] || null
+  );
 };
 
 const injectScript = (): HTMLScriptElement => {
