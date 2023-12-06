@@ -31,10 +31,14 @@ export const ConnectElementCustomMethodConfig = {
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
     setCardArtFileLink: (_cardArtFileLink: string | undefined): void => {},
-    setFetchEphemeralKey: (_fetchEphemeralKey: FetchEphemeralKeyFunction | undefined): void => {},
+    setFetchEphemeralKey: (
+      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
+    ): void => {}
   },
   "issuing-cards-list": {
     setCardArtFileLink: (_cardArtFileLink: string | undefined): void => {},
-    setFetchEphemeralKey: (_fetchEphemeralKey: FetchEphemeralKeyFunction | undefined): void => {},
+    setFetchEphemeralKey: (
+      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
+    ): void => {}
   }
 };
