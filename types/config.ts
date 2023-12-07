@@ -31,6 +31,7 @@ export const ConnectElementCustomMethodConfig = {
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
     setCardArtFileLink: (_cardArtFileLink: string | undefined): void => {},
+    setCardSwitching: (_cardSwitching: boolean | undefined): void => {},
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
     ): void => {}
