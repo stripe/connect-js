@@ -10,13 +10,20 @@ export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
-type ConnectElementHTMLName = "stripe-connect-account-onboarding";
+type ConnectElementHTMLName =
+  | "stripe-connect-account-onboarding"
+  | "stripe-connect-payments"
+  | "stripe-connect-payment-details"
+  | "stripe-connect-payouts";
 
 export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
-  "account-onboarding": "stripe-connect-account-onboarding"
+  "account-onboarding": "stripe-connect-account-onboarding",
+  payments: "stripe-connect-payments",
+  "payment-details": "stripe-connect-payment-details",
+  payouts: "stripe-connect-payouts"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {

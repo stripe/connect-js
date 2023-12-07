@@ -14,5 +14,9 @@ export const ConnectElementCustomMethodConfig = {
       _skipTermsOfServiceCollection: boolean | undefined
     ): void => {},
     setOnExit: (_listener: (() => void) | undefined): void => {}
+  },
+  "payment-details": {
+    setPayment: (_payment: string | undefined): void => {},
+    setOnClose: (_listener: (() => void) | undefined): void => {}
   }
 };
