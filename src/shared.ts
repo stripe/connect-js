@@ -179,7 +179,7 @@ export const initStripeConnect = (
     },
     logout: () => {
       return stripeConnectInstance.then(instance => {
-        instance.logout();
+        return instance.logout();
       });
     }
   };
