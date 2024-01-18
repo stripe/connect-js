@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+type CollectionOptions = {
+  fields: "currently_due" | "eventually_due";
+  futureRequirements?: "omit" | "include";
+};
+
 export const ConnectElementCustomMethodConfig = {
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
@@ -12,6 +17,9 @@ export const ConnectElementCustomMethodConfig = {
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setSkipTermsOfServiceCollection: (
       _skipTermsOfServiceCollection: boolean | undefined
+    ): void => {},
+    setCollectionOptions: (
+      _collectionOptions: CollectionOptions | undefined
     ): void => {},
     setOnExit: (_listener: (() => void) | undefined): void => {}
   },
