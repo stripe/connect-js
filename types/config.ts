@@ -10,6 +10,11 @@ type FetchEphemeralKeyFunction = (fetchParams: {
   ephemeralKeySecret: string;
 }>;
 
+type CollectionOptions = {
+  fields: "currently_due" | "eventually_due";
+  futureRequirements?: "omit" | "include";
+};
+
 export const ConnectElementCustomMethodConfig = {
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
@@ -25,6 +30,9 @@ export const ConnectElementCustomMethodConfig = {
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setSkipTermsOfServiceCollection: (
       _skipTermsOfServiceCollection: boolean | undefined
+    ): void => {},
+    setCollectionOptions: (
+      _collectionOptions: CollectionOptions | undefined
     ): void => {},
     setOnExit: (_listener: (() => void) | undefined): void => {}
   },
