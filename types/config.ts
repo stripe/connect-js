@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-type FetchEphemeralKeyFunction = (fetchParams: {
+export type FetchEphemeralKeyFunction = (fetchParams: {
   issuingCard: string;
   nonce: string;
 }) => Promise<{
@@ -10,7 +10,7 @@ type FetchEphemeralKeyFunction = (fetchParams: {
   ephemeralKeySecret: string;
 }>;
 
-type CollectionOptions = {
+export type CollectionOptions = {
   fields: "currently_due" | "eventually_due";
   futureRequirements?: "omit" | "include";
 };
