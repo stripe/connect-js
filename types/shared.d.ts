@@ -413,7 +413,7 @@ export interface IStripeConnectInitParams {
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
 
-type ConnectHTMLElementRecord = {
+export type ConnectHTMLElementRecord = {
   [K in keyof ConnectElementCustomMethods]: HTMLElement &
     ConnectElementCustomMethods[K];
 } & {
