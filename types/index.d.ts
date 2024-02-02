@@ -4,3 +4,4 @@ export declare const loadConnectAndInitialize: (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 export * from "./shared";
+export * from "./config";

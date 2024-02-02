@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-type CollectionOptions = {
+export type CollectionOptions = {
   fields: "currently_due" | "eventually_due";
   futureRequirements?: "omit" | "include";
 };
