@@ -12,6 +12,7 @@ export type LoadConnectAndInitialize = (
 
 type ConnectElementHTMLName =
   | "stripe-connect-account-onboarding"
+  | "stripe-connect-documents"
   | "stripe-connect-payments"
   | "stripe-connect-payment-details"
   | "stripe-connect-payouts";
@@ -21,6 +22,7 @@ export const componentNameMapping: Record<
   ConnectElementHTMLName
 > = {
   "account-onboarding": "stripe-connect-account-onboarding",
+  documents: "stripe-connect-documents",
   payments: "stripe-connect-payments",
   "payment-details": "stripe-connect-payment-details",
   payouts: "stripe-connect-payouts"
