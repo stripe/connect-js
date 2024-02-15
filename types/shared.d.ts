@@ -456,4 +456,5 @@ export type ConnectElementTagName =
   | "notification-banner"
   | "instant-payouts"
   | "issuing-card"
-  | "issuing-cards-list";
+  | "issuing-cards-list"
+  | "documents";
