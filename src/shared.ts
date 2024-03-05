@@ -20,7 +20,8 @@ export type ConnectElementHTMLName =
   | "stripe-connect-notification-banner"
   | "stripe-connect-instant-payouts"
   | "stripe-connect-issuing-card"
-  | "stripe-connect-issuing-cards-list";
+  | "stripe-connect-issuing-cards-list"
+  | "stripe-connect-documents";
 
 export const componentNameMapping: Record<
   ConnectElementTagName,
@@ -35,7 +36,8 @@ export const componentNameMapping: Record<
   "notification-banner": "stripe-connect-notification-banner",
   "instant-payouts": "stripe-connect-instant-payouts",
   "issuing-card": "stripe-connect-issuing-card",
-  "issuing-cards-list": "stripe-connect-issuing-cards-list"
+  "issuing-cards-list": "stripe-connect-issuing-cards-list",
+  documents: "stripe-connect-documents"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
