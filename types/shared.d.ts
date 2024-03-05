@@ -450,4 +450,5 @@ export type ConnectElementTagName =
   | "account-onboarding"
   | "payments"
   | "payment-details"
-  | "payouts";
+  | "payouts"
+  | "documents";

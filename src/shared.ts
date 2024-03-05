@@ -14,7 +14,8 @@ type ConnectElementHTMLName =
   | "stripe-connect-account-onboarding"
   | "stripe-connect-payments"
   | "stripe-connect-payment-details"
-  | "stripe-connect-payouts";
+  | "stripe-connect-payouts"
+  | "stripe-connect-documents";
 
 export const componentNameMapping: Record<
   ConnectElementTagName,
@@ -23,7 +24,8 @@ export const componentNameMapping: Record<
   "account-onboarding": "stripe-connect-account-onboarding",
   payments: "stripe-connect-payments",
   "payment-details": "stripe-connect-payment-details",
-  payouts: "stripe-connect-payouts"
+  payouts: "stripe-connect-payouts",
+  documents: "stripe-connect-documents"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
