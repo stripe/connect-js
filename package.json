@@ -1,6 +1,6 @@
 {
   "name": "@stripe/connect-js",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Connect.js loading utility package",
   "main": "dist/connect.js",
   "module": "dist/connect.esm.js",
@@ -67,6 +67,5 @@
     "yalc": "^1.0.0-pre.53",
     "zx": "^4.2.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
