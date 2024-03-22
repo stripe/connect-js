@@ -21,6 +21,8 @@ export type ConnectElementHTMLName =
   | "stripe-connect-instant-payouts"
   | "stripe-connect-issuing-card"
   | "stripe-connect-issuing-cards-list"
+  | "stripe-connect-financial-account"
+  | "stripe-connect-financial-account-transactions"
   | "stripe-connect-documents";
 
 export const componentNameMapping: Record<
@@ -37,6 +39,9 @@ export const componentNameMapping: Record<
   "instant-payouts": "stripe-connect-instant-payouts",
   "issuing-card": "stripe-connect-issuing-card",
   "issuing-cards-list": "stripe-connect-issuing-cards-list",
+  "financial-account": "stripe-connect-financial-account",
+  "financial-account-transactions":
+    "stripe-connect-financial-account-transactions",
   documents: "stripe-connect-documents"
 };
 

@@ -457,4 +457,6 @@ export type ConnectElementTagName =
   | "instant-payouts"
   | "issuing-card"
   | "issuing-cards-list"
+  | "financial-account"
+  | "financial-account-transactions"
   | "documents";

@@ -49,5 +49,11 @@ export const ConnectElementCustomMethodConfig = {
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
     ): void => {}
+  },
+  "financial-account": {
+    setFinancialAccount: (_financialAccount: string): void => {}
+  },
+  "financial-account-transactions": {
+    setFinancialAccount: (_financialAccount: string): void => {}
   }
 };
