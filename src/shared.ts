@@ -2,7 +2,7 @@ import {
   IStripeConnectInitParams,
   StripeConnectInstance,
   ConnectElementTagName,
-  ConnectHTMLElementRecord
+  ConnectHTMLElementRecord,
 } from "../types";
 import { ConnectElementCustomMethodConfig } from "../types/config";
 
@@ -25,7 +25,7 @@ export const componentNameMapping: Record<
   payments: "stripe-connect-payments",
   "payment-details": "stripe-connect-payment-details",
   payouts: "stripe-connect-payouts",
-  documents: "stripe-connect-documents"
+  documents: "stripe-connect-documents",
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
@@ -66,6 +66,7 @@ const injectScript = (): HTMLScriptElement => {
 };
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
+let stripeConnectInstance: Promise<StripeConnectInstance>;
 
 export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
@@ -130,12 +131,15 @@ export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
-  const stripeConnectInstance = stripePromise.then(wrapper =>
-    wrapper.initialize(initParams)
-  );
+  if (stripeConnectInstance !== null) {
+    console.log("Setting stripe instance");
+    stripeConnectInstance = stripePromise.then((wrapper) =>
+      wrapper.initialize(initParams)
+    );
+  }
 
   return {
-    create: tagName => {
+    create: (tagName) => {
       let htmlName = componentNameMapping[tagName];
       if (!htmlName) {
         htmlName = (tagName as unknown) as ConnectElementHTMLName;
@@ -152,15 +156,27 @@ export const initStripeConnect = (
           };
         }
       }
+      stripeConnectInstance.then((instance) => {
+        console.log(
+          element,
+          "element",
+          instance,
+          "instance",
+          (element as any).connector
+        );
 
-      stripeConnectInstance.then(instance => {
+        console.log(typeof element);
+        console.log(Object.keys(element));
         (element as any).setConnector((instance as any).connect);
+        // if ((element as any).setConnector) {
+        //   (element as any).setConnector((instance as any).connect);
+        // }
       });
 
       return element as ConnectHTMLElementRecord[typeof tagName];
     },
-    update: updateOptions => {
-      stripeConnectInstance.then(instance => {
+    update: (updateOptions) => {
+      stripeConnectInstance.then((instance) => {
         instance.update(updateOptions);
       });
     },
@@ -168,10 +184,10 @@ export const initStripeConnect = (
       return stripeConnectInstance;
     },
     logout: () => {
-      return stripeConnectInstance.then(instance => {
+      return stripeConnectInstance.then((instance) => {
         return instance.logout();
       });
-    }
+    },
   };
 };
 
@@ -188,12 +204,12 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_"
-          }
-        }
+            sdkVersion: "_NPM_PACKAGE_VERSION_",
+          },
+        },
       });
       return stripeConnectInstance;
-    }
+    },
   };
   return wrapper;
 };
