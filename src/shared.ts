@@ -50,7 +50,7 @@ export const findScript = (): HTMLScriptElement | null => {
 
 const injectScript = (): HTMLScriptElement => {
   const script = document.createElement("script");
-  script.src = "https://connect-js.stripe.com/v0.1/connect.js";
+  script.src = "https://connect-js.stripe.com/v1.0/connect.js";
 
   const head = document.head;
 
