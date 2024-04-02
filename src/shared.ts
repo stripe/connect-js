@@ -154,6 +154,22 @@ export const initStripeConnect = (
       }
 
       stripeConnectInstance.then(instance => {
+        if (!element.isConnected && !(element as any).setConnector) {
+          // If the element is not connected to the DOM and the `setConnector` method is not
+          // defined, this indicates the element was created before connect.js was loaded, and has
+          // not been transformed into a custom element yet
+
+          // To load the custom element code on it, we need to connect and disconnect it to the DOM
+          // This isn't a problem, as the element will be invisible, and we know the element is already
+          // not currently connected to the DOM
+
+          const oldDisplay = element.style.display;
+          element.style.display = "none";
+          document.body.appendChild(element);
+          document.body.removeChild(element);
+          element.style.display = oldDisplay;
+        }
+
         (element as any).setConnector((instance as any).connect);
       });
 
