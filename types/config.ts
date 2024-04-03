@@ -36,6 +36,11 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
     setOnExit: (_listener: (() => void) | undefined): void => {}
   },
+  "account-management": {
+    setCollectionOptions: (
+      _collectionOptions: CollectionOptions | undefined
+    ): void => {}
+  },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
     setCardArtFileLink: (_cardArtFileLink: string | undefined): void => {},
