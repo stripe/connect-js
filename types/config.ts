@@ -26,10 +26,5 @@ export const ConnectElementCustomMethodConfig = {
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {}
-  },
-  "account-management": {
-    setCollectionOptions: (
-      _collectionOptions: CollectionOptions | undefined
-    ): void => {}
   }
 };
