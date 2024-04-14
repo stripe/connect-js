@@ -453,4 +453,6 @@ export type ConnectElementTagName =
   | "account-management"
   | "notification-banner"
   | "payouts"
+  | "payouts-list"
+  | "balances"
   | "documents";
