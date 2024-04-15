@@ -23,7 +23,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-issuing-cards-list"
   | "stripe-connect-financial-account"
   | "stripe-connect-financial-account-transactions"
-  | "stripe-connect-documents" 
+  | "stripe-connect-documents"
   | "stripe-connect-tax-registrations"
   | "stripe-connect-tax-settings";
 
