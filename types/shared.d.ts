@@ -459,4 +459,6 @@ export type ConnectElementTagName =
   | "issuing-cards-list"
   | "financial-account"
   | "financial-account-transactions"
-  | "documents";
+  | "documents"
+  | "tax-registrations"
+  | "tax-settings";
