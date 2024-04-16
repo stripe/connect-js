@@ -23,6 +23,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-issuing-cards-list"
   | "stripe-connect-financial-account"
   | "stripe-connect-financial-account-transactions"
+  | "stripe-connect-capital-overview"
   | "stripe-connect-documents";
 
 export const componentNameMapping: Record<
@@ -42,6 +43,7 @@ export const componentNameMapping: Record<
   "financial-account": "stripe-connect-financial-account",
   "financial-account-transactions":
     "stripe-connect-financial-account-transactions",
+  "capital-overview": "stripe-connect-capital-overview",
   documents: "stripe-connect-documents"
 };
 
