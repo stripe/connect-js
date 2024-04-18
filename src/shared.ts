@@ -24,7 +24,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-financial-account"
   | "stripe-connect-financial-account-transactions"
   | "stripe-connect-capital-overview"
-  | "stripe-connect-documents" 
+  | "stripe-connect-documents"
   | "stripe-connect-tax-registrations"
   | "stripe-connect-tax-settings";
 
