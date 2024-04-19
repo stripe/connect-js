@@ -460,4 +460,6 @@ export type ConnectElementTagName =
   | "financial-account"
   | "financial-account-transactions"
   | "capital-overview"
-  | "documents";
+  | "documents"
+  | "tax-registrations"
+  | "tax-settings";
