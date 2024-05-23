@@ -26,12 +26,12 @@ export const ConnectElementCustomMethodConfig = {
   "account-management": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
-    ): void => {},
+    ): void => {}
   },
   "notification-banner": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
-    ): void => {},
+    ): void => {}
   },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
