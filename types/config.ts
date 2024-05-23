@@ -23,16 +23,6 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
     setOnExit: (_listener: (() => void) | undefined): void => {}
   },
-  "account-management": {
-    setCollectionOptions: (
-      _collectionOptions: CollectionOptions | undefined
-    ): void => {},
-  },
-  "notification-banner": {
-    setCollectionOptions: (
-      _collectionOptions: CollectionOptions | undefined
-    ): void => {},
-  },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {}
