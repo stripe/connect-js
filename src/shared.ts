@@ -11,6 +11,8 @@ export type LoadConnectAndInitialize = (
 ) => StripeConnectInstance;
 
 export type ConnectElementHTMLName =
+  | "stripe-connect-app-install"
+  | "stripe-connect-app-viewport"
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
   | "stripe-connect-payment-details"
@@ -36,6 +38,8 @@ export const componentNameMapping: Record<
   ConnectElementTagName,
   ConnectElementHTMLName
 > = {
+  "app-install": "stripe-connect-app-install",
+  "app-viewport": "stripe-connect-app-viewport",
   payments: "stripe-connect-payments",
   payouts: "stripe-connect-payouts",
   "payment-details": "stripe-connect-payment-details",
