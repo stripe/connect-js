@@ -447,6 +447,8 @@ export interface StripeConnectInstance {
  * Tagnames to be used with the `create` method of the Connect instance.
  */
 export type ConnectElementTagName =
+  | "app-install"
+  | "app-viewport"
   | "payments"
   | "payouts"
   | "payment-details"

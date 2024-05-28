@@ -15,6 +15,8 @@ export type CollectionOptions = {
   futureRequirements?: "omit" | "include";
 };
 
+
+
 export const ConnectElementCustomMethodConfig = {
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
@@ -60,5 +62,14 @@ export const ConnectElementCustomMethodConfig = {
   },
   "financial-account-transactions": {
     setFinancialAccount: (_financialAccount: string): void => {}
-  }
+  },
+  "app-install": {
+    setApp: (_app: string | undefined): void => {},
+    setOnAppInstallStateFetched: (_listener: (() => void) | undefined): void => {},
+    setOnAppInstallStateChanged: (_listener: (() => void) | undefined): void => {}
+  },
+  "app-viewport": {
+    setApp: (_app: string | undefined): void => {},
+    setAppData: (_appData: Record<string, string> | undefined): void => {},
+  },
 };
