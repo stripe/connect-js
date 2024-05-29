@@ -41,6 +41,11 @@ export const ConnectElementCustomMethodConfig = {
       _collectionOptions: CollectionOptions | undefined
     ): void => {}
   },
+  "notification-banner": {
+    setCollectionOptions: (
+      _collectionOptions: CollectionOptions | undefined
+    ): void => {}
+  },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
     setCardArtFileLink: (_cardArtFileLink: string | undefined): void => {},
