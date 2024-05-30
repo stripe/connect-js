@@ -193,6 +193,12 @@ export const initStripeConnect = (
           element.style.display = oldDisplay;
         }
 
+        if (!element || !(element as any).setConnector) {
+          throw new Error(
+            `Element ${tagName} was not transformed into a custom element. Are you using a documented component? See https://docs.stripe.com/connect/supported-embedded-components for a list of supported components`
+          );
+        }
+
         (element as any).setConnector((instance as any).connect);
       });
 
