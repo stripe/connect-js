@@ -462,4 +462,8 @@ export type ConnectElementTagName =
   | "capital-overview"
   | "documents"
   | "tax-registrations"
-  | "tax-settings";
+  | "tax-settings"
+  | "balances"
+  | "payouts-list"
+  | "app-install"
+  | "app-viewport";
