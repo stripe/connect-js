@@ -53,7 +53,7 @@ export const componentNameMapping: Record<
   documents: "stripe-connect-documents",
   "tax-registrations": "stripe-connect-tax-registrations",
   "tax-settings": "stripe-connect-tax-settings",
-  "balances": "stripe-connect-balances",
+  balances: "stripe-connect-balances",
   "payouts-list": "stripe-connect-payouts-list",
   "app-install": "stripe-connect-app-install",
   "app-viewport": "stripe-connect-app-viewport"
