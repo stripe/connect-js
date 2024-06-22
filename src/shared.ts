@@ -139,21 +139,11 @@ export const initStripeConnect = (
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
   const clientSecretPromise = initParams.fetchClientSecret();
-  let cachedClientSecretUsed = false;
-
-  const fetchClientSecret = async () => {
-    if (!cachedClientSecretUsed) {
-      cachedClientSecretUsed = true;
-      return await clientSecretPromise;
-    } else {
-      return await initParams.fetchClientSecret();
-    }
-  };
   const stripeConnectInstance = stripePromise.then(wrapper =>
     wrapper.initialize({
       ...initParams,
-      fetchClientSecret
-    })
+      clientSecretPromise
+    } as any)
   );
 
   return {
