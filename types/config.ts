@@ -44,7 +44,8 @@ export const ConnectElementCustomMethodConfig = {
   "notification-banner": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
-    ): void => {}
+    ): void => {},
+    setOnNotificationsChange: (_listener: (() => void) | undefined): void => {}
   },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
