@@ -31,7 +31,8 @@ export const ConnectElementCustomMethodConfig = {
   "notification-banner": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
-    ): void => {}
+    ): void => {},
+    setOnNotificationsChange: (_listener: (() => void) | undefined): void => {}
   },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
