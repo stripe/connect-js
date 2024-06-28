@@ -32,7 +32,7 @@ export const ConnectElementCustomMethodConfig = {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
     ): void => {},
-    setOnNotificationsChange: (_listener: (() => void) | undefined): void => {}
+    setOnNotificationsChange: (_listener: ((response?: {total?: number, actionRequired?: number}) => void) | undefined): void => {}
   },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
