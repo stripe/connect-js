@@ -161,8 +161,19 @@ export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
+  const eagerClientSecretPromise = (() => {
+    try {
+      return initParams.fetchClientSecret();
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  })();
+  const metaOptions = (initParams as any).metaOptions ?? {};
   const stripeConnectInstance = stripePromise.then(wrapper =>
-    wrapper.initialize(initParams)
+    wrapper.initialize({
+      ...initParams,
+      metaOptions: { ...metaOptions, eagerClientSecretPromise }
+    } as any)
   );
 
   return {
