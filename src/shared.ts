@@ -161,22 +161,19 @@ export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
   initParams: IStripeConnectInitParams
 ): StripeConnectInstanceExtended => {
-  const clientSecretPromise = initParams.fetchClientSecret();
-  let cachedClientSecretUsed = false;
-
-  const fetchClientSecret = async () => {
-    if (!cachedClientSecretUsed) {
-      cachedClientSecretUsed = true;
-      return await clientSecretPromise;
-    } else {
-      return await initParams.fetchClientSecret();
+  const eagerClientSecretPromise = (() => {
+    try {
+      return initParams.fetchClientSecret();
+    } catch (error) {
+      return Promise.reject(error);
     }
-  };
+  })();
+  const metaOptions = (initParams as any).metaOptions ?? {};
   const stripeConnectInstance = stripePromise.then(wrapper =>
     wrapper.initialize({
       ...initParams,
-      fetchClientSecret
-    })
+      metaOptions: { ...metaOptions, eagerClientSecretPromise }
+    } as any)
   );
 
   return {
