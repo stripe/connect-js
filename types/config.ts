@@ -15,6 +15,11 @@ export type CollectionOptions = {
   futureRequirements?: "omit" | "include";
 };
 
+export type NotificationCount = {
+  total: number;
+  actionRequired: number;
+};
+
 export const ConnectElementCustomMethodConfig = {
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
@@ -45,7 +50,11 @@ export const ConnectElementCustomMethodConfig = {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
     ): void => {},
-    setOnNotificationsChange: (_listener: (() => void) | undefined): void => {}
+    setOnNotificationsChange: (
+      _listener:
+        | (({ total, actionRequired }: NotificationCount) => void)
+        | undefined
+    ): void => {}
   },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
