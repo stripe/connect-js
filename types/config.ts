@@ -6,6 +6,11 @@ export type CollectionOptions = {
   futureRequirements?: "omit" | "include";
 };
 
+export type NotificationCount = {
+  total: number;
+  actionRequired: number;
+};
+
 export const ConnectElementCustomMethodConfig = {
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
@@ -32,7 +37,11 @@ export const ConnectElementCustomMethodConfig = {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
     ): void => {},
-    setOnNotificationsChange: (_listener: (() => void) | undefined): void => {}
+    setOnNotificationsChange: (
+      _listener:
+        | (({ total, actionRequired }: NotificationCount) => void)
+        | undefined
+    ): void => {}
   },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
