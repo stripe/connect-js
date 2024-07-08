@@ -52,7 +52,7 @@ export type EmbeddedErrorType =
   | 'api_error'
 
 
-export const CommonConnectElementMethodConfig = {
+export const ConnectElementCommonMethodConfig = {
   setOnLoadError: (
     _listener:
       | (({ error, elementTagName}: LoadError) => void)
