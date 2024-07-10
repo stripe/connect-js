@@ -46,19 +46,24 @@ interface StripeConnectWrapper {
 
 const EXISTING_SCRIPT_MESSAGE =
   "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
-const V0_URL = "https://connect-js.stripe.com/v1.0/connect.js";
+const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
+const V1_URL = "https://connect-js.stripe.com/v1.0/connect.js";
 
 export const findScript = (): HTMLScriptElement | null => {
   return (
     document.querySelectorAll<HTMLScriptElement>(
+      `script[src="${V1_URL}"]`
+    )[0] ||
+    document.querySelectorAll<HTMLScriptElement>(
       `script[src="${V0_URL}"]`
-    )[0] || null
+    )[0] ||
+    null
   );
 };
 
 const injectScript = (): HTMLScriptElement => {
   const script = document.createElement("script");
-  script.src = "https://connect-js.stripe.com/v1.0/connect.js";
+  script.src = V1_URL;
 
   const head = document.head;
 
