@@ -21,9 +21,9 @@ export type NotificationCount = {
 };
 
 export type InstallState = {
-    appId: string,
-    state: 'INSTALLED' | 'UNINSTALLED', 
-}
+  appId: string;
+  state: "INSTALLED" | "UNINSTALLED";
+};
 
 export const ConnectElementCustomMethodConfig = {
   "payment-details": {
@@ -83,11 +83,15 @@ export const ConnectElementCustomMethodConfig = {
   },
   "app-install": {
     setApp: (_app: string | undefined): void => {},
-    setOnAppInstallStateFetched: (_listener: (({appId, state}: InstallState) => void)  | undefined): void => {},
-    setOnAppInstallStateChanged: (_listener: (({appId, state}: InstallState) => void)  | undefined): void => {} 
+    setOnAppInstallStateFetched: (
+      _listener: (({ appId, state }: InstallState) => void) | undefined
+    ): void => {},
+    setOnAppInstallStateChanged: (
+      _listener: (({ appId, state }: InstallState) => void) | undefined
+    ): void => {}
   },
   "app-viewport": {
     setApp: (_app: string | undefined): void => {},
-    setAppData: (_appData: Record<string, string> | undefined): void => {},
-  },
+    setAppData: (_appData: Record<string, string> | undefined): void => {}
+  }
 };
