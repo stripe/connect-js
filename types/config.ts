@@ -20,6 +20,11 @@ export type NotificationCount = {
   actionRequired: number;
 };
 
+export type InstallState = {
+  appId: string;
+  state: "INSTALLED" | "UNINSTALLED";
+};
+
 export const ConnectElementCustomMethodConfig = {
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
@@ -75,5 +80,18 @@ export const ConnectElementCustomMethodConfig = {
   },
   "financial-account-transactions": {
     setFinancialAccount: (_financialAccount: string): void => {}
+  },
+  "app-install": {
+    setApp: (_app: string | undefined): void => {},
+    setOnAppInstallStateFetched: (
+      _listener: (({ appId, state }: InstallState) => void) | undefined
+    ): void => {},
+    setOnAppInstallStateChanged: (
+      _listener: (({ appId, state }: InstallState) => void) | undefined
+    ): void => {}
+  },
+  "app-viewport": {
+    setApp: (_app: string | undefined): void => {},
+    setAppData: (_appData: Record<string, string> | undefined): void => {}
   }
 };
