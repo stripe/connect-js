@@ -35,7 +35,7 @@ export const componentNameMapping: Record<
   balances: "stripe-connect-balances",
   "account-management": "stripe-connect-account-management",
   "notification-banner": "stripe-connect-notification-banner",
-  documents: "stripe-connect-documents"
+  documents: "stripe-connect-documents",
   "tax-registrations": "stripe-connect-tax-registrations",
   "tax-settings": "stripe-connect-tax-settings"
 };
