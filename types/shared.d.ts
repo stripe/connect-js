@@ -455,4 +455,6 @@ export type ConnectElementTagName =
   | "payouts"
   | "payouts-list"
   | "balances"
-  | "documents";
+  | "documents"
+  | "tax-registrations"
+  | "tax-settings";
