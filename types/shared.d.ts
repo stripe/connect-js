@@ -1,4 +1,7 @@
-import { ConnectElementCustomMethodConfig } from "./config";
+import {
+  ConnectElementCustomMethodConfig,
+  ConnectElementCommonMethodConfig
+} from "./config";
 
 export declare type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -412,12 +415,14 @@ export interface IStripeConnectInitParams {
 }
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
+type ConnectElementCommonMethods = typeof ConnectElementCommonMethodConfig;
 
 export type ConnectHTMLElementRecord = {
   [K in keyof ConnectElementCustomMethods]: HTMLElement &
-    ConnectElementCustomMethods[K];
+    ConnectElementCustomMethods[K] &
+    ConnectElementCommonMethods;
 } & {
-  [key: string]: HTMLElement;
+  [key: string]: HTMLElement & ConnectElementCommonMethods;
 };
 
 export interface StripeConnectInstance {
