@@ -4,7 +4,10 @@ import {
   ConnectElementTagName,
   ConnectHTMLElementRecord
 } from "../types";
-import { ConnectElementCommonMethodConfig, ConnectElementCustomMethodConfig } from "../types/config";
+import {
+  ConnectElementCommonMethodConfig,
+  ConnectElementCustomMethodConfig
+} from "../types/config";
 
 export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -161,8 +164,10 @@ export const initStripeConnect = (
       }
       const element = document.createElement(htmlName);
 
-      const customMethods = hasCustomMethod(tagName) ? ConnectElementCustomMethodConfig[tagName] : {};
-      const methods = { ...customMethods, ...ConnectElementCommonMethodConfig};
+      const customMethods = hasCustomMethod(tagName)
+        ? ConnectElementCustomMethodConfig[tagName]
+        : {};
+      const methods = { ...customMethods, ...ConnectElementCommonMethodConfig };
       for (const method in methods) {
         (element as any)[method] = function(value: any) {
           stripeConnectInstance.then(() => {

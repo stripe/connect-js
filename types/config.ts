@@ -13,12 +13,12 @@ export type NotificationCount = {
 
 export type LoaderStart = {
   elementTagName: string;
-}
+};
 
 export type LoadError = {
   elementTagName: string;
   error: EmbeddedError;
-}
+};
 
 export type EmbeddedError = {
   type: EmbeddedErrorType;
@@ -29,39 +29,34 @@ export type EmbeddedErrorType =
   /**
    * Failure to connect to Stripe's API.
    */
-  | 'api_connection_error'
+  | "api_connection_error"
   /**
    * Failure to perform the authentication flow within Connect Embedded Components
    */
-  | 'authentication_error'
+  | "authentication_error"
   /**
    * Account session create failed
    */
-  | 'account_session_create_error'
+  | "account_session_create_error"
   /**
    * Request failed with an 4xx status code, typically caused by platform configuration issues
    */
-  | 'invalid_request_error'
+  | "invalid_request_error"
   /**
    * Too many requests hit the API too quickly.
    */
-  | 'rate_limit_error'
+  | "rate_limit_error"
   /**
    * API errors covering any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
    */
-  | 'api_error'
-
+  | "api_error";
 
 export const ConnectElementCommonMethodConfig = {
   setOnLoadError: (
-    _listener:
-      | (({ error, elementTagName}: LoadError) => void)
-      | undefined
+    _listener: (({ error, elementTagName }: LoadError) => void) | undefined
   ): void => {},
   setOnLoaderStart: (
-    _listener:
-      | (({elementTagName}: LoaderStart) => void)
-      | undefined
+    _listener: (({ elementTagName }: LoaderStart) => void) | undefined
   ): void => {}
 };
 
