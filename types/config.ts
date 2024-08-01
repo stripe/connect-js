@@ -142,5 +142,10 @@ export const ConnectElementCustomMethodConfig = {
   "app-viewport": {
     setApp: (_app: string | undefined): void => {},
     setAppData: (_appData: Record<string, string> | undefined): void => {}
+  },
+  "payment-method-settings": {
+    setPaymentMethodConfiguration: (
+      _paymentMethodConfiguration: string | undefined
+    ): void => {}
   }
 };
