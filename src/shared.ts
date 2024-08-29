@@ -26,6 +26,9 @@ export type ConnectElementHTMLName =
   | "stripe-connect-issuing-cards-list"
   | "stripe-connect-financial-account"
   | "stripe-connect-financial-account-transactions"
+  | "stripe-connect-capital-financing"
+  | "stripe-connect-capital-financing-application"
+  | "stripe-connect-capital-financing-promotion"
   | "stripe-connect-capital-overview"
   | "stripe-connect-documents"
   | "stripe-connect-tax-registrations"
@@ -52,6 +55,9 @@ export const componentNameMapping: Record<
   "financial-account": "stripe-connect-financial-account",
   "financial-account-transactions":
     "stripe-connect-financial-account-transactions",
+    "capital-financing": "stripe-connect-capital-financing",
+    "capital-financing-application": "stripe-connect-capital-financing-application",
+    "capital-financing-promotion": "stripe-connect-capital-financing-promotion",
   "capital-overview": "stripe-connect-capital-overview",
   documents: "stripe-connect-documents",
   "tax-registrations": "stripe-connect-tax-registrations",
