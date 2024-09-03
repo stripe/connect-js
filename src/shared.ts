@@ -55,9 +55,10 @@ export const componentNameMapping: Record<
   "financial-account": "stripe-connect-financial-account",
   "financial-account-transactions":
     "stripe-connect-financial-account-transactions",
-    "capital-financing": "stripe-connect-capital-financing",
-    "capital-financing-application": "stripe-connect-capital-financing-application",
-    "capital-financing-promotion": "stripe-connect-capital-financing-promotion",
+  "capital-financing": "stripe-connect-capital-financing",
+  "capital-financing-application":
+    "stripe-connect-capital-financing-application",
+  "capital-financing-promotion": "stripe-connect-capital-financing-promotion",
   "capital-overview": "stripe-connect-capital-overview",
   documents: "stripe-connect-documents",
   "tax-registrations": "stripe-connect-tax-registrations",
