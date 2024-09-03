@@ -147,5 +147,24 @@ export const ConnectElementCustomMethodConfig = {
     setPaymentMethodConfiguration: (
       _paymentMethodConfiguration: string | undefined
     ): void => {}
+  },
+  "capital-financing": {
+    setDefaultFinancingOffer: (
+      _defaultFinancingOffer: string | undefined
+    ): void => {},
+    setShowFinancingSelector: (
+      _showFinancingSelector: boolean | undefined
+    ): void => {},
+    setFaqUrl: (_faqUrl: string | undefined): void => {},
+    setSupportUrl: (_supportUrl: string | undefined): void => {},
+    setOnFinancingsLoaded: (
+      _listener: (({ total }: { total: number }) => void) | undefined
+    ): void => {}
+  },
+  "capital-financing-application": {
+    setOnApplicationSubmitted: (_listener: (() => void) | undefined): void => {}
+  },
+  "capital-financing-promotion": {
+    setOnApplicationSubmitted: (_listener: (() => void) | undefined): void => {}
   }
 };
