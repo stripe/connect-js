@@ -163,12 +163,12 @@ export const ConnectElementCustomMethodConfig = {
     setOnApplicationSubmitted: (_listener: (() => void) | undefined): void => {}
   },
   "capital-financing-promotion": {
-    setLayout: (_layout: string | undefined): void => {},
+    setLayout: (_layout: 'full' | 'banner' | undefined): void => {},
     setOnApplicationSubmitted: (
       _listener: (() => void) | undefined
     ): void => {},
     setOnEligibleFinancingOfferLoaded: (
-      _listener: (({ total }: { total: number }) => void) | undefined
+      _listener: (({ productType }: { productType: 'standard' | 'refill' | 'none' }) => void) | undefined
     ): void => {}
   }
 };
