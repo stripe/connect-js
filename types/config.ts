@@ -39,6 +39,10 @@ export type EmbeddedError = {
   message?: string;
 };
 
+export type FinancingProductType = {
+  productType: "standard" | "refill" | "none";
+};
+
 export type EmbeddedErrorType =
   /**
    * Failure to connect to Stripe's API.
@@ -168,13 +172,7 @@ export const ConnectElementCustomMethodConfig = {
       _listener: (() => void) | undefined
     ): void => {},
     setOnEligibleFinancingOfferLoaded: (
-      _listener:
-        | (({
-            productType
-          }: {
-            productType: "standard" | "refill" | "none";
-          }) => void)
-        | undefined
+      _listener: (({ productType }: FinancingProductType) => void) | undefined
     ): void => {}
   }
 };
