@@ -39,6 +39,12 @@ export type EmbeddedError = {
   message?: string;
 };
 
+export type FinancingProductType = {
+  productType: "standard" | "refill" | "none";
+};
+
+export type FinancingPromotionLayoutType = "full" | "banner";
+
 export type EmbeddedErrorType =
   /**
    * Failure to connect to Stripe's API.
@@ -163,6 +169,12 @@ export const ConnectElementCustomMethodConfig = {
     setOnApplicationSubmitted: (_listener: (() => void) | undefined): void => {}
   },
   "capital-financing-promotion": {
-    setOnApplicationSubmitted: (_listener: (() => void) | undefined): void => {}
+    setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
+    setOnApplicationSubmitted: (
+      _listener: (() => void) | undefined
+    ): void => {},
+    setOnEligibleFinancingOfferLoaded: (
+      _listener: (({ productType }: FinancingProductType) => void) | undefined
+    ): void => {}
   }
 };
