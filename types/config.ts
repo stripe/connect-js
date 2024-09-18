@@ -34,6 +34,10 @@ export type LoadError = {
   error: EmbeddedError;
 };
 
+export type StepChange = {
+  step: string;
+};
+
 export type EmbeddedError = {
   type: EmbeddedErrorType;
   message?: string;
@@ -99,7 +103,10 @@ export const ConnectElementCustomMethodConfig = {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
     ): void => {},
-    setOnExit: (_listener: (() => void) | undefined): void => {}
+    setOnExit: (_listener: (() => void) | undefined): void => {},
+    setOnStepChange: (
+      _listener: (({ step }: StepChange) => void) | undefined
+    ): void => {}
   },
   "account-management": {
     setCollectionOptions: (
