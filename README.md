@@ -7,7 +7,7 @@ Calling `loadConnectAndInitialize` always loads the latest version of Connect.js
 
 The embedded onboarding component is generally available now. Please refer to our [documentation](https://stripe.com/docs/connect/supported-embedded-components#account-onboarding) for more information.
 
-Note: Majority of Connect embedded components are currently still in beta. Please [contact us](https://stripe.com/docs/connect/get-started-connect-embedded-components#access) to request beta access.
+Note: Some Connect embedded components are currently still in preview. These can be [viewed on our doc site](https://docs.stripe.com/connect/supported-embedded-components), where you can also request preview access.
 
 ## Installation
 
@@ -20,8 +20,7 @@ npm install @stripe/connect-js
 ## Documentation
 
 - [Connect embedded components](https://stripe.com/docs/connect/get-started-connect-embedded-components)
-- [Quickstart guide for GA](https://stripe.com/docs/connect/connect-embedded-components/quickstart)
-- [Quickstart guide for beta](https://stripe.com/docs/connect/connect-embedded-components/beta-quickstart)
+- [Quickstart guide](https://stripe.com/docs/connect/connect-embedded-components/quickstart)
 
 ## Usage
 
@@ -37,7 +36,7 @@ const fetchClientSecret = async () => {
 
 const instance = loadConnectAndInitialize({
   publishableKey: "{{pk test123}}",
-  fetchClientSecret: fetchClientSecret
+  fetchClientSecret: fetchClientSecret,
 });
 ```
 
@@ -72,6 +71,6 @@ import { loadConnectAndInitialize } from "@stripe/connect-js/pure";
 // Connect.js will not be loaded until `loadConnect` is called
 const instance = loadConnectAndInitialize({
   publishableKey: "{{pk test123}}",
-  fetchClientSecret: fetchClientSecret
+  fetchClientSecret: fetchClientSecret,
 });
 ```
