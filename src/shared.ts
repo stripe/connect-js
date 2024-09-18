@@ -36,7 +36,8 @@ export type ConnectElementHTMLName =
   | "stripe-connect-balances"
   | "stripe-connect-payouts-list"
   | "stripe-connect-app-install"
-  | "stripe-connect-app-viewport";
+  | "stripe-connect-app-viewport"
+  | "stripe-connect-reporting-chart";
 
 export const componentNameMapping: Record<
   ConnectElementTagName,
@@ -66,7 +67,8 @@ export const componentNameMapping: Record<
   balances: "stripe-connect-balances",
   "payouts-list": "stripe-connect-payouts-list",
   "app-install": "stripe-connect-app-install",
-  "app-viewport": "stripe-connect-app-viewport"
+  "app-viewport": "stripe-connect-app-viewport",
+  "reporting-chart": "stripe-connect-reporting-chart"
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
