@@ -49,6 +49,10 @@ export type FinancingProductType = {
 
 export type FinancingPromotionLayoutType = "full" | "banner";
 
+export type IntervalType = 'day' | 'week' | 'month' | 'quarter' | 'year';
+
+export type ReportName = 'gross_volume' | 'net_volume';
+
 export type EmbeddedErrorType =
   /**
    * Failure to connect to Stripe's API.
@@ -183,5 +187,11 @@ export const ConnectElementCustomMethodConfig = {
     setOnEligibleFinancingOfferLoaded: (
       _listener: (({ productType }: FinancingProductType) => void) | undefined
     ): void => {}
-  }
+  },
+  "reporting-chart": {
+    setReportName: (_reportName: ReportName): void => {},
+    setIntervalStart: (_intervalStart: Date | undefined): void => {},
+    setIntervalEnd: (_intervalEnd: Date | undefined): void => {},
+    setIntervalType: (_intervalType: IntervalType | undefined): void => {},
+  },
 };
