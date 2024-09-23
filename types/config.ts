@@ -128,12 +128,14 @@ export const ConnectElementCustomMethodConfig = {
     setCardSwitching: (_cardSwitching: boolean | undefined): void => {},
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
-    ): void => {}
+    ): void => {},
+    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {}
   },
   "issuing-cards-list": {
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
-    ): void => {}
+    ): void => {},
+    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {}
   },
   "financial-account": {
     setFinancialAccount: (_financialAccount: string): void => {}
