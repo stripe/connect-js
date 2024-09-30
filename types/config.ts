@@ -175,7 +175,9 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {}
   },
   "capital-financing-application": {
-    setOnApplicationSubmitted: (_listener: (() => void) | undefined): void => {},
+    setOnApplicationSubmitted: (
+      _listener: (() => void) | undefined
+    ): void => {},
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setHowCapitalWorksUrl: (_howCapitalWorksUrl: string | undefined): void => {}
   },
@@ -188,7 +190,11 @@ export const ConnectElementCustomMethodConfig = {
       _listener: (({ productType }: FinancingProductType) => void) | undefined
     ): void => {},
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
-    setHowCapitalWorksUrl: (_howCapitalWorksUrl: string | undefined): void => {},
-    setEligibilityCriteriaUrl: (_eligibilityCriteriaUrl: string | undefined): void => {}
+    setHowCapitalWorksUrl: (
+      _howCapitalWorksUrl: string | undefined
+    ): void => {},
+    setEligibilityCriteriaUrl: (
+      _eligibilityCriteriaUrl: string | undefined
+    ): void => {}
   }
 };
