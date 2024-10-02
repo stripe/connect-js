@@ -61,7 +61,7 @@ export const ConnectElementCommonMethodConfig = {
   ): void => {},
   setOnLoaderStart: (
     _listener: (({ elementTagName }: LoaderStart) => void) | undefined
-  ): void => {}
+  ): void => {},
 };
 
 export const ConnectElementCustomMethodConfig = {
@@ -82,12 +82,12 @@ export const ConnectElementCustomMethodConfig = {
     setOnExit: (_listener: (() => void) | undefined): void => {},
     setOnStepChange: (
       _listener: (({ step }: StepChange) => void) | undefined
-    ): void => {}
+    ): void => {},
   },
   "account-management": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
-    ): void => {}
+    ): void => {},
   },
   "notification-banner": {
     setCollectionOptions: (
@@ -97,10 +97,25 @@ export const ConnectElementCustomMethodConfig = {
       _listener:
         | (({ total, actionRequired }: NotificationCount) => void)
         | undefined
-    ): void => {}
+    ): void => {},
   },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
-    setOnClose: (_listener: (() => void) | undefined): void => {}
-  }
+    setOnClose: (_listener: (() => void) | undefined): void => {},
+  },
+  "tax-settings": {
+    setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
+    setDisplayHeadOfficeCountries: (
+      _countries: string[] | undefined
+    ): void => {},
+    setOnTaxSettingsUpdated: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {},
+  },
+  "tax-registrations": {
+    setOnAfterTaxRegistrationAdded: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {},
+    setDisplayCountries: (_countries: string[] | undefined): void => {},
+  },
 };
