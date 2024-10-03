@@ -473,4 +473,5 @@ export type ConnectElementTagName =
   | "balances"
   | "payouts-list"
   | "app-install"
-  | "app-viewport";
+  | "app-viewport"
+  | "reporting-chart";
