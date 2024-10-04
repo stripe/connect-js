@@ -102,5 +102,20 @@ export const ConnectElementCustomMethodConfig = {
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {}
+  },
+  "tax-settings": {
+    setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
+    setDisplayHeadOfficeCountries: (
+      _countries: string[] | undefined
+    ): void => {},
+    setOnTaxSettingsUpdated: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {}
+  },
+  "tax-registrations": {
+    setOnAfterTaxRegistrationAdded: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {},
+    setDisplayCountries: (_countries: string[] | undefined): void => {}
   }
 };
