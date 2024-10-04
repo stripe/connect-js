@@ -6,7 +6,7 @@ idna==3.2
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe>=2.0.1
-requests==2.26.0
+requests==2.32.2
 stripe==5.1.0b1
 toml==0.10.2
 Werkzeug==2.3.3
