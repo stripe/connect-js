@@ -49,9 +49,9 @@ export type FinancingProductType = {
 
 export type FinancingPromotionLayoutType = "full" | "banner";
 
-export type IntervalType = 'day' | 'week' | 'month' | 'quarter' | 'year';
+export type IntervalType = "day" | "week" | "month" | "quarter" | "year";
 
-export type ReportName = 'gross_volume' | 'net_volume';
+export type ReportName = "gross_volume" | "net_volume";
 
 export type EmbeddedErrorType =
   /**
@@ -205,6 +205,6 @@ export const ConnectElementCustomMethodConfig = {
     setReportName: (_reportName: ReportName): void => {},
     setIntervalStart: (_intervalStart: Date | undefined): void => {},
     setIntervalEnd: (_intervalEnd: Date | undefined): void => {},
-    setIntervalType: (_intervalType: IntervalType | undefined): void => {},
-  },
+    setIntervalType: (_intervalType: IntervalType | undefined): void => {}
+  }
 };
