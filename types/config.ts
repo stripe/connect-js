@@ -139,7 +139,8 @@ export const ConnectElementCustomMethodConfig = {
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
     ): void => {},
-    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {}
+    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {},
+    setIssuingProgram: (_issuingProgram: string | undefined): void => {}
   },
   "financial-account": {
     setFinancialAccount: (_financialAccount: string): void => {}
