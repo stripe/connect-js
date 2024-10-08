@@ -26,6 +26,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-issuing-cards-list"
   | "stripe-connect-financial-account"
   | "stripe-connect-financial-account-transactions"
+  | "stripe-connect-recipients"
   | "stripe-connect-capital-financing"
   | "stripe-connect-capital-financing-application"
   | "stripe-connect-capital-financing-promotion"
