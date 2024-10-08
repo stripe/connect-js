@@ -147,7 +147,7 @@ export const ConnectElementCustomMethodConfig = {
   "financial-account-transactions": {
     setFinancialAccount: (_financialAccount: string): void => {}
   },
-  "recipients": {
+  recipients: {
     setDataSource: (_dataSource: string): void => {}
   },
   "app-install": {
