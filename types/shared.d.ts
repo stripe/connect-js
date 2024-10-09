@@ -463,6 +463,7 @@ export type ConnectElementTagName =
   | "issuing-cards-list"
   | "financial-account"
   | "financial-account-transactions"
+  | "recipients"
   | "capital-financing"
   | "capital-financing-application"
   | "capital-financing-promotion"
