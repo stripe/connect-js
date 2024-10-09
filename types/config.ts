@@ -53,8 +53,6 @@ export type IntervalType = "day" | "week" | "month" | "quarter" | "year";
 
 export type ReportName = "gross_volume" | "net_volume";
 
-export type RecipientDataSource = "customers";
-
 export type EmbeddedErrorType =
   /**
    * Failure to connect to Stripe's API.
@@ -149,9 +147,6 @@ export const ConnectElementCustomMethodConfig = {
   },
   "financial-account-transactions": {
     setFinancialAccount: (_financialAccount: string): void => {}
-  },
-  recipients: {
-    setDataSource: (_dataSource: RecipientDataSource): void => {}
   },
   "app-install": {
     setApp: (_app: string | undefined): void => {},
