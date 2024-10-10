@@ -151,9 +151,41 @@ export declare type AppearanceVariables = {
    */
   actionPrimaryColorText?: string;
   /**
+   * The line type used for text decoration of primary actions and links. This accepts a valid text decoration line value.
+   */
+  actionPrimaryTextDecorationLine?: string;
+  /**
+   * The color used for text decoration of primary actions and links. This accepts hex values or RGB/HSL strings.
+   */
+  actionPrimaryTextDecorationColor?: string;
+  /**
+   * The style of text decoration of primary actions and links. This accepts a valid text decoration style value.
+   */
+  actionPrimaryTextDecorationStyle?: string;
+  /**
+   * The thickness of text decoration of primary actions and links. This accepts a valid text decoration thickness value.
+   */
+  actionPrimaryTextDecorationThickness?: string;
+  /**
    * The color used for secondary actions and links. This accepts hex values or RGB/HSL strings.
    */
   actionSecondaryColorText?: string;
+  /**
+   * The line type used for text decoration of secondary actions and links. This accepts a valid text decoration line value.
+   */
+  actionSecondaryTextDecorationLine?: string;
+  /**
+   * The color used for text decoration of secondary actions and links. This accepts hex values or RGB/HSL strings.
+   */
+  actionSecondaryTextDecorationColor?: string;
+  /**
+   * The style of text decoration of secondary actions and links. This accepts a valid text decoration style value.
+   */
+  actionSecondaryTextDecorationStyle?: string;
+  /**
+   * The thickness of text decoration of secondary actions and links. This accepts a valid text decoration thickness value.
+   */
+  actionSecondaryTextDecorationThickness?: string;
 
   // Neutral Badge Colors
   /**
@@ -261,6 +293,10 @@ export declare type AppearanceVariables = {
    * A z-index to use for the overlay throughout embedded components. Set this number to control the z-order of the overlay.
    */
   overlayZIndex?: number;
+  /**
+   * The backdrop color when an overlay is opened. This accepts hex values or RGB/RGBA/HSL strings.
+   */
+  overlayBackdropColor?: string;
 
   // Body Typography
   /**
