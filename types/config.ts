@@ -178,7 +178,9 @@ export const ConnectElementCustomMethodConfig = {
     setShowFinancingSelector: (
       _showFinancingSelector: boolean | undefined
     ): void => {},
-    setFaqUrl: (_faqUrl: string | undefined): void => {},
+    setHowCapitalWorksUrl: (
+      _howCapitalWorksUrl: string | undefined
+    ): void => {},
     setSupportUrl: (_supportUrl: string | undefined): void => {},
     setOnFinancingsLoaded: (
       _listener: (({ total }: { total: number }) => void) | undefined
