@@ -214,5 +214,20 @@ export const ConnectElementCustomMethodConfig = {
     setIntervalStart: (_intervalStart: Date | undefined): void => {},
     setIntervalEnd: (_intervalEnd: Date | undefined): void => {},
     setIntervalType: (_intervalType: IntervalType | undefined): void => {}
+  },
+  "tax-settings": {
+    setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
+    setDisplayHeadOfficeCountries: (
+      _countries: string[] | undefined
+    ): void => {},
+    setOnTaxSettingsUpdated: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {}
+  },
+  "tax-registrations": {
+    setOnAfterTaxRegistrationAdded: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {},
+    setDisplayCountries: (_countries: string[] | undefined): void => {}
   }
 };
