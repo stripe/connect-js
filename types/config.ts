@@ -7,115 +7,118 @@ export type CollectionOptions = {
 };
 
 export type Status =
-  | 'blocked'
-  | 'canceled'
-  | 'disputed'
-  | 'early_fraud_warning'
-  | 'failed'
-  | 'incomplete'
-  | 'partially_refunded'
-  | 'pending'
-  | 'refund_pending'
-  | 'refunded'
-  | 'successful'
-  | 'uncaptured';
+  | "blocked"
+  | "canceled"
+  | "disputed"
+  | "early_fraud_warning"
+  | "failed"
+  | "incomplete"
+  | "partially_refunded"
+  | "pending"
+  | "refund_pending"
+  | "refunded"
+  | "successful"
+  | "uncaptured";
 
 export type PaymentMethod =
-| 'ach_credit_transfer'
-| 'ach_debit'
-| 'acss_debit'
-| 'affirm'
-| 'afterpay_clearpay'
-| 'alipay'
-| 'alma'
-| 'amazon_pay'
-| 'amex_express_checkout'
-| 'android_pay'
-| 'apple_pay'
-| 'au_becs_debit'
-| 'nz_bank_account'
-| 'bancontact'
-| 'bacs_debit'
-| 'bitcoin_source'
-| 'bitcoin'
-| 'blik'
-| 'boleto'
-| 'boleto_pilot'
-| 'card_present'
-| 'card'
-| 'cashapp'
-| 'crypto'
-| 'customer_balance'
-| 'demo_pay'
-| 'dummy_passthrough_card'
-| 'gbp_credit_transfer'
-| 'google_pay'
-| 'eps'
-| 'fpx'
-| 'giropay'
-| 'grabpay'
-| 'ideal'
-| 'id_bank_transfer'
-| 'id_credit_transfer'
-| 'jp_credit_transfer'
-| 'interac_present'
-| 'kakao_pay'
-| 'klarna'
-| 'konbini'
-| 'kr_card'
-| 'kr_market'
-| 'link'
-| 'masterpass'
-| 'mb_way'
-| 'meta_pay'
-| 'multibanco'
-| 'mobilepay'
-| 'naver_pay'
-| 'netbanking'
-| 'ng_bank'
-| 'ng_bank_transfer'
-| 'ng_card'
-| 'ng_market'
-| 'ng_ussd'
-| 'vipps'
-| 'oxxo'
-| 'p24'
-| 'payto'
-| 'pay_by_bank'
-| 'paper_check'
-| 'payco'
-| 'paynow'
-| 'paypal'
-| 'pix'
-| 'promptpay'
-| 'revolut_pay'
-| 'samsung_pay'
-| 'sepa_credit_transfer'
-| 'sepa_debit'
-| 'sofort'
-| 'south_korea_market'
-| 'swish'
-| 'three_d_secure'
-| 'three_d_secure_2'
-| 'three_d_secure_2_eap'
-| 'twint'
-| 'upi'
-| 'us_bank_account'
-| 'visa_checkout'
-| 'wechat'
-| 'wechat_pay'
-| 'zip';
+  | "ach_credit_transfer"
+  | "ach_debit"
+  | "acss_debit"
+  | "affirm"
+  | "afterpay_clearpay"
+  | "alipay"
+  | "alma"
+  | "amazon_pay"
+  | "amex_express_checkout"
+  | "android_pay"
+  | "apple_pay"
+  | "au_becs_debit"
+  | "nz_bank_account"
+  | "bancontact"
+  | "bacs_debit"
+  | "bitcoin_source"
+  | "bitcoin"
+  | "blik"
+  | "boleto"
+  | "boleto_pilot"
+  | "card_present"
+  | "card"
+  | "cashapp"
+  | "crypto"
+  | "customer_balance"
+  | "demo_pay"
+  | "dummy_passthrough_card"
+  | "gbp_credit_transfer"
+  | "google_pay"
+  | "eps"
+  | "fpx"
+  | "giropay"
+  | "grabpay"
+  | "ideal"
+  | "id_bank_transfer"
+  | "id_credit_transfer"
+  | "jp_credit_transfer"
+  | "interac_present"
+  | "kakao_pay"
+  | "klarna"
+  | "konbini"
+  | "kr_card"
+  | "kr_market"
+  | "link"
+  | "masterpass"
+  | "mb_way"
+  | "meta_pay"
+  | "multibanco"
+  | "mobilepay"
+  | "naver_pay"
+  | "netbanking"
+  | "ng_bank"
+  | "ng_bank_transfer"
+  | "ng_card"
+  | "ng_market"
+  | "ng_ussd"
+  | "vipps"
+  | "oxxo"
+  | "p24"
+  | "payto"
+  | "pay_by_bank"
+  | "paper_check"
+  | "payco"
+  | "paynow"
+  | "paypal"
+  | "pix"
+  | "promptpay"
+  | "revolut_pay"
+  | "samsung_pay"
+  | "sepa_credit_transfer"
+  | "sepa_debit"
+  | "sofort"
+  | "south_korea_market"
+  | "swish"
+  | "three_d_secure"
+  | "three_d_secure_2"
+  | "three_d_secure_2_eap"
+  | "twint"
+  | "upi"
+  | "us_bank_account"
+  | "visa_checkout"
+  | "wechat"
+  | "wechat_pay"
+  | "zip";
 
 export type PaymentsListDefaultFilters = {
   amount?:
-    | {equals: number}
-    | {greaterThan: number}
-    | {lessThan: number}
-    | {between: {lowerBound: number; upperBound: number}};
-  date?: {before: Date} | {after: Date} | {between: {start: Date; end: Date}};
+    | { equals: number }
+    | { greaterThan: number }
+    | { lessThan: number }
+    | { between: { lowerBound: number; upperBound: number } };
+  date?:
+    | { before: Date }
+    | { after: Date }
+    | { between: { start: Date; end: Date } };
   status?: Array<Status>;
   paymentMethod?: PaymentMethod;
-}
+};
 
 export type NotificationCount = {
   total: number;
@@ -210,7 +213,11 @@ export const ConnectElementCustomMethodConfig = {
         | undefined
     ): void => {}
   },
-  "payments": {setDefaultFilters: (_filters: PaymentsListDefaultFilters | undefined): void => {}},
+  payments: {
+    setDefaultFilters: (
+      _filters: PaymentsListDefaultFilters | undefined
+    ): void => {}
+  },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {}
