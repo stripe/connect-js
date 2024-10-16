@@ -213,7 +213,7 @@ export const ConnectElementCustomMethodConfig = {
         | undefined
     ): void => {}
   },
-  "payments": {
+  payments: {
     setDefaultFilters: (
       _filters: PaymentsListDefaultFilters | undefined
     ): void => {}
