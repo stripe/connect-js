@@ -159,6 +159,7 @@ export type EmbeddedError = {
 
 export type FinancingProductType = {
   productType: "standard" | "refill" | "none";
+  activeFinancingCount: number;
 };
 
 export type FinancingPromotionLayoutType = "full" | "banner";
@@ -318,7 +319,12 @@ export const ConnectElementCustomMethodConfig = {
       _listener: (() => void) | undefined
     ): void => {},
     setOnEligibleFinancingOfferLoaded: (
-      _listener: (({ productType }: FinancingProductType) => void) | undefined
+      _listener:
+        | (({
+            productType,
+            activeFinancingCount
+          }: FinancingProductType) => void)
+        | undefined
     ): void => {},
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setHowCapitalWorksUrl: (
