@@ -322,7 +322,7 @@ export const ConnectElementCustomMethodConfig = {
       _listener:
         | (({
             productType,
-            activeFinancingCount,
+            activeFinancingCount
           }: FinancingProductType) => void)
         | undefined
     ): void => {},
