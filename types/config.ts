@@ -1,6 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+export type FetchEphemeralKeyFunction = (fetchParams: {
+  issuingCard: string;
+  nonce: string;
+}) => Promise<{
+  issuingCard: string;
+  nonce: string;
+  ephemeralKeySecret: string;
+}>;
+
 export type CollectionOptions = {
   fields: "currently_due" | "eventually_due";
   futureRequirements?: "omit" | "include";
@@ -212,6 +221,27 @@ export const ConnectElementCustomMethodConfig = {
         | (({ total, actionRequired }: NotificationCount) => void)
         | undefined
     ): void => {}
+  },
+  "issuing-card": {
+    setDefaultCard: (_defaultCard: string | undefined): void => {},
+    setCardSwitching: (_cardSwitching: boolean | undefined): void => {},
+    setFetchEphemeralKey: (
+      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
+    ): void => {},
+    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {}
+  },
+  "issuing-cards-list": {
+    setFetchEphemeralKey: (
+      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
+    ): void => {},
+    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {},
+    setIssuingProgram: (_issuingProgram: string | undefined): void => {}
+  },
+  "financial-account": {
+    setFinancialAccount: (_financialAccount: string): void => {}
+  },
+  "financial-account-transactions": {
+    setFinancialAccount: (_financialAccount: string): void => {}
   },
   payments: {
     setDefaultFilters: (
