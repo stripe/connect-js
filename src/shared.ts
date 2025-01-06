@@ -34,6 +34,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-documents"
   | "stripe-connect-tax-registrations"
   | "stripe-connect-tax-settings"
+  | "stripe-connect-tax-threshold-monitoring"
   | "stripe-connect-balances"
   | "stripe-connect-payouts-list"
   | "stripe-connect-app-install"
@@ -66,6 +67,7 @@ export const componentNameMapping: Record<
   documents: "stripe-connect-documents",
   "tax-registrations": "stripe-connect-tax-registrations",
   "tax-settings": "stripe-connect-tax-settings",
+  "tax-threshold-monitoring": "stripe-connect-tax-threshold-monitoring",
   balances: "stripe-connect-balances",
   "payouts-list": "stripe-connect-payouts-list",
   "app-install": "stripe-connect-app-install",
