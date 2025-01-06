@@ -462,4 +462,5 @@ export type ConnectElementTagName =
   | "balances"
   | "documents"
   | "tax-registrations"
-  | "tax-settings";
+  | "tax-settings"
+  | "tax-threshold-monitoring";
