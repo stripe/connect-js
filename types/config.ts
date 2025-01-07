@@ -354,5 +354,8 @@ export const ConnectElementCustomMethodConfig = {
       _listener: (({ id }: { id: string }) => void) | undefined
     ): void => {},
     setDisplayCountries: (_countries: string[] | undefined): void => {}
+  },
+  "tax-threshold-monitoring": {
+    setDisplayCountries: (_countries: string[] | undefined): void => {}
   }
 };

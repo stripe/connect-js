@@ -507,6 +507,7 @@ export type ConnectElementTagName =
   | "documents"
   | "tax-registrations"
   | "tax-settings"
+  | "tax-threshold-monitoring"
   | "balances"
   | "payouts-list"
   | "app-install"
