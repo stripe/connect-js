@@ -357,5 +357,13 @@ export const ConnectElementCustomMethodConfig = {
   },
   "tax-threshold-monitoring": {
     setDisplayCountries: (_countries: string[] | undefined): void => {}
+  },
+  "product-tax-code-selector": {
+    setOnTaxCodeSelect: (
+      _listener: (({ taxCode }: { taxCode: string }) => void) | undefined
+    ): void => {},
+    setHideDescription: (_hideDescription: boolean | undefined): void => {},
+    setDisabled: (_disabled: boolean | undefined): void => {},
+    setInitialTaxCode: (_initialTaxCode: string | undefined): void => {}
   }
 };
