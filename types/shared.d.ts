@@ -505,6 +505,7 @@ export type ConnectElementTagName =
   | "capital-financing-promotion"
   | "capital-overview"
   | "documents"
+  | "product-tax-code-selector"
   | "tax-registrations"
   | "tax-settings"
   | "tax-threshold-monitoring"

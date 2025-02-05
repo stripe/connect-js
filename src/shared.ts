@@ -32,6 +32,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-capital-financing-promotion"
   | "stripe-connect-capital-overview"
   | "stripe-connect-documents"
+  | "stripe-connect-product-tax-code-selector"
   | "stripe-connect-tax-registrations"
   | "stripe-connect-tax-settings"
   | "stripe-connect-tax-threshold-monitoring"
@@ -65,6 +66,7 @@ export const componentNameMapping: Record<
   "capital-financing-promotion": "stripe-connect-capital-financing-promotion",
   "capital-overview": "stripe-connect-capital-overview",
   documents: "stripe-connect-documents",
+  "product-tax-code-selector": "stripe-connect-product-tax-code-selector",
   "tax-registrations": "stripe-connect-tax-registrations",
   "tax-settings": "stripe-connect-tax-settings",
   "tax-threshold-monitoring": "stripe-connect-tax-threshold-monitoring",
