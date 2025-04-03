@@ -506,6 +506,7 @@ export type ConnectElementTagName =
   | "capital-overview"
   | "documents"
   | "product-tax-code-selector"
+  | "export-tax-transactions"
   | "tax-registrations"
   | "tax-settings"
   | "tax-threshold-monitoring"
