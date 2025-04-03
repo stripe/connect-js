@@ -366,6 +366,5 @@ export const ConnectElementCustomMethodConfig = {
     setDisabled: (_disabled: boolean | undefined): void => {},
     setInitialTaxCode: (_initialTaxCode: string | undefined): void => {}
   },
-  "export-tax-transactions": {
-  }
+  "export-tax-transactions": {}
 };
