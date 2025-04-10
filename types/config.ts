@@ -217,7 +217,9 @@ export const ConnectElementCustomMethodConfig = {
   },
   "payment-disputes": {
     setPayment: (_payment: string | undefined): void => {},
-    setOnDisputesLoaded: (_listener: (({total}: {total: number}) => void) | undefined): void => {}
+    setOnDisputesLoaded: (
+      _listener: (({ total }: { total: number }) => void) | undefined
+    ): void => {}
   },
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
