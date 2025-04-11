@@ -490,6 +490,7 @@ export type ConnectElementTagName =
   | "payments"
   | "payouts"
   | "payment-details"
+  | "payment-disputes"
   | "account-onboarding"
   | "payment-method-settings"
   | "account-management"

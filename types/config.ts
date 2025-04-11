@@ -215,6 +215,12 @@ export const ConnectElementCustomMethodConfig = {
     setPayment: (_payment: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {}
   },
+  "payment-disputes": {
+    setPayment: (_payment: string | undefined): void => {},
+    setOnDisputesLoaded: (
+      _listener: (({ total }: { total: number }) => void) | undefined
+    ): void => {}
+  },
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
       _termOfServiceUrl: string | undefined

@@ -17,6 +17,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-payments"
   | "stripe-connect-payouts"
   | "stripe-connect-payment-details"
+  | "stripe-connect-payment-disputes"
   | "stripe-connect-account-onboarding"
   | "stripe-connect-payment-method-settings"
   | "stripe-connect-account-management"
@@ -50,6 +51,7 @@ export const componentNameMapping: Record<
   payments: "stripe-connect-payments",
   payouts: "stripe-connect-payouts",
   "payment-details": "stripe-connect-payment-details",
+  "payment-disputes": "stripe-connect-payment-disputes",
   "account-onboarding": "stripe-connect-account-onboarding",
   "payment-method-settings": "stripe-connect-payment-method-settings",
   "account-management": "stripe-connect-account-management",
