@@ -47,7 +47,7 @@ test this code through your Connect account.
 If you have deployed a
 [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/Security/CSP),
 make sure to
-[include Connect.js in your directives](https://stripe.com/docs/security/guide#content-security-policy).
+[include Connect.js in your directives](https://stripe.com/connect/get-started-connect-embedded-components?platform=web#csp-and-http-header-requirements).
 
 ### Import as a side effect
 
