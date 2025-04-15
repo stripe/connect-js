@@ -7,16 +7,16 @@ import pkg from "./package.json";
 
 const PLUGINS = [
   ts({
-    tsconfigOverride: { exclude: ["**/*.test.ts"] }
+    tsconfigOverride: { exclude: ["**/*.test.ts"] },
   }),
   babel({
-    extensions: [".ts", ".js", ".tsx", ".jsx"]
+    extensions: [".ts", ".js", ".tsx", ".jsx"],
   }),
   replace({
     // This string is replaced by the npm package version when bundling
-    _NPM_PACKAGE_VERSION_: pkg.version
+    _NPM_PACKAGE_VERSION_: pkg.version,
   }),
-  json()
+  json(),
 ];
 
 export default [
@@ -24,16 +24,16 @@ export default [
     input: "src/index.ts",
     output: [
       { file: pkg.main, format: "cjs" },
-      { file: pkg.module, format: "es" }
+      { file: pkg.module, format: "es" },
     ],
-    plugins: PLUGINS
+    plugins: PLUGINS,
   },
   {
     input: "src/pure.ts",
     output: [
       { file: "dist/pure.js", format: "cjs" },
-      { file: "dist/pure.esm.js", format: "es" }
+      { file: "dist/pure.esm.js", format: "es" },
     ],
-    plugins: PLUGINS
-  }
+    plugins: PLUGINS,
+  },
 ];

@@ -1,6 +1,6 @@
-import {
+import type {
   ConnectElementCustomMethodConfig,
-  ConnectElementCommonMethodConfig
+  ConnectElementCommonMethodConfig,
 } from "./config";
 export declare type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams

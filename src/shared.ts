@@ -1,12 +1,12 @@
-import {
+import type {
   IStripeConnectInitParams,
   StripeConnectInstance,
   ConnectElementTagName,
-  ConnectHTMLElementRecord
+  ConnectHTMLElementRecord,
 } from "../types";
 import {
   ConnectElementCommonMethodConfig,
-  ConnectElementCustomMethodConfig
+  ConnectElementCustomMethodConfig,
 } from "../types/config";
 
 export type LoadConnectAndInitialize = (
@@ -78,7 +78,7 @@ export const componentNameMapping: Record<
   "payouts-list": "stripe-connect-payouts-list",
   "app-install": "stripe-connect-app-install",
   "app-viewport": "stripe-connect-app-viewport",
-  "reporting-chart": "stripe-connect-reporting-chart"
+  "reporting-chart": "stripe-connect-reporting-chart",
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
@@ -196,18 +196,18 @@ export const initStripeConnect = (
     }
   })();
   const metaOptions = (initParams as any).metaOptions ?? {};
-  const stripeConnectInstance = stripePromise.then(wrapper =>
+  const stripeConnectInstance = stripePromise.then((wrapper) =>
     wrapper.initialize({
       ...initParams,
-      metaOptions: { ...metaOptions, eagerClientSecretPromise }
+      metaOptions: { ...metaOptions, eagerClientSecretPromise },
     } as any)
   );
 
   return {
-    create: tagName => {
+    create: (tagName) => {
       let htmlName = componentNameMapping[tagName];
       if (!htmlName) {
-        htmlName = (tagName as unknown) as ConnectElementHTMLName;
+        htmlName = tagName as unknown as ConnectElementHTMLName;
       }
       const element = document.createElement(htmlName);
 
@@ -216,14 +216,14 @@ export const initStripeConnect = (
         : {};
       const methods = { ...customMethods, ...ConnectElementCommonMethodConfig };
       for (const method in methods) {
-        (element as any)[method] = function(value: any) {
+        (element as any)[method] = function (value: any) {
           stripeConnectInstance.then(() => {
             this[`${method}InternalOnly`](value);
           });
         };
       }
 
-      stripeConnectInstance.then(instance => {
+      stripeConnectInstance.then((instance) => {
         if (!element.isConnected && !(element as any).setConnector) {
           // If the element is not connected to the DOM and the `setConnector` method is not
           // defined, this indicates the element was created before connect.js was loaded, and has
@@ -251,8 +251,8 @@ export const initStripeConnect = (
 
       return element as ConnectHTMLElementRecord[typeof tagName];
     },
-    update: updateOptions => {
-      stripeConnectInstance.then(instance => {
+    update: (updateOptions) => {
+      stripeConnectInstance.then((instance) => {
         instance.update(updateOptions);
       });
     },
@@ -260,10 +260,10 @@ export const initStripeConnect = (
       return stripeConnectInstance;
     },
     logout: () => {
-      return stripeConnectInstance.then(instance => {
+      return stripeConnectInstance.then((instance) => {
         return instance.logout();
       });
-    }
+    },
   };
 };
 
@@ -280,12 +280,12 @@ const createWrapper = (stripeConnect: any) => {
           sdk: true,
           sdkOptions: {
             // This will be replaced by the npm package version when bundling
-            sdkVersion: "_NPM_PACKAGE_VERSION_"
-          }
-        }
+            sdkVersion: "_NPM_PACKAGE_VERSION_",
+          },
+        },
       });
       return stripeConnectInstance;
-    }
+    },
   };
   return wrapper;
 };
