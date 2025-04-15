@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import { IStripeConnectInitParams } from "../types";
+import type { IStripeConnectInitParams } from "../types";
 import { SCRIPT_SELECTOR } from "./utils/jestHelpers";
 
 describe("pure module", () => {
@@ -16,7 +16,7 @@ describe("pure module", () => {
       publishableKey: "pk_123",
       fetchClientSecret: async () => {
         return "secret_123";
-      }
+      },
     };
     loadConnectAndInitialize(mockInitParams);
 

@@ -1,9 +1,6 @@
-import { IStripeConnectInitParams, StripeConnectInstance } from "../types";
-import {
-  loadScript,
-  initStripeConnect,
-  LoadConnectAndInitialize
-} from "./shared";
+import type { IStripeConnectInitParams, StripeConnectInstance } from "../types";
+import type { LoadConnectAndInitialize } from "./shared";
+import { loadScript, initStripeConnect } from "./shared";
 
 export const loadConnectAndInitialize: LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
