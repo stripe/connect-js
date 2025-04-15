@@ -184,7 +184,7 @@ export const ConnectElementCommonMethodConfig = {
   ): void => {},
   setOnLoaderStart: (
     _listener: (({ elementTagName }: LoaderStart) => void) | undefined
-  ): void => {}
+  ): void => {},
 };
 
 export const ConnectElementCustomMethodConfig = {
@@ -205,12 +205,12 @@ export const ConnectElementCustomMethodConfig = {
     setOnExit: (_listener: (() => void) | undefined): void => {},
     setOnStepChange: (
       _listener: (({ step }: StepChange) => void) | undefined
-    ): void => {}
+    ): void => {},
   },
   "account-management": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
-    ): void => {}
+    ): void => {},
   },
   "notification-banner": {
     setCollectionOptions: (
@@ -220,7 +220,7 @@ export const ConnectElementCustomMethodConfig = {
       _listener:
         | (({ total, actionRequired }: NotificationCount) => void)
         | undefined
-    ): void => {}
+    ): void => {},
   },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
@@ -228,29 +228,29 @@ export const ConnectElementCustomMethodConfig = {
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
     ): void => {},
-    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {}
+    setShowSpendControls: (_showSpendControls: boolean | undefined): void => {},
   },
   "issuing-cards-list": {
     setFetchEphemeralKey: (
       _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
     ): void => {},
     setShowSpendControls: (_showSpendControls: boolean | undefined): void => {},
-    setIssuingProgram: (_issuingProgram: string | undefined): void => {}
+    setIssuingProgram: (_issuingProgram: string | undefined): void => {},
   },
   "financial-account": {
-    setFinancialAccount: (_financialAccount: string): void => {}
+    setFinancialAccount: (_financialAccount: string): void => {},
   },
   "financial-account-transactions": {
-    setFinancialAccount: (_financialAccount: string): void => {}
+    setFinancialAccount: (_financialAccount: string): void => {},
   },
   payments: {
     setDefaultFilters: (
       _filters: PaymentsListDefaultFilters | undefined
-    ): void => {}
+    ): void => {},
   },
   "payment-details": {
     setPayment: (_payment: string | undefined): void => {},
-    setOnClose: (_listener: (() => void) | undefined): void => {}
+    setOnClose: (_listener: (() => void) | undefined): void => {},
   },
   "tax-settings": {
     setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
@@ -259,12 +259,12 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
     setOnTaxSettingsUpdated: (
       _listener: (({ id }: { id: string }) => void) | undefined
-    ): void => {}
+    ): void => {},
   },
   "tax-registrations": {
     setOnAfterTaxRegistrationAdded: (
       _listener: (({ id }: { id: string }) => void) | undefined
     ): void => {},
-    setDisplayCountries: (_countries: string[] | undefined): void => {}
-  }
+    setDisplayCountries: (_countries: string[] | undefined): void => {},
+  },
 };

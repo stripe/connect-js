@@ -36,7 +36,7 @@ const fetchClientSecret = async () => {
 
 const instance = loadConnectAndInitialize({
   publishableKey: "{{pk test123}}",
-  fetchClientSecret: fetchClientSecret
+  fetchClientSecret: fetchClientSecret,
 });
 ```
 
@@ -71,6 +71,6 @@ import { loadConnectAndInitialize } from "@stripe/connect-js/pure";
 // Connect.js will not be loaded until `loadConnect` is called
 const instance = loadConnectAndInitialize({
   publishableKey: "{{pk test123}}",
-  fetchClientSecret: fetchClientSecret
+  fetchClientSecret: fetchClientSecret,
 });
 ```
