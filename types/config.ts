@@ -368,7 +368,7 @@ export const ConnectElementCustomMethodConfig = {
   },
   "product-tax-code-selector": {
     setOnTaxCodeSelect: (
-      _listener: (({ taxCode }: { taxCode: string }) => void) | undefined
+      _listener: ((taxCode: string) => void) | undefined
     ): void => {},
     setHideDescription: (_hideDescription: boolean | undefined): void => {},
     setDisabled: (_disabled: boolean | undefined): void => {},
