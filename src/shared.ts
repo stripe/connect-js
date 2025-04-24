@@ -128,7 +128,7 @@ let stripePromise: Promise<StripeConnectWrapper> | null = null;
 export const isWindowStripeConnectDefined = (stripeConnect: unknown) => {
   // We only consider `StripeConnect` defined if `init` is a function
   // Why? HTML markup like:
-  // <a id="StripeConnect"><a id="StripeConnect" name="init" href="doyensec"></a></a> in the <head> of the page
+  // <a id="StripeConnect"><a id="StripeConnect" name="init" href="stripe"></a></a> in the <head> of the page
   // can end up "contaminating" the window.StripeConnect object and cause issues in connect.js initialization
   return !!(
     stripeConnect &&
