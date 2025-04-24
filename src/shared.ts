@@ -125,6 +125,19 @@ const injectScript = (): HTMLScriptElement => {
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
 
+export const isWindowStripeConnectDefined = (stripeConnect: unknown) => {
+  // We only consider `StripeConnect` defined if `init` is a function
+  // Why? HTML markup like:
+  // <a id="StripeConnect"><a id="StripeConnect" name="init" href="stripe"></a></a> in the <head> of the page
+  // can end up "contaminating" the window.StripeConnect object and cause issues in connect.js initialization
+  return !!(
+    stripeConnect &&
+    typeof stripeConnect === "object" &&
+    "init" in stripeConnect &&
+    typeof stripeConnect.init === "function"
+  );
+};
+
 export const loadScript = (): Promise<StripeConnectWrapper> => {
   // Ensure that we only attempt to load Connect.js at most once
   if (stripePromise !== null) {
@@ -139,11 +152,8 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
       return;
     }
 
-    if ((window as any).StripeConnect) {
+    if (isWindowStripeConnectDefined((window as any).StripeConnect)) {
       console.warn(EXISTING_SCRIPT_MESSAGE);
-    }
-
-    if ((window as any).StripeConnect) {
       const wrapper = createWrapper((window as any).StripeConnect);
       resolve(wrapper);
       return;
@@ -159,7 +169,7 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
       }
 
       script.addEventListener("load", () => {
-        if ((window as any).StripeConnect) {
+        if (isWindowStripeConnectDefined((window as any).StripeConnect)) {
           const wrapper = createWrapper((window as any).StripeConnect);
           resolve(wrapper);
         } else {
