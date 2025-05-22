@@ -256,7 +256,7 @@ export const ConnectElementCustomMethodConfig = {
     setPayment: (_payment: string | undefined): void => {},
     setOnDisputesLoaded: (
       _listener: (({ total }: { total: number }) => void) | undefined
-    ): void => {}
+    ): void => {},
   },
   "tax-settings": {
     setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
