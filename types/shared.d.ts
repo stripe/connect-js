@@ -489,8 +489,10 @@ export interface StripeConnectInstance {
  */
 export type ConnectElementTagName =
   | "account-onboarding"
+  | "disputes-list"
   | "payments"
   | "payment-details"
+  | "payment-disputes"
   | "account-management"
   | "notification-banner"
   | "issuing-card"
