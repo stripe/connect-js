@@ -109,7 +109,7 @@ export const isWindowStripeConnectDefined = (stripeConnect: unknown) => {
     stripeConnect &&
     typeof stripeConnect === "object" &&
     "init" in stripeConnect &&
-    typeof stripeConnect.init === "function"
+    typeof (stripeConnect as { init: unknown } & Record<string, unknown>).init === "function"
   );
 };
 
