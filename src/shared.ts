@@ -24,6 +24,7 @@ export type ConnectElementHTMLName =
   | "stripe-connect-account-management"
   | "stripe-connect-notification-banner"
   | "stripe-connect-instant-payouts"
+  | "stripe-connect-instant-payouts-promotion"
   | "stripe-connect-issuing-card"
   | "stripe-connect-issuing-cards-list"
   | "stripe-connect-financial-account"
@@ -59,6 +60,7 @@ export const componentNameMapping: Record<
   "account-management": "stripe-connect-account-management",
   "notification-banner": "stripe-connect-notification-banner",
   "instant-payouts": "stripe-connect-instant-payouts",
+  "instant-payouts-promotion": "stripe-connect-instant-payouts-promotion",
   "issuing-card": "stripe-connect-issuing-card",
   "issuing-cards-list": "stripe-connect-issuing-cards-list",
   "financial-account": "stripe-connect-financial-account",

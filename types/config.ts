@@ -255,6 +255,16 @@ export const ConnectElementCustomMethodConfig = {
         | undefined
     ): void => {},
   },
+  "instant-payouts-promotion": {
+    setOnInstantPayoutsPromotionLoaded: (
+      _listener:
+        | (({ promotionShown }: { promotionShown: boolean }) => void)
+        | undefined
+    ): void => {},
+    setOnInstantPayoutCreated: (
+      _listener: (({ payoutId }: { payoutId: string }) => void) | undefined
+    ): void => {},
+  },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
     setCardSwitching: (_cardSwitching: boolean | undefined): void => {},

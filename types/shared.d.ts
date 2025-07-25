@@ -497,6 +497,7 @@ export type ConnectElementTagName =
   | "account-management"
   | "notification-banner"
   | "instant-payouts"
+  | "instant-payouts-promotion"
   | "issuing-card"
   | "issuing-cards-list"
   | "financial-account"
