@@ -320,6 +320,13 @@ export const ConnectElementCustomMethodConfig = {
     setHowCapitalWorksUrl: (
       _howCapitalWorksUrl: string | undefined
     ): void => {},
+    setOnApplicationStepChange: (
+      _listener:
+        | (({
+            step
+          }: StepChange) => void)
+        | undefined
+    ): void => {},
   },
   "capital-financing-promotion": {
     setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
@@ -340,6 +347,13 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
     setEligibilityCriteriaUrl: (
       _eligibilityCriteriaUrl: string | undefined
+    ): void => {},
+    setOnApplicationStepChange: (
+      _listener:
+        | (({
+            step
+          }: StepChange) => void)
+        | undefined
     ): void => {},
   },
   "reporting-chart": {
