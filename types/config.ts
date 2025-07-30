@@ -321,11 +321,7 @@ export const ConnectElementCustomMethodConfig = {
       _howCapitalWorksUrl: string | undefined
     ): void => {},
     setOnApplicationStepChange: (
-      _listener:
-        | (({
-            step
-          }: StepChange) => void)
-        | undefined
+      _listener: (({ step }: StepChange) => void) | undefined
     ): void => {},
   },
   "capital-financing-promotion": {
@@ -349,11 +345,7 @@ export const ConnectElementCustomMethodConfig = {
       _eligibilityCriteriaUrl: string | undefined
     ): void => {},
     setOnApplicationStepChange: (
-      _listener:
-        | (({
-            step
-          }: StepChange) => void)
-        | undefined
+      _listener: (({ step }: StepChange) => void) | undefined
     ): void => {},
   },
   "reporting-chart": {
