@@ -268,6 +268,10 @@ export const ConnectElementCustomMethodConfig = {
       _listener: (({ total }: { total: number }) => void) | undefined
     ): void => {},
   },
+  "payout-details": {
+    setPayout: (_payout: string | undefined): void => {},
+    setOnClose: (_listener: (() => void) | undefined): void => {},
+  },
   "tax-settings": {
     setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
     setDisplayHeadOfficeCountries: (
