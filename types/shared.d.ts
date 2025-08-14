@@ -515,6 +515,7 @@ export type ConnectElementTagName =
   | "tax-threshold-monitoring"
   | "balances"
   | "payouts-list"
+  | "payout-details"
   | "app-install"
   | "app-viewport"
   | "reporting-chart";

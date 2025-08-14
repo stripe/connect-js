@@ -391,4 +391,8 @@ export const ConnectElementCustomMethodConfig = {
     setInitialTaxCode: (_initialTaxCode: string | undefined): void => {},
   },
   "export-tax-transactions": {},
+  "payout-details": {
+    setPayout: (_payout: string | undefined): void => {},
+    setOnClose: (_listener: (() => void) | undefined): void => {},
+  },
 };
