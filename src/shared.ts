@@ -28,6 +28,7 @@ type ConnectElementHTMLName =
   | "stripe-connect-financial-account-transactions"
   | "stripe-connect-payouts"
   | "stripe-connect-payouts-list"
+  | "stripe-connect-payout-details"
   | "stripe-connect-balances"
   | "stripe-connect-documents"
   | "stripe-connect-tax-registrations"
@@ -44,6 +45,7 @@ export const componentNameMapping: Record<
   "payment-disputes": "stripe-connect-payment-disputes",
   payouts: "stripe-connect-payouts",
   "payouts-list": "stripe-connect-payouts-list",
+  "payout-details": "stripe-connect-payout-details",
   balances: "stripe-connect-balances",
   "account-management": "stripe-connect-account-management",
   "notification-banner": "stripe-connect-notification-banner",

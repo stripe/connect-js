@@ -502,6 +502,7 @@ export type ConnectElementTagName =
   | "financial-account-transactions"
   | "payouts"
   | "payouts-list"
+  | "payout-details"
   | "balances"
   | "documents"
   | "tax-registrations"

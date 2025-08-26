@@ -283,4 +283,8 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
     setDisplayCountries: (_countries: string[] | undefined): void => {},
   },
+  "payout-details": {
+    setPayout: (_payout: string | undefined): void => {},
+    setOnClose: (_listener: (() => void) | undefined): void => {},
+  },
 };
