@@ -27,7 +27,7 @@
     "noImplicitOverride": true,
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": true
   },
   "include": ["src", "types/index.d.ts", "types/shared.d.ts"]
 }
