@@ -208,6 +208,12 @@ export const initStripeConnect = (
       for (const method in methods) {
         (element as any)[method] = function (value: any) {
           stripeConnectInstance.then(() => {
+            if (!this[`${method}InternalOnly`]) {
+              throw new Error(
+                `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`
+              );
+            }
+
             this[`${method}InternalOnly`](value);
           });
         };
