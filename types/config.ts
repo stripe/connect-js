@@ -289,6 +289,9 @@ export const ConnectElementCustomMethodConfig = {
       _listener: (({ id }: { id: string }) => void) | undefined
     ): void => {},
     setDisplayCountries: (_countries: string[] | undefined): void => {},
+    setOnAfterTaxRegistrationExpired: (
+      _listener: (({ id }: { id: string }) => void) | undefined
+    ): void => {},
   },
   "payout-details": {
     setPayout: (_payout: string | undefined): void => {},
