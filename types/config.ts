@@ -393,8 +393,8 @@ export const ConnectElementCustomMethodConfig = {
     setOnTaxCodeSelect: (
       _listener:
         | ((
-            taxCode: string,
-            { analyticsName }: { analyticsName: string }
+            taxCode: string | null,
+            _: { analyticsName: string } | null
           ) => void)
         | undefined
     ): void => {},
