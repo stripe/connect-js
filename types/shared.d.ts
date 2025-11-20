@@ -1,6 +1,8 @@
 import type {
   ConnectElementCustomMethodConfig,
   ConnectElementCommonMethodConfig,
+  EmbeddedError,
+  EmbeddedErrorType,
 } from "./config";
 export declare type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -418,6 +420,67 @@ export type IStripeConnectUpdateParams = {
 };
 
 /**
+ * Reasons why risk signals collection was skipped.
+ */
+export declare type RiskSignalsCollectionSkippedReason =
+  /**
+   * Required component (account_onboarding) not enabled.
+   */
+  | "required_component_not_enabled"
+  /**
+   * The account doesn't have a risk signals collection requirement.
+   */
+  | "not_required"
+  /**
+   * The risk signals collection requirement has already been fulfilled.
+   */
+  | "requirement_fulfilled";
+
+/**
+ * Error types that can occur during risk signals collection.
+ */
+export declare type RiskSignalsCollectionErrorType = Extract<
+  EmbeddedErrorType,
+  | "api_connection_error"
+  | "invalid_request_error"
+  | "rate_limit_error"
+  | "api_error"
+>;
+
+/**
+ * Errors that can occur during risk signals collection.
+ */
+export declare type RiskSignalsCollectionError =
+  /**
+   * Error occurred during general Connect.js loading.
+   */
+  | { type: "load_error"; loadError: EmbeddedError }
+
+  /**
+   * Error occurred during risk signals collection.
+   */
+  | { type: RiskSignalsCollectionErrorType; message?: string };
+
+/**
+ * Event emitted during risk signals collection.
+ */
+export declare type RiskSignalsCollectionEvent =
+  /**
+   * Risk signals collection completed and successfully received by Stripe.
+   */
+  | { status: "completed" }
+
+  /**
+   * Risk signals collection skipped with reason.
+   */
+  | { status: "skipped"; skippedReason: RiskSignalsCollectionSkippedReason }
+
+  /**
+   * Risk signals collection failed due to error and was not sent to Stripe server.
+   */
+  | { status: "failed"; error: RiskSignalsCollectionError };
+
+/**
  * Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
  */
 export interface IStripeConnectInitParams {
@@ -447,6 +510,12 @@ export interface IStripeConnectInitParams {
    * An array of custom fonts, which embedded components created from a ConnectInstance can use.
    */
   fonts?: Array<CssFontSource | CustomFontSource>;
+
+  /**
+   * Callback for risk signals collection event
+   * @param {RiskSignalsCollectionEvent} event - The risk signals collection event containing status and additional details.
+   */
+  onRiskSignalsCollection?: (event: RiskSignalsCollectionEvent) => void;
 }
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
