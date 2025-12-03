@@ -587,4 +587,5 @@ export type ConnectElementTagName =
   | "payout-details"
   | "app-install"
   | "app-viewport"
-  | "reporting-chart";
+  | "reporting-chart"
+  | "check-scanning";

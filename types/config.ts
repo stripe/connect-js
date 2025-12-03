@@ -410,4 +410,13 @@ export const ConnectElementCustomMethodConfig = {
     setPayout: (_payout: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {},
   },
+  "check-scanning": {
+    setHandleCheckScanSubmitted: (
+      _handleCheckScanSubmitted: ({
+        checkScanToken,
+      }: {
+        checkScanToken: string;
+      }) => Promise<void>
+    ): void => {},
+  },
 };
