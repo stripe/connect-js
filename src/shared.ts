@@ -10,7 +10,7 @@ import {
 } from "../types/config";
 
 export type LoadConnectAndInitialize = (
-  initParams: IStripeConnectInitParams
+  initParams: IStripeConnectInitParams,
 ) => StripeConnectInstance;
 
 export type ConnectElementHTMLName =
@@ -105,10 +105,10 @@ const V1_URL = "https://connect-js.stripe.com/v1.0/connect.js";
 export const findScript = (): HTMLScriptElement | null => {
   return (
     document.querySelectorAll<HTMLScriptElement>(
-      `script[src="${V0_URL}"]`
+      `script[src="${V0_URL}"]`,
     )[0] ||
     document.querySelectorAll<HTMLScriptElement>(
-      `script[src="${V1_URL}"]`
+      `script[src="${V1_URL}"]`,
     )[0] ||
     null
   );
@@ -122,7 +122,7 @@ const injectScript = (): HTMLScriptElement => {
 
   if (!head) {
     throw new Error(
-      "Expected document.head not to be null. Connect.js requires a <head> element."
+      "Expected document.head not to be null. Connect.js requires a <head> element.",
     );
   }
 
@@ -156,7 +156,7 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
   stripePromise = new Promise<StripeConnectWrapper>((resolve, reject) => {
     if (typeof window === "undefined") {
       reject(
-        "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects."
+        "ConnectJS won't load when rendering code in the server - it can only be loaded on a browser. This error is expected when loading ConnectJS in SSR environments, like NextJS. It will have no impact in the UI, however if you wish to avoid it, you can switch to the `pure` version of the connect.js loader: https://github.com/stripe/connect-js#importing-loadconnect-without-side-effects.",
       );
       return;
     }
@@ -198,14 +198,14 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
 };
 
 const hasCustomMethod = (
-  tagName: ConnectElementTagName
+  tagName: ConnectElementTagName,
 ): tagName is keyof typeof ConnectElementCustomMethodConfig => {
   return tagName in ConnectElementCustomMethodConfig;
 };
 
 export const initStripeConnect = (
   stripePromise: Promise<StripeConnectWrapper>,
-  initParams: IStripeConnectInitParams
+  initParams: IStripeConnectInitParams,
 ): StripeConnectInstanceExtended => {
   const eagerClientSecretPromise = (() => {
     try {
@@ -219,7 +219,7 @@ export const initStripeConnect = (
     wrapper.initialize({
       ...initParams,
       metaOptions: { ...metaOptions, eagerClientSecretPromise },
-    } as any)
+    } as any),
   );
 
   return {
@@ -239,7 +239,7 @@ export const initStripeConnect = (
           stripeConnectInstance.then(() => {
             if (!this[`${method}InternalOnly`]) {
               throw new Error(
-                `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`
+                `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`,
               );
             }
 
@@ -267,7 +267,7 @@ export const initStripeConnect = (
 
         if (!element || !(element as any).setConnector) {
           throw new Error(
-            `Element ${tagName} was not transformed into a custom element. Are you using a documented component? See https://docs.stripe.com/connect/supported-embedded-components for a list of supported components`
+            `Element ${tagName} was not transformed into a custom element. Are you using a documented component? See https://docs.stripe.com/connect/supported-embedded-components for a list of supported components`,
           );
         }
 
