@@ -205,17 +205,17 @@ export type EmbeddedErrorType =
 
 export const ConnectElementCommonMethodConfig = {
   setOnLoadError: (
-    _listener: (({ error, elementTagName }: LoadError) => void) | undefined
+    _listener: (({ error, elementTagName }: LoadError) => void) | undefined,
   ): void => {},
   setOnLoaderStart: (
-    _listener: (({ elementTagName }: LoaderStart) => void) | undefined
+    _listener: (({ elementTagName }: LoaderStart) => void) | undefined,
   ): void => {},
 };
 
 export const ConnectElementCustomMethodConfig = {
   payments: {
     setDefaultFilters: (
-      _filters: PaymentsListDefaultFilters | undefined
+      _filters: PaymentsListDefaultFilters | undefined,
     ): void => {},
   },
   "payment-details": {
@@ -225,64 +225,64 @@ export const ConnectElementCustomMethodConfig = {
   "payment-disputes": {
     setPayment: (_payment: string | undefined): void => {},
     setOnDisputesLoaded: (
-      _listener: (({ total }: { total: number }) => void) | undefined
+      _listener: (({ total }: { total: number }) => void) | undefined,
     ): void => {},
   },
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
-      _termOfServiceUrl: string | undefined
+      _termOfServiceUrl: string | undefined,
     ): void => {},
     setRecipientTermsOfServiceUrl: (
-      _recipientTermsOfServiceUrl: string | undefined
+      _recipientTermsOfServiceUrl: string | undefined,
     ): void => {},
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setSkipTermsOfServiceCollection: (
-      _skipTermsOfServiceCollection: boolean | undefined
+      _skipTermsOfServiceCollection: boolean | undefined,
     ): void => {},
     setCollectionOptions: (
-      _collectionOptions: CollectionOptions | undefined
+      _collectionOptions: CollectionOptions | undefined,
     ): void => {},
     setOnExit: (_listener: (() => void) | undefined): void => {},
     setOnStepChange: (
-      _listener: (({ step }: StepChange) => void) | undefined
+      _listener: (({ step }: StepChange) => void) | undefined,
     ): void => {},
   },
   "account-management": {
     setCollectionOptions: (
-      _collectionOptions: CollectionOptions | undefined
+      _collectionOptions: CollectionOptions | undefined,
     ): void => {},
   },
   "notification-banner": {
     setCollectionOptions: (
-      _collectionOptions: CollectionOptions | undefined
+      _collectionOptions: CollectionOptions | undefined,
     ): void => {},
     setOnNotificationsChange: (
       _listener:
         | (({ total, actionRequired }: NotificationCount) => void)
-        | undefined
+        | undefined,
     ): void => {},
   },
   "instant-payouts-promotion": {
     setOnInstantPayoutsPromotionLoaded: (
       _listener:
         | (({ promotionShown }: { promotionShown: boolean }) => void)
-        | undefined
+        | undefined,
     ): void => {},
     setOnInstantPayoutCreated: (
-      _listener: (({ payoutId }: { payoutId: string }) => void) | undefined
+      _listener: (({ payoutId }: { payoutId: string }) => void) | undefined,
     ): void => {},
   },
   "issuing-card": {
     setDefaultCard: (_defaultCard: string | undefined): void => {},
     setCardSwitching: (_cardSwitching: boolean | undefined): void => {},
     setFetchEphemeralKey: (
-      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
+      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined,
     ): void => {},
     setShowSpendControls: (_showSpendControls: boolean | undefined): void => {},
   },
   "issuing-cards-list": {
     setFetchEphemeralKey: (
-      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined
+      _fetchEphemeralKey: FetchEphemeralKeyFunction | undefined,
     ): void => {},
     setShowSpendControls: (_showSpendControls: boolean | undefined): void => {},
     setIssuingProgram: (_issuingProgram: string | undefined): void => {},
@@ -299,10 +299,10 @@ export const ConnectElementCustomMethodConfig = {
   "app-install": {
     setApp: (_app: string | undefined): void => {},
     setOnAppInstallStateFetched: (
-      _listener: (({ appId, state }: InstallState) => void) | undefined
+      _listener: (({ appId, state }: InstallState) => void) | undefined,
     ): void => {},
     setOnAppInstallStateChanged: (
-      _listener: (({ appId, state }: InstallState) => void) | undefined
+      _listener: (({ appId, state }: InstallState) => void) | undefined,
     ): void => {},
   },
   "app-viewport": {
@@ -311,40 +311,40 @@ export const ConnectElementCustomMethodConfig = {
   },
   "payment-method-settings": {
     setPaymentMethodConfiguration: (
-      _paymentMethodConfiguration: string | undefined
+      _paymentMethodConfiguration: string | undefined,
     ): void => {},
   },
   "capital-financing": {
     setDefaultFinancingOffer: (
-      _defaultFinancingOffer: string | undefined
+      _defaultFinancingOffer: string | undefined,
     ): void => {},
     setShowFinancingSelector: (
-      _showFinancingSelector: boolean | undefined
+      _showFinancingSelector: boolean | undefined,
     ): void => {},
     setHowCapitalWorksUrl: (
-      _howCapitalWorksUrl: string | undefined
+      _howCapitalWorksUrl: string | undefined,
     ): void => {},
     setSupportUrl: (_supportUrl: string | undefined): void => {},
     setOnFinancingsLoaded: (
-      _listener: (({ total }: { total: number }) => void) | undefined
+      _listener: (({ total }: { total: number }) => void) | undefined,
     ): void => {},
   },
   "capital-financing-application": {
     setOnApplicationSubmitted: (
-      _listener: (() => void) | undefined
+      _listener: (() => void) | undefined,
     ): void => {},
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setHowCapitalWorksUrl: (
-      _howCapitalWorksUrl: string | undefined
+      _howCapitalWorksUrl: string | undefined,
     ): void => {},
     setOnApplicationStepChange: (
-      _listener: (({ step }: StepChange) => void) | undefined
+      _listener: (({ step }: StepChange) => void) | undefined,
     ): void => {},
   },
   "capital-financing-promotion": {
     setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
     setOnApplicationSubmitted: (
-      _listener: (() => void) | undefined
+      _listener: (() => void) | undefined,
     ): void => {},
     setOnEligibleFinancingOfferLoaded: (
       _listener:
@@ -352,17 +352,17 @@ export const ConnectElementCustomMethodConfig = {
             productType,
             activeFinancingCount,
           }: FinancingProductType) => void)
-        | undefined
+        | undefined,
     ): void => {},
     setPrivacyPolicyUrl: (_privacyPolicyUrl: string | undefined): void => {},
     setHowCapitalWorksUrl: (
-      _howCapitalWorksUrl: string | undefined
+      _howCapitalWorksUrl: string | undefined,
     ): void => {},
     setEligibilityCriteriaUrl: (
-      _eligibilityCriteriaUrl: string | undefined
+      _eligibilityCriteriaUrl: string | undefined,
     ): void => {},
     setOnApplicationStepChange: (
-      _listener: (({ step }: StepChange) => void) | undefined
+      _listener: (({ step }: StepChange) => void) | undefined,
     ): void => {},
   },
   "reporting-chart": {
@@ -374,19 +374,19 @@ export const ConnectElementCustomMethodConfig = {
   "tax-settings": {
     setHideProductTaxCodeSelector: (_hidden: boolean | undefined): void => {},
     setDisplayHeadOfficeCountries: (
-      _countries: string[] | undefined
+      _countries: string[] | undefined,
     ): void => {},
     setOnTaxSettingsUpdated: (
-      _listener: (({ id }: { id: string }) => void) | undefined
+      _listener: (({ id }: { id: string }) => void) | undefined,
     ): void => {},
   },
   "tax-registrations": {
     setOnAfterTaxRegistrationAdded: (
-      _listener: (({ id }: { id: string }) => void) | undefined
+      _listener: (({ id }: { id: string }) => void) | undefined,
     ): void => {},
     setDisplayCountries: (_countries: string[] | undefined): void => {},
     setOnAfterTaxRegistrationExpired: (
-      _listener: (({ id }: { id: string }) => void) | undefined
+      _listener: (({ id }: { id: string }) => void) | undefined,
     ): void => {},
   },
   "tax-threshold-monitoring": {
@@ -397,9 +397,9 @@ export const ConnectElementCustomMethodConfig = {
       _listener:
         | ((
             taxCode: string | null,
-            _: { analyticsName: string } | null
+            _: { analyticsName: string } | null,
           ) => void)
-        | undefined
+        | undefined,
     ): void => {},
     setHideDescription: (_hideDescription: boolean | undefined): void => {},
     setDisabled: (_disabled: boolean | undefined): void => {},
@@ -411,6 +411,12 @@ export const ConnectElementCustomMethodConfig = {
     setOnClose: (_listener: (() => void) | undefined): void => {},
   },
   "check-scanning": {
-    setHandleCheckScanSubmitted: (_handleCheckScanSubmitted: ({ checkScanToken }: { checkScanToken: string }) => Promise<void>): void => {},
-  }
+    setHandleCheckScanSubmitted: (
+      _handleCheckScanSubmitted: ({
+        checkScanToken,
+      }: {
+        checkScanToken: string;
+      }) => Promise<void>,
+    ): void => {},
+  },
 };
