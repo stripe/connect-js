@@ -5,7 +5,7 @@ import type {
   EmbeddedErrorType,
 } from "./config";
 export declare type LoadConnectAndInitialize = (
-  initParams: IStripeConnectInitParams,
+  initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
 export declare type OverlayOption = "dialog" | "drawer";
@@ -536,7 +536,7 @@ export interface StripeConnectInstance {
    * @returns An HTML component corresponding to that connect component
    */
   create: <T extends ConnectElementTagName>(
-    tagName: T,
+    tagName: T
   ) => ConnectHTMLElementRecord[T];
 
   /**

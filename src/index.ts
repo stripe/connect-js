@@ -15,7 +15,7 @@ stripePromise.catch((err: Error) => {
 });
 
 export const loadConnectAndInitialize: LoadConnectAndInitialize = (
-  initParams: IStripeConnectInitParams,
+  initParams: IStripeConnectInitParams
 ): StripeConnectInstance => {
   loadCalled = true;
   return initStripeConnect(stripePromise, initParams);

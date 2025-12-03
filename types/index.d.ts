@@ -1,7 +1,7 @@
 import type { IStripeConnectInitParams, StripeConnectInstance } from "../types";
 
 export declare const loadConnectAndInitialize: (
-  initParams: IStripeConnectInitParams,
+  initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 export * from "./shared";
 export * from "./config";
