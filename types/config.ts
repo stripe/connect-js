@@ -181,6 +181,10 @@ export type EmbeddedErrorType =
    */
   | "rate_limit_error"
   /**
+   * Failure to render the component, typically caused by browser extensions or network issues
+   */
+  | "render_error"
+  /**
    * API errors covering any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon.
    */
   | "api_error";
