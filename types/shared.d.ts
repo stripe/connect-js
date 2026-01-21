@@ -588,4 +588,5 @@ export type ConnectElementTagName =
   | "app-install"
   | "app-viewport"
   | "reporting-chart"
-  | "check-scanning";
+  | "check-scanning"
+  | "agentic-commerce-settings";

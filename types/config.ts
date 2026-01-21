@@ -423,4 +423,5 @@ export const ConnectElementCustomMethodConfig = {
       }) => Promise<void>
     ): void => {},
   },
+  "agentic-commerce-settings": {},
 };
