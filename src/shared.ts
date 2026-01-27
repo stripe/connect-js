@@ -47,7 +47,9 @@ export type ConnectElementHTMLName =
   | "stripe-connect-app-viewport"
   | "stripe-connect-reporting-chart"
   | "stripe-connect-check-scanning"
-  | "stripe-connect-agentic-commerce-settings";
+  | "stripe-connect-agentic-commerce-settings"
+  | "stripe-connect-terminal-hardware-orders"
+  | "stripe-connect-terminal-hardware-shop";
 
 export const componentNameMapping: Record<
   ConnectElementTagName,
@@ -89,6 +91,8 @@ export const componentNameMapping: Record<
   "reporting-chart": "stripe-connect-reporting-chart",
   "check-scanning": "stripe-connect-check-scanning",
   "agentic-commerce-settings": "stripe-connect-agentic-commerce-settings",
+  "terminal-hardware-orders": "stripe-connect-terminal-hardware-orders",
+  "terminal-hardware-shop": "stripe-connect-terminal-hardware-shop",
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
