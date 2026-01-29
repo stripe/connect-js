@@ -589,4 +589,5 @@ export type ConnectElementTagName =
   | "app-viewport"
   | "reporting-chart"
   | "check-scanning"
-  | "agentic-commerce-settings";
+  | "agentic-commerce-settings"
+  | "network-cost-passthrough-report";
