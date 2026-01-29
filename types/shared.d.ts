@@ -591,4 +591,5 @@ export type ConnectElementTagName =
   | "check-scanning"
   | "agentic-commerce-settings"
   | "terminal-hardware-orders"
-  | "terminal-hardware-shop";
+  | "terminal-hardware-shop"
+  | "network-cost-passthrough-report";
