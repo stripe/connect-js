@@ -590,4 +590,6 @@ export type ConnectElementTagName =
   | "reporting-chart"
   | "check-scanning"
   | "agentic-commerce-settings"
+  | "terminal-hardware-orders"
+  | "terminal-hardware-shop"
   | "network-cost-passthrough-report";

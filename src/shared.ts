@@ -48,6 +48,8 @@ export type ConnectElementHTMLName =
   | "stripe-connect-reporting-chart"
   | "stripe-connect-check-scanning"
   | "stripe-connect-agentic-commerce-settings"
+  | "stripe-connect-terminal-hardware-orders"
+  | "stripe-connect-terminal-hardware-shop"
   | "stripe-connect-network-cost-passthrough-report";
 
 export const componentNameMapping: Record<
@@ -90,6 +92,8 @@ export const componentNameMapping: Record<
   "reporting-chart": "stripe-connect-reporting-chart",
   "check-scanning": "stripe-connect-check-scanning",
   "agentic-commerce-settings": "stripe-connect-agentic-commerce-settings",
+  "terminal-hardware-orders": "stripe-connect-terminal-hardware-orders",
+  "terminal-hardware-shop": "stripe-connect-terminal-hardware-shop",
   "network-cost-passthrough-report":
     "stripe-connect-network-cost-passthrough-report",
 };

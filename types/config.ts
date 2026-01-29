@@ -423,4 +423,7 @@ export const ConnectElementCustomMethodConfig = {
       }) => Promise<void>
     ): void => {},
   },
+  "terminal-hardware-shop": {
+    setOnCheckoutFinished: (_listener: (() => void) | undefined): void => {},
+  },
 };
