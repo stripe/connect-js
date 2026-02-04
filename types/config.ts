@@ -423,6 +423,11 @@ export const ConnectElementCustomMethodConfig = {
       }) => Promise<void>
     ): void => {},
   },
+  "agentic-commerce-settings": {
+    setOnAgreementUpdated: (
+      _listener: (({ agreemmentId }: { agreemmentId: string }) => void) | undefined
+    ): void => {},
+  },
   "terminal-hardware-shop": {
     setOnCheckoutFinished: (_listener: (() => void) | undefined): void => {},
   },
