@@ -426,7 +426,7 @@ export const ConnectElementCustomMethodConfig = {
   "agentic-commerce-settings": {
     setOnAgreementUpdated: (
       _listener:
-        | (({ agreemmentId }: { agreemmentId: string }) => void)
+        | (({ agreementId }: { agreementId: string }) => void)
         | undefined
     ): void => {},
   },
