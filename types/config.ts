@@ -301,4 +301,7 @@ export const ConnectElementCustomMethodConfig = {
     setPayout: (_payout: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {},
   },
+  payoutReconciliationReport: {
+    setOnNotAvailable: (_listener: (() => void) | undefined): void => {},
+  },
 };
