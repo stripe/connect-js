@@ -344,6 +344,9 @@ export const ConnectElementCustomMethodConfig = {
     setOnApplicationStepChange: (
       _listener: (({ step }: StepChange) => void) | undefined
     ): void => {},
+    setDefaultFinancingOffer: (
+      _defaultFinancingOffer: string | undefined
+    ): void => {},
   },
   "capital-financing-promotion": {
     setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
