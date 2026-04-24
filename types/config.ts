@@ -438,7 +438,9 @@ export const ConnectElementCustomMethodConfig = {
   },
   "payout-reconciliation-report": {
     setOnReportAvailabilityLoaded: (
-      _listener: (() => void) | undefined
+      _listener:
+        | (({ isReportAvailable }: { isReportAvailable: boolean }) => void)
+        | undefined
     ): void => {},
   },
 };
