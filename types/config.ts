@@ -302,6 +302,8 @@ export const ConnectElementCustomMethodConfig = {
     setOnClose: (_listener: (() => void) | undefined): void => {},
   },
   payoutReconciliationReport: {
-    setOnReportAvailabilityLoaded: (_listener: (() => void) | undefined): void => {},
+    setOnReportAvailabilityLoaded: (
+      _listener: (() => void) | undefined
+    ): void => {},
   },
 };
