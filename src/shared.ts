@@ -99,8 +99,7 @@ export const componentNameMapping: Record<
   "network-cost-passthrough-report":
     "stripe-connect-network-cost-passthrough-report",
   "balance-report": "stripe-connect-balance-report",
-  "payout-reconciliation-report":
-    "stripe-connect-payout-reconciliation-report",
+  "payout-reconciliation-report": "stripe-connect-payout-reconciliation-report",
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
