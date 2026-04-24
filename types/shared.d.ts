@@ -595,5 +595,5 @@ export type ConnectElementTagName =
   | "documents"
   | "tax-registrations"
   | "tax-settings"
-  | "balanceReport"
-  | "payoutReconciliationReport";
+  | "balance-report"
+  | "payout-reconciliation-report";
