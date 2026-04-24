@@ -680,4 +680,6 @@ export type ConnectElementTagName =
   | "agentic-commerce-settings"
   | "terminal-hardware-orders"
   | "terminal-hardware-shop"
-  | "network-cost-passthrough-report";
+  | "network-cost-passthrough-report"
+  | "balance-report"
+  | "payout-reconciliation-report";
