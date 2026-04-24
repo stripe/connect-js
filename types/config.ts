@@ -436,4 +436,11 @@ export const ConnectElementCustomMethodConfig = {
   "terminal-hardware-shop": {
     setOnCheckoutFinished: (_listener: (() => void) | undefined): void => {},
   },
+  "payout-reconciliation-report": {
+    setOnReportAvailabilityLoaded: (
+      _listener:
+        | (({ isReportAvailable }: { isReportAvailable: boolean }) => void)
+        | undefined
+    ): void => {},
+  },
 };

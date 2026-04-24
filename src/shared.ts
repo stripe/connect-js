@@ -50,7 +50,9 @@ export type ConnectElementHTMLName =
   | "stripe-connect-agentic-commerce-settings"
   | "stripe-connect-terminal-hardware-orders"
   | "stripe-connect-terminal-hardware-shop"
-  | "stripe-connect-network-cost-passthrough-report";
+  | "stripe-connect-network-cost-passthrough-report"
+  | "stripe-connect-balance-report"
+  | "stripe-connect-payout-reconciliation-report";
 
 export const componentNameMapping: Record<
   ConnectElementTagName,
@@ -96,6 +98,8 @@ export const componentNameMapping: Record<
   "terminal-hardware-shop": "stripe-connect-terminal-hardware-shop",
   "network-cost-passthrough-report":
     "stripe-connect-network-cost-passthrough-report",
+  "balance-report": "stripe-connect-balance-report",
+  "payout-reconciliation-report": "stripe-connect-payout-reconciliation-report",
 };
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
