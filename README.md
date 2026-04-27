@@ -7,7 +7,7 @@ Calling `loadConnectAndInitialize` always loads the latest version of Connect.js
 
 The embedded onboarding component is generally available now. Please refer to our [documentation](https://stripe.com/docs/connect/supported-embedded-components#account-onboarding) for more information.
 
-Note: Some Connect embedded components are currently still in preview. These can be [viewed on our doc site](https://docs.stripe.com/connect/supported-embedded-components), where you can also request preview access.
+Note: Some Connect embedded components are in preview. These can be [viewed on our doc site](https://docs.stripe.com/connect/supported-embedded-components), where you can also request preview access.
 
 ## Installation
 
@@ -74,3 +74,7 @@ const instance = loadConnectAndInitialize({
   fetchClientSecret: fetchClientSecret,
 });
 ```
+
+## Preview/GA
+
+To work with the [preview](https://docs.stripe.com/connect/supported-embedded-components) version of embedded components, use the [preview](/preview) folder. For the stable GA version, use [/ga](/ga).
