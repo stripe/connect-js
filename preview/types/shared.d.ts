@@ -682,4 +682,7 @@ export type ConnectElementTagName =
   | "terminal-hardware-shop"
   | "network-cost-passthrough-report"
   | "balance-report"
-  | "payout-reconciliation-report";
+  | "payout-reconciliation-report"
+  | "recipients-list"
+  | "financial-accounts"
+  | "financial-accounts-transactions";
