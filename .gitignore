@@ -1,9 +1,1 @@
 .DS_Store
-.cache
-node_modules
-dist
-*.log
-.vim
-/examples/rollup/public/index.js
-/examples/rollup/.yalc
-yalc.lock
