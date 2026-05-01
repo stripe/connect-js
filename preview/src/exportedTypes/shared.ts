@@ -1,19 +1,25 @@
 import type {
-  ConnectElementCustomMethodConfig,
   ConnectElementCommonMethodConfig,
+  ConnectElementCustomMethodConfig,
+  connectElementTagNames,
   EmbeddedError,
   EmbeddedErrorType,
-} from "./config";
-export declare type LoadConnectAndInitialize = (
+} from "../components/componentsAndSetters";
+
+export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
-export declare type OverlayOption = "dialog" | "drawer";
+export interface StripeConnectWrapper {
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
+
+export type OverlayOption = "dialog" | "drawer";
 
 /*
  * Use a `CssFontSource` to pass custom fonts via a stylesheet URL when initializing a Connect instance.
  */
-export declare type CssFontSource = {
+export type CssFontSource = {
   /**
    * A relative or absolute URL pointing to a CSS file with [@font-face](https://developer.mozilla.org/en/docs/Web/CSS/@font-face) definitions, for example:
    *
@@ -27,7 +33,7 @@ export declare type CssFontSource = {
 /*
  * Use a `CustomFontSource` to pass custom fonts when initializing a Connect instance.
  */
-export declare type CustomFontSource = {
+export type CustomFontSource = {
   /**
    * The name to give the font
    */
@@ -63,7 +69,7 @@ export declare type CustomFontSource = {
 /**
  * Appearance options for the Connect instance.
  */
-export declare type AppearanceOptions = {
+export type AppearanceOptions = {
   /**
    * The type of overlay used throughout the Connect.js design system. Set this to be either a Dialog or Drawer.
    */
@@ -71,7 +77,7 @@ export declare type AppearanceOptions = {
   variables?: AppearanceVariables;
 };
 
-export declare type AppearanceVariables = {
+export type AppearanceVariables = {
   // Commonly used
 
   /**
@@ -510,7 +516,7 @@ export type IStripeConnectUpdateParams = {
 /**
  * Reasons why risk signals collection was skipped.
  */
-export declare type RiskSignalsCollectionSkippedReason =
+export type RiskSignalsCollectionSkippedReason =
   /**
    * Required component (account_onboarding) not enabled.
    */
@@ -527,7 +533,7 @@ export declare type RiskSignalsCollectionSkippedReason =
 /**
  * Error types that can occur during risk signals collection.
  */
-export declare type RiskSignalsCollectionErrorType = Extract<
+export type RiskSignalsCollectionErrorType = Extract<
   EmbeddedErrorType,
   | "api_connection_error"
   | "invalid_request_error"
@@ -538,7 +544,7 @@ export declare type RiskSignalsCollectionErrorType = Extract<
 /**
  * Errors that can occur during risk signals collection.
  */
-export declare type RiskSignalsCollectionError =
+export type RiskSignalsCollectionError =
   /**
    * Error occurred during general Connect.js loading.
    */
@@ -643,46 +649,4 @@ export interface StripeConnectInstance {
 /**
  * Tagnames to be used with the `create` method of the Connect instance.
  */
-export type ConnectElementTagName =
-  | "payments"
-  | "payouts"
-  | "payment-details"
-  | "payment-disputes"
-  | "disputes-list"
-  | "account-onboarding"
-  | "payment-method-settings"
-  | "account-management"
-  | "notification-banner"
-  | "instant-payouts"
-  | "instant-payouts-promotion"
-  | "issuing-card"
-  | "issuing-cards-list"
-  | "financial-account"
-  | "financial-account-transactions"
-  | "recipients"
-  | "capital-financing"
-  | "capital-financing-application"
-  | "capital-financing-promotion"
-  | "capital-overview"
-  | "documents"
-  | "product-tax-code-selector"
-  | "export-tax-transactions"
-  | "tax-registrations"
-  | "tax-settings"
-  | "tax-threshold-monitoring"
-  | "balances"
-  | "payouts-list"
-  | "payout-details"
-  | "app-install"
-  | "app-viewport"
-  | "reporting-chart"
-  | "check-scanning"
-  | "agentic-commerce-settings"
-  | "terminal-hardware-orders"
-  | "terminal-hardware-shop"
-  | "network-cost-passthrough-report"
-  | "balance-report"
-  | "payout-reconciliation-report"
-  | "recipients-list"
-  | "financial-accounts"
-  | "financial-accounts-transactions";
+export type ConnectElementTagName = (typeof connectElementTagNames)[number];

@@ -1,154 +1,33 @@
-import type {
-  IStripeConnectInitParams,
-  StripeConnectInstance,
-  ConnectElementTagName,
-  ConnectHTMLElementRecord,
-} from "../types";
 import {
   ConnectElementCommonMethodConfig,
   ConnectElementCustomMethodConfig,
-} from "../types/config";
-
-export type LoadConnectAndInitialize = (
-  initParams: IStripeConnectInitParams
-) => StripeConnectInstance;
-
-export type ConnectElementHTMLName =
-  | "stripe-connect-payments"
-  | "stripe-connect-payouts"
-  | "stripe-connect-payment-details"
-  | "stripe-connect-payment-disputes"
-  | "stripe-connect-disputes-list"
-  | "stripe-connect-account-onboarding"
-  | "stripe-connect-payment-method-settings"
-  | "stripe-connect-account-management"
-  | "stripe-connect-notification-banner"
-  | "stripe-connect-instant-payouts"
-  | "stripe-connect-instant-payouts-promotion"
-  | "stripe-connect-issuing-card"
-  | "stripe-connect-issuing-cards-list"
-  | "stripe-connect-financial-account"
-  | "stripe-connect-financial-account-transactions"
-  | "stripe-connect-recipients"
-  | "stripe-connect-capital-financing"
-  | "stripe-connect-capital-financing-application"
-  | "stripe-connect-capital-financing-promotion"
-  | "stripe-connect-capital-overview"
-  | "stripe-connect-documents"
-  | "stripe-connect-product-tax-code-selector"
-  | "stripe-connect-export-tax-transactions"
-  | "stripe-connect-tax-registrations"
-  | "stripe-connect-tax-settings"
-  | "stripe-connect-tax-threshold-monitoring"
-  | "stripe-connect-balances"
-  | "stripe-connect-payouts-list"
-  | "stripe-connect-payout-details"
-  | "stripe-connect-app-install"
-  | "stripe-connect-app-viewport"
-  | "stripe-connect-reporting-chart"
-  | "stripe-connect-check-scanning"
-  | "stripe-connect-agentic-commerce-settings"
-  | "stripe-connect-terminal-hardware-orders"
-  | "stripe-connect-terminal-hardware-shop"
-  | "stripe-connect-network-cost-passthrough-report"
-  | "stripe-connect-balance-report"
-  | "stripe-connect-payout-reconciliation-report"
-  | "stripe-connect-recipients-list"
-  | "stripe-connect-financial-accounts"
-  | "stripe-connect-financial-accounts-transactions";
-
-export const componentNameMapping: Record<
+  connectElementTagNames,
+} from "./components/componentsAndSetters";
+import type { ConnectHTMLElementRecord } from "./exportedTypes/shared";
+import type {
   ConnectElementTagName,
-  ConnectElementHTMLName
-> = {
-  payments: "stripe-connect-payments",
-  payouts: "stripe-connect-payouts",
-  "payment-details": "stripe-connect-payment-details",
-  "payment-disputes": "stripe-connect-payment-disputes",
-  "disputes-list": "stripe-connect-disputes-list",
-  "account-onboarding": "stripe-connect-account-onboarding",
-  "payment-method-settings": "stripe-connect-payment-method-settings",
-  "account-management": "stripe-connect-account-management",
-  "notification-banner": "stripe-connect-notification-banner",
-  "instant-payouts": "stripe-connect-instant-payouts",
-  "instant-payouts-promotion": "stripe-connect-instant-payouts-promotion",
-  "issuing-card": "stripe-connect-issuing-card",
-  "issuing-cards-list": "stripe-connect-issuing-cards-list",
-  "financial-account": "stripe-connect-financial-account",
-  recipients: "stripe-connect-recipients",
-  "financial-account-transactions":
-    "stripe-connect-financial-account-transactions",
-  "capital-financing": "stripe-connect-capital-financing",
-  "capital-financing-application":
-    "stripe-connect-capital-financing-application",
-  "capital-financing-promotion": "stripe-connect-capital-financing-promotion",
-  "capital-overview": "stripe-connect-capital-overview",
-  documents: "stripe-connect-documents",
-  "product-tax-code-selector": "stripe-connect-product-tax-code-selector",
-  "export-tax-transactions": "stripe-connect-export-tax-transactions",
-  "tax-registrations": "stripe-connect-tax-registrations",
-  "tax-settings": "stripe-connect-tax-settings",
-  "tax-threshold-monitoring": "stripe-connect-tax-threshold-monitoring",
-  balances: "stripe-connect-balances",
-  "payouts-list": "stripe-connect-payouts-list",
-  "payout-details": "stripe-connect-payout-details",
-  "app-install": "stripe-connect-app-install",
-  "app-viewport": "stripe-connect-app-viewport",
-  "reporting-chart": "stripe-connect-reporting-chart",
-  "check-scanning": "stripe-connect-check-scanning",
-  "agentic-commerce-settings": "stripe-connect-agentic-commerce-settings",
-  "terminal-hardware-orders": "stripe-connect-terminal-hardware-orders",
-  "terminal-hardware-shop": "stripe-connect-terminal-hardware-shop",
-  "network-cost-passthrough-report":
-    "stripe-connect-network-cost-passthrough-report",
-  "balance-report": "stripe-connect-balance-report",
-  "payout-reconciliation-report": "stripe-connect-payout-reconciliation-report",
-  "recipients-list": "stripe-connect-recipients-list",
-  "financial-accounts": "stripe-connect-financial-accounts",
-  "financial-accounts-transactions":
-    "stripe-connect-financial-accounts-transactions",
-};
+  IStripeConnectInitParams,
+  StripeConnectInstance,
+  StripeConnectWrapper,
+} from "./exportedTypes/shared";
+import {
+  EXISTING_SCRIPT_MESSAGE,
+  findScript,
+  injectScript,
+} from "./utils/scriptUtils";
+
+export type ConnectElementHTMLName = `stripe-connect-${ConnectElementTagName}`;
+
+export const componentNameMapping = connectElementTagNames.reduce(
+  (acc, name) => {
+    acc[name] = `stripe-connect-${name}`;
+    return acc;
+  },
+  {} as Record<ConnectElementTagName, ConnectElementHTMLName>
+);
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
   debugInstance: () => Promise<StripeConnectInstance>;
-};
-
-interface StripeConnectWrapper {
-  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
-}
-
-const EXISTING_SCRIPT_MESSAGE =
-  "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
-const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
-const V1_URL = "https://connect-js.stripe.com/v1.0/connect.js";
-
-export const findScript = (): HTMLScriptElement | null => {
-  return (
-    document.querySelectorAll<HTMLScriptElement>(
-      `script[src="${V0_URL}"]`
-    )[0] ||
-    document.querySelectorAll<HTMLScriptElement>(
-      `script[src="${V1_URL}"]`
-    )[0] ||
-    null
-  );
-};
-
-const injectScript = (): HTMLScriptElement => {
-  const script = document.createElement("script");
-  script.src = V1_URL;
-
-  const head = document.head;
-
-  if (!head) {
-    throw new Error(
-      "Expected document.head not to be null. Connect.js requires a <head> element."
-    );
-  }
-
-  document.head.appendChild(script);
-
-  return script;
 };
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;

@@ -1,5 +1,5 @@
-import type { ConnectElementCustomMethodConfig } from "./config";
-import type { ConnectElementTagName } from "./shared.d";
+import type { ConnectElementTagName } from "../exportedTypes";
+import type { ConnectElementCustomMethodConfig } from "./componentsAndSetters";
 
 // ensure that keys of ConnectElementCustomMethodConfig are from ConnectElementTagName
 export type HasType<T, Q extends T> = Q;
