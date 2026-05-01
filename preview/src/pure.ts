@@ -1,6 +1,9 @@
-import type { IStripeConnectInitParams, StripeConnectInstance } from "../types";
-import type { LoadConnectAndInitialize } from "./shared";
-import { loadScript, initStripeConnect } from "./shared";
+import { initStripeConnect, loadScript } from "./init";
+import type {
+  IStripeConnectInitParams,
+  LoadConnectAndInitialize,
+  StripeConnectInstance,
+} from "./exportedTypes/shared";
 
 export const loadConnectAndInitialize: LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
@@ -13,3 +16,6 @@ export const loadConnectAndInitialize: LoadConnectAndInitialize = (
   }
   return initStripeConnect(maybeConnect, initParams);
 };
+
+// Export all types from the exportedTypes folder
+export * from "./exportedTypes";

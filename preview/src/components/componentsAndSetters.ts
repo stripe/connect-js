@@ -1,5 +1,52 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
+// Source of truth for the entire list of components. When you add a new component, it should be added here.
+export const connectElementTagNames = [
+  "payments",
+  "payouts",
+  "payment-details",
+  "payment-disputes",
+  "disputes-list",
+  "account-onboarding",
+  "payment-method-settings",
+  "account-management",
+  "notification-banner",
+  "instant-payouts",
+  "instant-payouts-promotion",
+  "issuing-card",
+  "issuing-cards-list",
+  "financial-account",
+  "financial-account-transactions",
+  "recipients",
+  "capital-financing",
+  "capital-financing-application",
+  "capital-financing-promotion",
+  "capital-overview",
+  "documents",
+  "product-tax-code-selector",
+  "export-tax-transactions",
+  "tax-registrations",
+  "tax-settings",
+  "tax-threshold-monitoring",
+  "balances",
+  "payouts-list",
+  "payout-details",
+  "app-install",
+  "app-viewport",
+  "reporting-chart",
+  "check-scanning",
+  "agentic-commerce-settings",
+  "terminal-hardware-orders",
+  "terminal-hardware-shop",
+  "network-cost-passthrough-report",
+  "balance-report",
+  "payout-reconciliation-report",
+  "recipients-list",
+  "financial-accounts",
+  "financial-accounts-transactions",
+] as const;
+
+// BEGIN: Setter definitions. All setters and their associated types are defined here. When adding a new component, if it has setters, they should be added here as well.
 
 export type FetchEphemeralKeyFunction = (fetchParams: {
   issuingCard: string;

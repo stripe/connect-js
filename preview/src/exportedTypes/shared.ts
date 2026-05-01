@@ -1,19 +1,23 @@
 import type {
-  ConnectElementCustomMethodConfig,
   ConnectElementCommonMethodConfig,
-  EmbeddedError,
-  EmbeddedErrorType,
-} from "./config";
-export declare type LoadConnectAndInitialize = (
+  ConnectElementCustomMethodConfig,
+  connectElementTagNames,
+} from "../components/componentsAndSetters";
+
+export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
-export declare type OverlayOption = "dialog" | "drawer";
+export interface StripeConnectWrapper {
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
+
+export type OverlayOption = "dialog" | "drawer";
 
 /*
  * Use a `CssFontSource` to pass custom fonts via a stylesheet URL when initializing a Connect instance.
  */
-export declare type CssFontSource = {
+export type CssFontSource = {
   /**
    * A relative or absolute URL pointing to a CSS file with [@font-face](https://developer.mozilla.org/en/docs/Web/CSS/@font-face) definitions, for example:
    *
@@ -27,7 +31,7 @@ export declare type CssFontSource = {
 /*
  * Use a `CustomFontSource` to pass custom fonts when initializing a Connect instance.
  */
-export declare type CustomFontSource = {
+export type CustomFontSource = {
   /**
    * The name to give the font
    */
@@ -63,7 +67,7 @@ export declare type CustomFontSource = {
 /**
  * Appearance options for the Connect instance.
  */
-export declare type AppearanceOptions = {
+export type AppearanceOptions = {
   /**
    * The type of overlay used throughout the Connect.js design system. Set this to be either a Dialog or Drawer.
    */
@@ -71,7 +75,7 @@ export declare type AppearanceOptions = {
   variables?: AppearanceVariables;
 };
 
-export declare type AppearanceVariables = {
+export type AppearanceVariables = {
   // Commonly used
 
   /**
@@ -508,67 +512,6 @@ export type IStripeConnectUpdateParams = {
 };
 
 /**
- * Reasons why risk signals collection was skipped.
- */
-export declare type RiskSignalsCollectionSkippedReason =
-  /**
-   * Required component (account_onboarding) not enabled.
-   */
-  | "required_component_not_enabled"
-  /**
-   * The account doesn't have a risk signals collection requirement.
-   */
-  | "not_required"
-  /**
-   * The risk signals collection requirement has already been fulfilled.
-   */
-  | "requirement_fulfilled";
-
-/**
- * Error types that can occur during risk signals collection.
- */
-export declare type RiskSignalsCollectionErrorType = Extract<
-  EmbeddedErrorType,
-  | "api_connection_error"
-  | "invalid_request_error"
-  | "rate_limit_error"
-  | "api_error"
->;
-
-/**
- * Errors that can occur during risk signals collection.
- */
-export declare type RiskSignalsCollectionError =
-  /**
-   * Error occurred during general Connect.js loading.
-   */
-  | { type: "load_error"; loadError: EmbeddedError }
-
-  /**
-   * Error occurred during risk signals collection.
-   */
-  | { type: RiskSignalsCollectionErrorType; message?: string };
-
-/**
- * Event emitted during risk signals collection.
- */
-export declare type RiskSignalsCollectionEvent =
-  /**
-   * Risk signals collection completed and successfully received by Stripe.
-   */
-  | { status: "completed" }
-
-  /**
-   * Risk signals collection skipped with reason.
-   */
-  | { status: "skipped"; skippedReason: RiskSignalsCollectionSkippedReason }
-
-  /**
-   * Risk signals collection failed due to error and was not sent to Stripe server.
-   */
-  | { status: "failed"; error: RiskSignalsCollectionError };
-
-/**
  * Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
  */
 export interface IStripeConnectInitParams {
@@ -598,12 +541,6 @@ export interface IStripeConnectInitParams {
    * An array of custom fonts, which embedded components created from a ConnectInstance can use.
    */
   fonts?: Array<CssFontSource | CustomFontSource>;
-
-  /**
-   * Callback for risk signals collection event
-   * @param {RiskSignalsCollectionEvent} event - The risk signals collection event containing status and additional details.
-   */
-  onRiskSignalsCollection?: (event: RiskSignalsCollectionEvent) => void;
 }
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
@@ -643,46 +580,4 @@ export interface StripeConnectInstance {
 /**
  * Tagnames to be used with the `create` method of the Connect instance.
  */
-export type ConnectElementTagName =
-  | "payments"
-  | "payouts"
-  | "payment-details"
-  | "payment-disputes"
-  | "disputes-list"
-  | "account-onboarding"
-  | "payment-method-settings"
-  | "account-management"
-  | "notification-banner"
-  | "instant-payouts"
-  | "instant-payouts-promotion"
-  | "issuing-card"
-  | "issuing-cards-list"
-  | "financial-account"
-  | "financial-account-transactions"
-  | "recipients"
-  | "capital-financing"
-  | "capital-financing-application"
-  | "capital-financing-promotion"
-  | "capital-overview"
-  | "documents"
-  | "product-tax-code-selector"
-  | "export-tax-transactions"
-  | "tax-registrations"
-  | "tax-settings"
-  | "tax-threshold-monitoring"
-  | "balances"
-  | "payouts-list"
-  | "payout-details"
-  | "app-install"
-  | "app-viewport"
-  | "reporting-chart"
-  | "check-scanning"
-  | "agentic-commerce-settings"
-  | "terminal-hardware-orders"
-  | "terminal-hardware-shop"
-  | "network-cost-passthrough-report"
-  | "balance-report"
-  | "payout-reconciliation-report"
-  | "recipients-list"
-  | "financial-accounts"
-  | "financial-accounts-transactions";
+export type ConnectElementTagName = (typeof connectElementTagNames)[number];

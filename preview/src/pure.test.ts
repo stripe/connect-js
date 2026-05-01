@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import type { IStripeConnectInitParams } from "../types";
+import type { IStripeConnectInitParams } from "./exportedTypes/shared";
 import { SCRIPT_SELECTOR } from "./utils/jestHelpers";
 
 describe("pure module", () => {

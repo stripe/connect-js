@@ -1,6 +1,9 @@
-import type { IStripeConnectInitParams, StripeConnectInstance } from "../types";
-import type { LoadConnectAndInitialize } from "./shared";
-import { loadScript, initStripeConnect } from "./shared";
+import { initStripeConnect, loadScript } from "./init";
+import type {
+  IStripeConnectInitParams,
+  StripeConnectInstance,
+  LoadConnectAndInitialize,
+} from "./exportedTypes/shared";
 
 // Execute our own script injection after a tick to give users time to do their
 // own script injection.
@@ -20,3 +23,6 @@ export const loadConnectAndInitialize: LoadConnectAndInitialize = (
   loadCalled = true;
   return initStripeConnect(stripePromise, initParams);
 };
+
+// Export all types from the exportedTypes folder
+export * from "./exportedTypes";
