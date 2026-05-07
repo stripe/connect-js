@@ -1,109 +1,33 @@
-import type {
-  IStripeConnectInitParams,
-  StripeConnectInstance,
-  ConnectElementTagName,
-  ConnectHTMLElementRecord,
-} from "../types";
 import {
   ConnectElementCommonMethodConfig,
   ConnectElementCustomMethodConfig,
-} from "../types/config";
-
-export type LoadConnectAndInitialize = (
-  initParams: IStripeConnectInitParams
-) => StripeConnectInstance;
-
-type ConnectElementHTMLName =
-  | "stripe-connect-account-onboarding"
-  | "stripe-connect-disputes-list"
-  | "stripe-connect-payments"
-  | "stripe-connect-payment-details"
-  | "stripe-connect-payment-disputes"
-  | "stripe-connect-account-management"
-  | "stripe-connect-notification-banner"
-  | "stripe-connect-instant-payouts-promotion"
-  | "stripe-connect-issuing-card"
-  | "stripe-connect-issuing-cards-list"
-  | "stripe-connect-financial-account"
-  | "stripe-connect-financial-account-transactions"
-  | "stripe-connect-payouts"
-  | "stripe-connect-payouts-list"
-  | "stripe-connect-payout-details"
-  | "stripe-connect-balances"
-  | "stripe-connect-documents"
-  | "stripe-connect-tax-registrations"
-  | "stripe-connect-tax-settings"
-  | "stripe-connect-balance-report"
-  | "stripe-connect-payout-reconciliation-report";
-
-export const componentNameMapping: Record<
+  connectElementTagNames,
+} from "./components/componentsAndSetters";
+import type { ConnectHTMLElementRecord } from "./exportedTypes/shared";
+import type {
   ConnectElementTagName,
-  ConnectElementHTMLName
-> = {
-  "account-onboarding": "stripe-connect-account-onboarding",
-  "disputes-list": "stripe-connect-disputes-list",
-  payments: "stripe-connect-payments",
-  "payment-details": "stripe-connect-payment-details",
-  "payment-disputes": "stripe-connect-payment-disputes",
-  payouts: "stripe-connect-payouts",
-  "payouts-list": "stripe-connect-payouts-list",
-  "payout-details": "stripe-connect-payout-details",
-  balances: "stripe-connect-balances",
-  "account-management": "stripe-connect-account-management",
-  "notification-banner": "stripe-connect-notification-banner",
-  "instant-payouts-promotion": "stripe-connect-instant-payouts-promotion",
-  "issuing-card": "stripe-connect-issuing-card",
-  "issuing-cards-list": "stripe-connect-issuing-cards-list",
-  "financial-account": "stripe-connect-financial-account",
-  "financial-account-transactions":
-    "stripe-connect-financial-account-transactions",
-  documents: "stripe-connect-documents",
-  "tax-registrations": "stripe-connect-tax-registrations",
-  "tax-settings": "stripe-connect-tax-settings",
-  "balance-report": "stripe-connect-balance-report",
-  "payout-reconciliation-report": "stripe-connect-payout-reconciliation-report",
-};
+  IStripeConnectInitParams,
+  StripeConnectInstance,
+  StripeConnectWrapper,
+} from "./exportedTypes/shared";
+import {
+  EXISTING_SCRIPT_MESSAGE,
+  findScript,
+  injectScript,
+} from "./utils/scriptUtils";
+
+export type ConnectElementHTMLName = `stripe-connect-${ConnectElementTagName}`;
+
+export const componentNameMapping = connectElementTagNames.reduce(
+  (acc, name) => {
+    acc[name] = `stripe-connect-${name}`;
+    return acc;
+  },
+  {} as Record<ConnectElementTagName, ConnectElementHTMLName>
+);
 
 type StripeConnectInstanceExtended = StripeConnectInstance & {
   debugInstance: () => Promise<StripeConnectInstance>;
-};
-
-interface StripeConnectWrapper {
-  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
-}
-
-const EXISTING_SCRIPT_MESSAGE =
-  "loadConnect was called but an existing Connect.js script already exists in the document; existing script parameters will be used";
-const V0_URL = "https://connect-js.stripe.com/v0.1/connect.js";
-const V1_URL = "https://connect-js.stripe.com/v1.0/connect.js";
-
-export const findScript = (): HTMLScriptElement | null => {
-  return (
-    document.querySelectorAll<HTMLScriptElement>(
-      `script[src="${V1_URL}"]`
-    )[0] ||
-    document.querySelectorAll<HTMLScriptElement>(
-      `script[src="${V0_URL}"]`
-    )[0] ||
-    null
-  );
-};
-
-const injectScript = (): HTMLScriptElement => {
-  const script = document.createElement("script");
-  script.src = V1_URL;
-
-  const head = document.head;
-
-  if (!head) {
-    throw new Error(
-      "Expected document.head not to be null. Connect.js requires a <head> element."
-    );
-  }
-
-  document.head.appendChild(script);
-
-  return script;
 };
 
 let stripePromise: Promise<StripeConnectWrapper> | null = null;
