@@ -1,18 +1,23 @@
 import type {
-  ConnectElementCustomMethodConfig,
   ConnectElementCommonMethodConfig,
-} from "./config";
+  ConnectElementCustomMethodConfig,
+  connectElementTagNames,
+} from "../components/componentsAndSetters";
 
-export declare type LoadConnectAndInitialize = (
+export type LoadConnectAndInitialize = (
   initParams: IStripeConnectInitParams
 ) => StripeConnectInstance;
 
-export declare type OverlayOption = "dialog" | "drawer";
+export interface StripeConnectWrapper {
+  initialize: (params: IStripeConnectInitParams) => StripeConnectInstance;
+}
+
+export type OverlayOption = "dialog" | "drawer";
 
 /*
  * Use a `CssFontSource` to pass custom fonts via a stylesheet URL when initializing a Connect instance.
  */
-export declare type CssFontSource = {
+export type CssFontSource = {
   /**
    * A relative or absolute URL pointing to a CSS file with [@font-face](https://developer.mozilla.org/en/docs/Web/CSS/@font-face) definitions, for example:
    *
@@ -26,7 +31,7 @@ export declare type CssFontSource = {
 /*
  * Use a `CustomFontSource` to pass custom fonts when initializing a Connect instance.
  */
-export declare type CustomFontSource = {
+export type CustomFontSource = {
   /**
    * The name to give the font
    */
@@ -62,7 +67,7 @@ export declare type CustomFontSource = {
 /**
  * Appearance options for the Connect instance.
  */
-export declare type AppearanceOptions = {
+export type AppearanceOptions = {
   /**
    * The type of overlay used throughout the Connect.js design system. Set this to be either a Dialog or Drawer.
    */
@@ -70,7 +75,7 @@ export declare type AppearanceOptions = {
   variables?: AppearanceVariables;
 };
 
-export declare type AppearanceVariables = {
+export type AppearanceVariables = {
   // Commonly used
 
   /**
@@ -575,25 +580,4 @@ export interface StripeConnectInstance {
 /**
  * Tagnames to be used with the `create` method of the Connect instance.
  */
-export type ConnectElementTagName =
-  | "account-onboarding"
-  | "disputes-list"
-  | "payments"
-  | "payment-details"
-  | "payment-disputes"
-  | "account-management"
-  | "notification-banner"
-  | "instant-payouts-promotion"
-  | "issuing-card"
-  | "issuing-cards-list"
-  | "financial-account"
-  | "financial-account-transactions"
-  | "payouts"
-  | "payouts-list"
-  | "payout-details"
-  | "balances"
-  | "documents"
-  | "tax-registrations"
-  | "tax-settings"
-  | "balance-report"
-  | "payout-reconciliation-report";
+export type ConnectElementTagName = (typeof connectElementTagNames)[number];
