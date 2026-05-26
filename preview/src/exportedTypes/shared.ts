@@ -511,6 +511,11 @@ export type IStripeConnectUpdateParams = {
    * The locale to use for the Connect instance.
    */
   locale?: string;
+
+  /**
+   * Options that affect how all embedded components under this instance render
+   */
+  displayOptions?: IStripeConnectDisplayOptions;
 };
 
 /**
@@ -574,6 +579,13 @@ export declare type RiskSignalsCollectionEvent =
    */
   | { status: "failed"; error: RiskSignalsCollectionError };
 
+export interface IStripeConnectDisplayOptions {
+  /**
+   * Whether embedded components should show object id's in the UI
+  */
+  showObjectIds?: boolean;
+}
+
 /**
  * Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
  */
@@ -610,6 +622,11 @@ export interface IStripeConnectInitParams {
    * @param {RiskSignalsCollectionEvent} event - The risk signals collection event containing status and additional details.
    */
   onRiskSignalsCollection?: (event: RiskSignalsCollectionEvent) => void;
+
+  /**
+   * Options that affect how all embedded components under this instance render
+   */
+  displayOptions?: IStripeConnectDisplayOptions;
 }
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
