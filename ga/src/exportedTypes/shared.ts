@@ -509,7 +509,19 @@ export type IStripeConnectUpdateParams = {
    * The locale to use for the Connect instance.
    */
   locale?: string;
+
+  /**
+   * Options that affect how all embedded components under this instance render
+   */
+  displayOptions?: IStripeConnectDisplayOptions;
 };
+
+export interface IStripeConnectDisplayOptions {
+  /**
+   * Whether embedded components should show object id's in the UI
+  */
+  showObjectIds?: boolean;
+}
 
 /**
  * Initialization parameters for Connect JS. See https://stripe.com/docs/connect/get-started-connect-embedded-components#configuring-connect-js for more details.
@@ -541,6 +553,11 @@ export interface IStripeConnectInitParams {
    * An array of custom fonts, which embedded components created from a ConnectInstance can use.
    */
   fonts?: Array<CssFontSource | CustomFontSource>;
+
+  /**
+   * Options that affect how all embedded components under this instance render
+   */
+  displayOptions?: IStripeConnectDisplayOptions;
 }
 
 type ConnectElementCustomMethods = typeof ConnectElementCustomMethodConfig;
