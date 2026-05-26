@@ -519,7 +519,7 @@ export type IStripeConnectUpdateParams = {
 export interface IStripeConnectDisplayOptions {
   /**
    * Whether embedded components should show object id's in the UI
-  */
+   */
   showObjectIds?: boolean;
 }
 
