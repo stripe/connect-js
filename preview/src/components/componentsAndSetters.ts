@@ -44,6 +44,7 @@ export const connectElementTagNames = [
   "recipients-list",
   "financial-accounts",
   "financial-accounts-transactions",
+  "bills",
 ] as const;
 
 // BEGIN: Setter definitions. All setters and their associated types are defined here. When adding a new component, if it has setters, they should be added here as well.
