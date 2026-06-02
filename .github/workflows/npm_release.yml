@@ -48,6 +48,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
+          registry-url: "https://registry.npmjs.org"
 
       - run: yarn install --frozen-lockfile
       - run: yarn test
@@ -87,6 +88,8 @@ jobs:
           else
             npm publish --ignore-scripts --access public
           fi
+        env:
+            NODE_AUTH_TOKEN: ""
 
       - name: Push version commit and tag
         if: ${{ !inputs.dry_run }}
