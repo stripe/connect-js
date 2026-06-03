@@ -73,14 +73,16 @@ jobs:
             fi
           fi
 
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            npm version $BUMP --no-git-tag-version
-          else
-            npm version $BUMP -m "Release %s (${{ inputs.package }})"
-          fi
-          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          npm version $BUMP --no-git-tag-version
+
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "package_name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
           echo "variant=${{ inputs.package == './preview' && 'preview' || 'GA' }}" >> "$GITHUB_OUTPUT"
+
+          git add -A
+          git commit -m "Release v$VERSION (${{ inputs.package }})"
+          git tag "v$VERSION"
 
       # - name: Publish
       #   if: ${{ !inputs.dry_run }}
@@ -96,14 +98,14 @@ jobs:
         run: |
           git push origin HEAD --follow-tags
 
-      - name: Create GitHub Release
-        if: ${{ !inputs.dry_run }}
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: "v${{ steps.version.outputs.version }}"
-          name: "${{ steps.version.outputs.package_name }}@${{ steps.version.outputs.version }}"
-          generate_release_notes: true
-          prerelease: ${{ inputs.package == './preview' }}
+      # - name: Create GitHub Release
+      #   if: ${{ !inputs.dry_run }}
+      #   uses: softprops/action-gh-release@v2
+      #   with:
+      #     tag_name: "v${{ steps.version.outputs.version }}"
+      #     name: "${{ steps.version.outputs.package_name }}@${{ steps.version.outputs.version }}"
+      #     generate_release_notes: true
+      #     prerelease: ${{ inputs.package == './preview' }}
 
       # - name: Notify Slack
       #   if: always()
