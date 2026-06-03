@@ -103,13 +103,13 @@ jobs:
           generate_release_notes: true
           prerelease: ${{ inputs.package == './preview' }}
 
-      - name: Notify Slack
-        if: always()
-        uses: slackapi/slack-github-action@v2
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_CONNECT_EMBEDDED }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-              "text": "${{ inputs.dry_run && '[DRY RUN] ' || '' }}${{ job.status == 'success' && (inputs.dry_run && '✅' || '✅') || '❌' }} ${{ job.status == 'success' && (inputs.dry_run && format('A {0} version of `{1}` would be published: {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump) || format('A {0} version of `{1}` was published! {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump)) || format('Failed to publish a {0} version of `{1}`! {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
-            }
+      # - name: Notify Slack
+      #   if: always()
+      #   uses: slackapi/slack-github-action@v2
+      #   with:
+      #     webhook: ${{ secrets.SLACK_WEBHOOK_CONNECT_EMBEDDED }}
+      #     webhook-type: incoming-webhook
+      #     payload: |
+      #       {
+      #         "text": "${{ inputs.dry_run && '[DRY RUN] ' || '' }}${{ job.status == 'success' && (inputs.dry_run && '✅' || '✅') || '❌' }} ${{ job.status == 'success' && (inputs.dry_run && format('A {0} version of `{1}` would be published: {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump) || format('A {0} version of `{1}` was published! {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump)) || format('Failed to publish a {0} version of `{1}`! {2} → {3} ({4})', steps.version.outputs.variant, steps.version.outputs.package_name, steps.version.outputs.old_version, steps.version.outputs.version, inputs.version_bump) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
+      #       }
