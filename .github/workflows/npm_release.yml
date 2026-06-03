@@ -37,6 +37,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: master
 
       - name: Validate inputs
         run: |
@@ -80,19 +82,19 @@ jobs:
           echo "package_name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
           echo "variant=${{ inputs.package == './preview' && 'preview' || 'GA' }}" >> "$GITHUB_OUTPUT"
 
-      - name: Publish
-        if: ${{ !inputs.dry_run }}
-        run: |
-          if [ "${{ inputs.package }}" = "./preview" ]; then
-            npm publish --ignore-scripts --access public --tag preview
-          else
-            npm publish --ignore-scripts --access public
-          fi
+      # - name: Publish
+      #   if: ${{ !inputs.dry_run }}
+      #   run: |
+      #     if [ "${{ inputs.package }}" = "./preview" ]; then
+      #       npm publish --ignore-scripts --access public --tag preview
+      #     else
+      #       npm publish --ignore-scripts --access public
+      #     fi
 
       - name: Push version commit and tag
         if: ${{ !inputs.dry_run }}
         run: |
-          git push origin master --follow-tags
+          git push origin HEAD --follow-tags
 
       - name: Create GitHub Release
         if: ${{ !inputs.dry_run }}
