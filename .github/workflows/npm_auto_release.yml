@@ -10,6 +10,8 @@ on:
 jobs:
   detect-releases:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       ga_changed: ${{ steps.check.outputs.ga_changed }}
       ga_version: ${{ steps.check.outputs.ga_version }}
