@@ -1,4 +1,4 @@
-name: NPM Release
+name: NPM Manual Release
 
 on:
   workflow_dispatch:
