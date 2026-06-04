@@ -1,4 +1,4 @@
-name: NPM AutoRelease
+name: NPM Auto Release
 
 on:
   push:
@@ -93,9 +93,7 @@ jobs:
             NOTES="- Version bump to ${{ needs.detect-releases.outputs.ga_version }}"
           fi
 
-          echo "notes<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$NOTES" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "$NOTES" > "$RUNNER_TEMP/ga-release-notes.md"
 
       - name: Create tag and GitHub Release
         working-directory: .
@@ -112,7 +110,7 @@ jobs:
 
           gh release create "$TAG" \
             --title "@stripe/react-connect-js@${VERSION}" \
-            --notes "${{ steps.notes.outputs.notes }}" \
+            --notes-file "$RUNNER_TEMP/ga-release-notes.md" \
             --latest
 
       - name: Notify Slack
@@ -171,9 +169,7 @@ jobs:
             NOTES="- Version bump to ${{ needs.detect-releases.outputs.preview_version }}"
           fi
 
-          echo "notes<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$NOTES" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "$NOTES" > "$RUNNER_TEMP/preview-release-notes.md"
 
       - name: Create tag and GitHub Release
         working-directory: .
@@ -190,7 +186,7 @@ jobs:
 
           gh release create "$TAG" \
             --title "@stripe/react-connect-js@${VERSION} (preview)" \
-            --notes "${{ steps.notes.outputs.notes }}" \
+            --notes-file "$RUNNER_TEMP/preview-release-notes.md" \
             --prerelease
 
       - name: Notify Slack
