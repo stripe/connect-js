@@ -109,7 +109,7 @@ jobs:
           git push origin "$TAG"
 
           gh release create "$TAG" \
-            --title "@stripe/react-connect-js@${VERSION}" \
+            --title "@stripe/connect-js@${VERSION}" \
             --notes-file "$RUNNER_TEMP/ga-release-notes.md" \
             --latest
 
@@ -121,7 +121,7 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "${{ job.status == 'success' && '✅' || '❌' }} ${{ job.status == 'success' && format('GA release `@stripe/react-connect-js@{0}` published!', needs.detect-releases.outputs.ga_version) || format('Failed to publish GA release `@stripe/react-connect-js@{0}`', needs.detect-releases.outputs.ga_version) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
+              "text": "${{ job.status == 'success' && '✅' || '❌' }} ${{ job.status == 'success' && format('GA release `@stripe/connect-js@{0}` published!', needs.detect-releases.outputs.ga_version) || format('Failed to publish GA release `@stripe/connect-js@{0}`', needs.detect-releases.outputs.ga_version) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
             }
 
   release-preview:
@@ -185,7 +185,7 @@ jobs:
           git push origin "$TAG"
 
           gh release create "$TAG" \
-            --title "@stripe/react-connect-js@${VERSION} (preview)" \
+            --title "@stripe/connect-js@${VERSION} (preview)" \
             --notes-file "$RUNNER_TEMP/preview-release-notes.md" \
             --prerelease
 
@@ -197,5 +197,5 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "${{ job.status == 'success' && '✅' || '❌' }} ${{ job.status == 'success' && format('Preview release `@stripe/react-connect-js@{0}` published!', needs.detect-releases.outputs.preview_version) || format('Failed to publish preview release `@stripe/react-connect-js@{0}`', needs.detect-releases.outputs.preview_version) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
+              "text": "${{ job.status == 'success' && '✅' || '❌' }} ${{ job.status == 'success' && format('Preview release `@stripe/connect-js@{0}` published!', needs.detect-releases.outputs.preview_version) || format('Failed to publish preview release `@stripe/connect-js@{0}`', needs.detect-releases.outputs.preview_version) }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run> • Triggered by ${{ github.actor }}"
             }
