@@ -179,6 +179,10 @@ export type StepChange = {
   step: string;
 };
 
+export type SectionOpen = {
+  sectionName: string;
+};
+
 export type EmbeddedError = {
   type: EmbeddedErrorType;
   message?: string;
@@ -246,6 +250,9 @@ export const ConnectElementCustomMethodConfig = {
   "account-management": {
     setCollectionOptions: (
       _collectionOptions: CollectionOptions | undefined
+    ): void => {},
+    setOnSectionOpen: (
+      _listener: (({ sectionName }: SectionOpen) => void) | undefined
     ): void => {},
   },
   "notification-banner": {
