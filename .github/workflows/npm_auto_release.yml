@@ -73,9 +73,7 @@ jobs:
       - run: yarn build
 
       - name: Publish to npm
-        run: npm publish --ignore-scripts --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --ignore-scripts --access public
 
       - name: Generate scoped release notes
         id: notes
@@ -149,9 +147,7 @@ jobs:
       - run: yarn build
 
       - name: Publish to npm
-        run: npm publish --ignore-scripts --access public --tag preview
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --ignore-scripts --access public --tag preview
 
       - name: Generate scoped release notes
         id: notes
