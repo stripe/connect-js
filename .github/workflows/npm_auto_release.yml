@@ -71,6 +71,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
       - run: yarn build
+      - run: cp ../README.md .
 
       - name: Publish to npm
         run: npm publish --provenance --ignore-scripts --access public
@@ -145,6 +146,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
       - run: yarn build
+      - run: cp ../README.md .
 
       - name: Publish to npm
         run: npm publish --provenance --ignore-scripts --access public --tag preview
