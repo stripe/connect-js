@@ -405,6 +405,9 @@ export const ConnectElementCustomMethodConfig = {
     setOnApplicationInitiated: (
       _listener: (() => void) | undefined
     ): void => {},
+    setResumeInitiatedApplication: (
+      _resumeInitiatedApplication: boolean | undefined
+    ): void => {},
   },
   "capital-financing-promotion": {
     setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
