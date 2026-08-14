@@ -402,6 +402,12 @@ export const ConnectElementCustomMethodConfig = {
     setDefaultFinancingOffer: (
       _defaultFinancingOffer: string | undefined
     ): void => {},
+    setOnApplicationInitiated: (
+      _listener: (() => void) | undefined
+    ): void => {},
+    setResumeInitiatedApplication: (
+      _resumeInitiatedApplication: boolean | undefined
+    ): void => {},
   },
   "capital-financing-promotion": {
     setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
@@ -425,6 +431,12 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
     setOnApplicationStepChange: (
       _listener: (({ step }: StepChange) => void) | undefined
+    ): void => {},
+    setOnAdvanceToCapitalFinancingApplication: (
+      _listener: (() => void) | undefined
+    ): void => {},
+    setDisableNestedCapitalFinancingApplication: (
+      _disableNestedCapitalFinancingApplication: boolean | undefined
     ): void => {},
   },
   "reporting-chart": {
