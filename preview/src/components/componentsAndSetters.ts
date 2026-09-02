@@ -16,6 +16,7 @@ export const connectElementTagNames = [
   "issuing-card",
   "issuing-cards-list",
   "financial-account",
+  "financial-account-rewards",
   "financial-account-transactions",
   "recipients",
   "capital-financing",
@@ -347,6 +348,9 @@ export const ConnectElementCustomMethodConfig = {
     setIssuingProgram: (_issuingProgram: string | undefined): void => {},
   },
   "financial-account": {
+    setFinancialAccount: (_financialAccount: string): void => {},
+  },
+  "financial-account-rewards": {
     setFinancialAccount: (_financialAccount: string): void => {},
   },
   "financial-account-transactions": {
