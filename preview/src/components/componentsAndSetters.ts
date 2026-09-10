@@ -22,6 +22,7 @@ export const connectElementTagNames = [
   "capital-financing",
   "capital-financing-application",
   "capital-financing-promotion",
+  "capital-financing-manual-payment",
   "capital-overview",
   "documents",
   "product-tax-code-selector",
@@ -224,6 +225,10 @@ export type FinancingProductType = {
 
 export type FinancingPromotionLayoutType = "full" | "banner";
 
+export type CapitalFinancingManualPaymentPresentationMode =
+  | "inline"
+  | "overlay";
+
 export type IntervalType = "day" | "week" | "month" | "quarter" | "year";
 
 export type ReportName = "gross_volume" | "net_volume";
@@ -412,6 +417,15 @@ export const ConnectElementCustomMethodConfig = {
     setResumeInitiatedApplication: (
       _resumeInitiatedApplication: boolean | undefined
     ): void => {},
+  },
+  "capital-financing-manual-payment": {
+    setPresentationMode: (
+      _presentationMode: CapitalFinancingManualPaymentPresentationMode
+    ): void => {},
+    setOnManualPaymentSubmitted: (
+      _listener: (() => void) | undefined
+    ): void => {},
+    setOnOverlayClosed: (_listener: (() => void) | undefined): void => {},
   },
   "capital-financing-promotion": {
     setLayout: (_layout: FinancingPromotionLayoutType | undefined): void => {},
