@@ -420,7 +420,9 @@ export const ConnectElementCustomMethodConfig = {
   },
   "capital-financing-manual-payment": {
     setPresentationMode: (
-      _presentationMode: CapitalFinancingManualPaymentPresentationMode
+      _presentationMode:
+        | CapitalFinancingManualPaymentPresentationMode
+        | undefined
     ): void => {},
     setOnManualPaymentSubmitted: (
       _listener: (() => void) | undefined
