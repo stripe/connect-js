@@ -1,2 +1,2 @@
-// A simple "redirect" to the pure exports in src
-export * from "./src/pure";
+// A simple "redirect" to the bundled pure exports
+export * from "./dist/pure";

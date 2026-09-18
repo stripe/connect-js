@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ["<rootDir>/src"],
+  roots: ["<rootDir>/.generated/src"],
   testMatch: [
     "**/__tests__/**/*.+(ts|tsx|js)",
     "**/?(*.)+(spec|test).+(ts|tsx|js)",
@@ -7,6 +7,6 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": ["ts-jest", { diagnostics: { ignoreCodes: [151001] } }],
   },
-  setupFilesAfterEnv: ["<rootDir>/src/utils/jestSetup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/.generated/src/utils/jestSetup.ts"],
   testEnvironment: "jsdom",
 };

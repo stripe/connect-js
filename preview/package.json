@@ -8,16 +8,17 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "yarn lint && yarn test:unit --passWithNoTests && yarn typecheck && yarn build",
-    "test:unit": "jest",
+    "prepare-source": "node ../scripts/prepare-source.js",
+    "test:unit": "yarn prepare-source && jest",
     "test:types": "zx ./tests/types/scripts/test.mjs",
-    "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
-    "lint-fix": "eslint '{src,types}/**/*.{ts,js}' --fix && yarn prettier-check",
-    "typecheck": "tsc --noEmit",
-    "build": "yarn clean && rollup -c",
+    "lint": "eslint --config .eslintrc.yml '{src,../shared/src}/**/*.{ts,js}' && yarn prettier-check",
+    "lint-fix": "eslint --config .eslintrc.yml '{src,../shared/src}/**/*.{ts,js}' --fix && yarn prettier-check",
+    "typecheck": "yarn prepare-source && tsc --noEmit",
+    "build": "yarn prepare-source && yarn clean && rollup -c",
     "validate-change": "yarn run test",
     "clean": "rimraf dist",
-    "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
-    "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check"
+    "prettier": "prettier 'src/**/*.{js,ts}' '../shared/src/**/*.{js,ts}' '../scripts/**/*.{js,ts}' --write",
+    "prettier-check": "prettier 'src/**/*.{js,ts}' '../shared/src/**/*.{js,ts}' '../scripts/**/*.{js,ts}' --check"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,6 @@
   },
   "files": [
     "dist",
-    "src",
     "types",
     "pure.js",
     "pure.d.ts"

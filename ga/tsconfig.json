@@ -29,5 +29,5 @@
     "noFallthroughCasesInSwitch": true,
     "exactOptionalPropertyTypes": true
   },
-  "include": ["src", "types/index.d.ts", "types/shared.d.ts"]
+  "include": [".generated/src"]
 }

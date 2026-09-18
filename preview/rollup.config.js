@@ -21,7 +21,7 @@ const PLUGINS = [
 
 export default [
   {
-    input: "src/index.ts",
+    input: ".generated/src/index.ts",
     output: [
       { file: pkg.main, format: "cjs" },
       { file: pkg.module, format: "es" },
@@ -29,7 +29,7 @@ export default [
     plugins: PLUGINS,
   },
   {
-    input: "src/pure.ts",
+    input: ".generated/src/pure.ts",
     output: [
       { file: "dist/pure.js", format: "cjs" },
       { file: "dist/pure.esm.js", format: "es" },
