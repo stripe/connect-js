@@ -460,6 +460,7 @@ export const ConnectElementCustomMethodConfig = {
     ): void => {},
   },
   "reporting-chart": {
+    setHeight: (_height: string | undefined): void => {},
     setReportName: (_reportName: ReportName): void => {},
     setIntervalStart: (_intervalStart: Date | undefined): void => {},
     setIntervalEnd: (_intervalEnd: Date | undefined): void => {},
