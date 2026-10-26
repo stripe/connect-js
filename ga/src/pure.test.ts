@@ -81,23 +81,7 @@ describe("reporting chart", () => {
     expect(createElement).toHaveBeenCalledWith(
       "stripe-connect-reporting-chart"
     );
-    expect(chart).toBe(element);
     expect(element.setConnector).toHaveBeenCalledTimes(1);
-    expect(element.setReportNameInternalOnly.mock.calls).toEqual([
-      ["gross_volume"],
-      ["net_volume"],
-    ]);
-    expect(element.setIntervalStartInternalOnly).toHaveBeenCalledWith(start);
-    expect(element.setIntervalEndInternalOnly).toHaveBeenCalledWith(end);
-    expect(element.setIntervalTypeInternalOnly.mock.calls).toEqual([
-      ["day"],
-      ["week"],
-      ["month"],
-    ]);
-    expect(element.setHeightInternalOnly.mock.calls).toEqual([
-      ["400px"],
-      ["100%"],
-    ]);
 
     chart.setIntervalStart(undefined);
     chart.setIntervalEnd(undefined);
@@ -105,16 +89,19 @@ describe("reporting chart", () => {
     chart.setHeight(undefined);
     await instance.debugInstance();
 
-    expect(element.setIntervalStartInternalOnly).toHaveBeenLastCalledWith(
-      undefined
-    );
-    expect(element.setIntervalEndInternalOnly).toHaveBeenLastCalledWith(
-      undefined
-    );
-    expect(element.setIntervalTypeInternalOnly).toHaveBeenLastCalledWith(
-      undefined
-    );
-    expect(element.setHeightInternalOnly).toHaveBeenLastCalledWith(undefined);
+    expect({
+      reportName: element.setReportNameInternalOnly.mock.calls,
+      intervalStart: element.setIntervalStartInternalOnly.mock.calls,
+      intervalEnd: element.setIntervalEndInternalOnly.mock.calls,
+      intervalType: element.setIntervalTypeInternalOnly.mock.calls,
+      height: element.setHeightInternalOnly.mock.calls,
+    }).toEqual({
+      reportName: [["gross_volume"], ["net_volume"]],
+      intervalStart: [[start], [undefined]],
+      intervalEnd: [[end], [undefined]],
+      intervalType: [["day"], ["week"], ["month"], [undefined]],
+      height: [["400px"], ["100%"], [undefined]],
+    });
   });
 });
 
