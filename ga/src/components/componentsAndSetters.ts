@@ -25,6 +25,7 @@ export const connectElementTagNames = [
   "terminal-hardware-shop",
   "balance-report",
   "payout-reconciliation-report",
+  "reporting-chart",
 ] as const;
 
 // BEGIN: Setter definitions. All setters and their associated types are defined here. When adding a new component, if it has setters, they should be added here as well.
@@ -190,6 +191,10 @@ export type EmbeddedError = {
   message?: string;
 };
 
+export type IntervalType = "day" | "week" | "month";
+
+export type ReportName = "gross_volume" | "net_volume";
+
 export type EmbeddedErrorType =
   /**
    * Failure to connect to Stripe's API.
@@ -337,6 +342,13 @@ export const ConnectElementCustomMethodConfig = {
   },
   "terminal-hardware-shop": {
     setOnCheckoutFinished: (_listener: (() => void) | undefined): void => {},
+  },
+  "reporting-chart": {
+    setReportName: (_reportName: ReportName): void => {},
+    setIntervalStart: (_intervalStart: Date | undefined): void => {},
+    setIntervalEnd: (_intervalEnd: Date | undefined): void => {},
+    setIntervalType: (_intervalType: IntervalType | undefined): void => {},
+    setHeight: (_height: string | undefined): void => {},
   },
   "payout-reconciliation-report": {
     setOnReportAvailabilityLoaded: (
