@@ -21,6 +21,8 @@ export const connectElementTagNames = [
   "documents",
   "tax-registrations",
   "tax-settings",
+  "terminal-hardware-orders",
+  "terminal-hardware-shop",
   "balance-report",
   "payout-reconciliation-report",
 ] as const;
@@ -332,6 +334,9 @@ export const ConnectElementCustomMethodConfig = {
   "payout-details": {
     setPayout: (_payout: string | undefined): void => {},
     setOnClose: (_listener: (() => void) | undefined): void => {},
+  },
+  "terminal-hardware-shop": {
+    setOnCheckoutFinished: (_listener: (() => void) | undefined): void => {},
   },
   "payout-reconciliation-report": {
     setOnReportAvailabilityLoaded: (
