@@ -47,6 +47,7 @@ export const connectElementTagNames = [
   "financial-accounts",
   "financial-accounts-transactions",
   "bills",
+  "business-profile-management",
 ] as const;
 
 // BEGIN: Setter definitions. All setters and their associated types are defined here. When adding a new component, if it has setters, they should be added here as well.
@@ -234,6 +235,11 @@ export type IntervalType = "day" | "week" | "month" | "quarter" | "year";
 export type ReportName = "gross_volume" | "net_volume";
 
 export type RecipientDataSource = "customers";
+
+export type BusinessProfileSavedEvent = {
+  id: string;
+  action: "created" | "updated";
+};
 
 export type EmbeddedErrorType =
   /**
@@ -528,6 +534,13 @@ export const ConnectElementCustomMethodConfig = {
     setOnReportAvailabilityLoaded: (
       _listener:
         | (({ isReportAvailable }: { isReportAvailable: boolean }) => void)
+        | undefined
+    ): void => {},
+  },
+  "business-profile-management": {
+    setOnBusinessProfileSaved: (
+      _listener:
+        | (({ id, action }: BusinessProfileSavedEvent) => void)
         | undefined
     ): void => {},
   },
