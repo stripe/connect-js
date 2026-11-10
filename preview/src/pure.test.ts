@@ -48,6 +48,7 @@ describe("component loading errors", () => {
       balances.setOnLoadError(onBalancesError);
       instance.update({ locale: "en" });
 
+      expect(document.querySelector(SCRIPT_SELECTOR)).not.toBe(null);
       document
         .querySelector(SCRIPT_SELECTOR)!
         .dispatchEvent(new Event("error"));
@@ -102,7 +103,6 @@ describe("component loading errors", () => {
     await flushPromises();
 
     const element = instance.create("payments");
-    await flushPromises();
     const removedListener = jest.fn();
     element.setOnLoadError(removedListener);
     element.setOnLoadError(undefined);
@@ -166,18 +166,5 @@ describe("pure module", () => {
     require("./pure");
 
     expect(document.querySelector(SCRIPT_SELECTOR)).toBe(null);
-  });
-
-  test("it injects the script if loadConnectAndInitialize is called", async () => {
-    const { loadConnectAndInitialize } = require("./pure");
-    const mockInitParams: IStripeConnectInitParams = {
-      publishableKey: "pk_123",
-      fetchClientSecret: async () => {
-        return "secret_123";
-      },
-    };
-    loadConnectAndInitialize(mockInitParams);
-
-    expect(document.querySelector(SCRIPT_SELECTOR)).not.toBe(null);
   });
 });
