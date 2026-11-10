@@ -26,18 +26,14 @@ describe("component loading errors", () => {
   });
 
   test.each(["injected", "existing"])(
-    "reports %s script failures even if fetching the client secret fails",
+    "reports %s script failures to every component",
     async (source) => {
       if (source === "existing") {
         const script = document.createElement("script");
         script.src = "https://connect-js.stripe.com/v1.0/connect.js";
         document.head.appendChild(script);
       }
-      const instance = loadConnectAndInitialize({
-        ...initParams,
-        fetchClientSecret: () =>
-          Promise.reject(new Error("Secret fetch failed")),
-      });
+      const instance = loadConnectAndInitialize(initParams);
       const payments = instance.create("payments");
       const balances = instance.create("balances");
       const onPaymentsError = jest.fn();

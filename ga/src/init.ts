@@ -114,8 +114,6 @@ export const initStripeConnect = (
       return Promise.reject(error);
     }
   })();
-  // Connect.js consumes this promise after loading, which may fail first.
-  eagerClientSecretPromise.catch(() => {});
   const metaOptions = (initParams as any).metaOptions ?? {};
   const stripeConnectInstance = stripePromise.then((wrapper) =>
     wrapper.initialize({
