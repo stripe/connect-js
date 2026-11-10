@@ -122,9 +122,6 @@ export const initStripeConnect = (
     } as any)
   );
 
-  // Components can be created after initialization has already failed.
-  stripeConnectInstance.catch(() => {});
-
   return {
     create: (tagName) => {
       let htmlName = componentNameMapping[tagName];
