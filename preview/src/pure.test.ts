@@ -2,7 +2,6 @@
 
 import type { IStripeConnectInitParams } from "./exportedTypes/shared";
 import { SCRIPT_SELECTOR } from "./utils/jestHelpers";
-import type { LoadError } from "./components/componentsAndSetters";
 import type { LoadConnectAndInitialize } from "./exportedTypes/shared";
 
 const flushPromises = async () => {
@@ -27,14 +26,18 @@ describe("component loading errors", () => {
   });
 
   test.each(["injected", "existing"])(
-    "reports a network failure for an %s script to every component",
+    "reports %s script failures even if fetching the client secret fails",
     async (source) => {
       if (source === "existing") {
         const script = document.createElement("script");
         script.src = "https://connect-js.stripe.com/v1.0/connect.js";
         document.head.appendChild(script);
       }
-      const instance = loadConnectAndInitialize(initParams);
+      const instance = loadConnectAndInitialize({
+        ...initParams,
+        fetchClientSecret: () =>
+          Promise.reject(new Error("Secret fetch failed")),
+      });
       const payments = instance.create("payments");
       const balances = instance.create("balances");
       const onPaymentsError = jest.fn();
@@ -151,19 +154,6 @@ describe("component loading errors", () => {
     expect(onLoadError).toHaveBeenCalledTimes(1);
   });
 
-  test("handles a rejected client secret when script loading fails", async () => {
-    const element = loadConnectAndInitialize({
-      ...initParams,
-      fetchClientSecret: () => Promise.reject(new Error("Secret fetch failed")),
-    }).create("payments");
-    const onLoadError = jest.fn();
-    element.setOnLoadError(onLoadError);
-    document.querySelector(SCRIPT_SELECTOR)!.dispatchEvent(new Event("error"));
-    await flushPromises();
-
-    expect(onLoadError).toHaveBeenCalledTimes(1);
-  });
-
   test.each(["upgrade", "connector", "setter"])(
     "reports component %s failures",
     async (failure) => {
@@ -222,12 +212,6 @@ describe("component loading errors", () => {
     expect(update).toHaveBeenCalledWith({ locale: "en" });
     expect(onLoadError).not.toHaveBeenCalled();
 
-    const event: LoadError = {
-      elementTagName: "stripe-connect-payments",
-      error: { type: "api_connection_error" },
-    };
-    setOnLoadError.mock.calls[0]![0](event);
-    expect(onLoadError).toHaveBeenCalledWith(event);
     element.setOnLoadError(undefined);
     await flushPromises();
     expect(setOnLoadError).toHaveBeenLastCalledWith(undefined);

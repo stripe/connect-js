@@ -141,11 +141,11 @@ export const initStripeConnect = (
 
       let onLoadError: ((event: LoadError) => void) | undefined;
       let loadError: LoadError | undefined;
-      let loadErrorReported = false;
       const notifyLoadError = () => {
-        if (loadError && onLoadError && !loadErrorReported) {
-          loadErrorReported = true;
-          onLoadError(loadError);
+        if (loadError && onLoadError) {
+          const listener = onLoadError;
+          onLoadError = undefined;
+          listener(loadError);
         }
       };
       const reportLoadError = (error: unknown) => {
@@ -199,9 +199,10 @@ export const initStripeConnect = (
         (element as any)[method] = function (value: any) {
           if (method === "setOnLoadError") {
             onLoadError = value;
-            loadErrorReported = false;
-            // Replay failures asynchronously so listeners can be replaced or removed.
-            Promise.resolve().then(notifyLoadError);
+            if (loadError) {
+              // Replay failures asynchronously so listeners can be replaced or removed.
+              Promise.resolve().then(notifyLoadError);
+            }
           }
           componentPromise
             .then(
