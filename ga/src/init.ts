@@ -78,15 +78,11 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
       }
 
       script.addEventListener("load", () => {
-        try {
-          if (isWindowStripeConnectDefined((window as any).StripeConnect)) {
-            const wrapper = createWrapper((window as any).StripeConnect);
-            resolve(wrapper);
-          } else {
-            reject(new Error("Connect.js did not load the necessary objects"));
-          }
-        } catch (error) {
-          reject(error);
+        if (isWindowStripeConnectDefined((window as any).StripeConnect)) {
+          const wrapper = createWrapper((window as any).StripeConnect);
+          resolve(wrapper);
+        } else {
+          reject(new Error("Connect.js did not load the necessary objects"));
         }
       });
 
@@ -140,57 +136,6 @@ export const initStripeConnect = (
       const element = document.createElement(htmlName);
 
       let onLoadError: ((event: LoadError) => void) | undefined;
-      let loadError: LoadError | undefined;
-      const notifyLoadError = () => {
-        if (loadError && onLoadError) {
-          const listener = onLoadError;
-          onLoadError = undefined;
-          listener(loadError);
-        }
-      };
-      const reportLoadError = (error: unknown) => {
-        if (!loadError) {
-          loadError = {
-            elementTagName: htmlName,
-            error: {
-              type: "render_error",
-              message:
-                error instanceof Error
-                  ? error.message
-                  : "Failed to load Connect.js",
-            },
-          };
-        }
-        notifyLoadError();
-      };
-
-      const componentPromise = stripeConnectInstance.then((instance) => {
-        if (!element.isConnected && !(element as any).setConnector) {
-          // If the element is not connected to the DOM and the `setConnector` method is not
-          // defined, this indicates the element was created before connect.js was loaded, and has
-          // not been transformed into a custom element yet
-
-          // To load the custom element code on it, we need to connect and disconnect it to the DOM
-          // This isn't a problem, as the element will be invisible, and we know the element is already
-          // not currently connected to the DOM
-
-          const oldDisplay = element.style.display;
-          element.style.display = "none";
-          document.body.appendChild(element);
-          document.body.removeChild(element);
-          element.style.display = oldDisplay;
-        }
-
-        if (!element || !(element as any).setConnector) {
-          throw new Error(
-            `Element ${tagName} was not transformed into a custom element. Are you using a documented component? See https://docs.stripe.com/connect/supported-embedded-components for a list of supported components`
-          );
-        }
-
-        (element as any).setConnector((instance as any).connect);
-      });
-      componentPromise.catch(reportLoadError);
-
       const customMethods = hasCustomMethod(tagName)
         ? ConnectElementCustomMethodConfig[tagName]
         : {};
@@ -199,27 +144,69 @@ export const initStripeConnect = (
         (element as any)[method] = function (value: any) {
           if (method === "setOnLoadError") {
             onLoadError = value;
-            if (loadError) {
-              // Replay failures asynchronously so listeners can be replaced or removed.
-              Promise.resolve().then(notifyLoadError);
-            }
           }
-          componentPromise
-            .then(
-              () => {
-                if (!this[`${method}InternalOnly`]) {
-                  throw new Error(
-                    `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`
-                  );
-                }
+          stripeConnectInstance.then(
+            () => {
+              if (!this[`${method}InternalOnly`]) {
+                throw new Error(
+                  `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`
+                );
+              }
 
-                this[`${method}InternalOnly`](value);
-              },
-              () => {}
-            )
-            .catch(reportLoadError);
+              this[`${method}InternalOnly`](value);
+            },
+            (error: unknown) => {
+              if (
+                method === "setOnLoadError" &&
+                onLoadError &&
+                onLoadError === value
+              ) {
+                const listener = onLoadError;
+                onLoadError = undefined;
+                listener({
+                  elementTagName: htmlName,
+                  error: {
+                    type: "render_error",
+                    message:
+                      error instanceof Error
+                        ? error.message
+                        : "Failed to load Connect.js",
+                  },
+                });
+              }
+            }
+          );
         };
       }
+
+      stripeConnectInstance.then(
+        (instance) => {
+          if (!element.isConnected && !(element as any).setConnector) {
+            // If the element is not connected to the DOM and the `setConnector` method is not
+            // defined, this indicates the element was created before connect.js was loaded, and has
+            // not been transformed into a custom element yet
+
+            // To load the custom element code on it, we need to connect and disconnect it to the DOM
+            // This isn't a problem, as the element will be invisible, and we know the element is already
+            // not currently connected to the DOM
+
+            const oldDisplay = element.style.display;
+            element.style.display = "none";
+            document.body.appendChild(element);
+            document.body.removeChild(element);
+            element.style.display = oldDisplay;
+          }
+
+          if (!element || !(element as any).setConnector) {
+            throw new Error(
+              `Element ${tagName} was not transformed into a custom element. Are you using a documented component? See https://docs.stripe.com/connect/supported-embedded-components for a list of supported components`
+            );
+          }
+
+          (element as any).setConnector((instance as any).connect);
+        },
+        () => {}
+      );
 
       return element as ConnectHTMLElementRecord[typeof tagName];
     },

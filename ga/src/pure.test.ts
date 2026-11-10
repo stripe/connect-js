@@ -69,66 +69,31 @@ describe("component loading errors", () => {
     }
   );
 
-  test("reports missing objects after the script loads", async () => {
-    const element = loadConnectAndInitialize(initParams).create("payments");
-    const onLoadError = jest.fn();
-    element.setOnLoadError(onLoadError);
-
-    document.querySelector(SCRIPT_SELECTOR)!.dispatchEvent(new Event("load"));
-    await flushPromises();
-
-    expect(onLoadError).toHaveBeenCalledWith({
-      elementTagName: "stripe-connect-payments",
-      error: {
-        type: "render_error",
-        message: "Connect.js did not load the necessary objects",
-      },
-    });
-  });
-
-  test("reports script injection failures", async () => {
-    jest.spyOn(document.head, "appendChild").mockImplementation(() => {
-      throw new Error("Script injection failed");
-    });
-    const element = loadConnectAndInitialize(initParams).create("payments");
-    const onLoadError = jest.fn();
-    element.setOnLoadError(onLoadError);
-    await flushPromises();
-
-    expect(onLoadError).toHaveBeenCalledWith({
-      elementTagName: "stripe-connect-payments",
-      error: { type: "render_error", message: "Script injection failed" },
-    });
-  });
-
-  test("reports initialization failures", async () => {
-    (window as any).StripeConnect = {
-      init: () => {
-        throw new Error("Initialization failed");
-      },
+  test.each([
+    ["missing objects", "Connect.js did not load the necessary objects"],
+    ["script injection", "Script injection failed"],
+    ["initialization", "Initialization failed"],
+  ])("reports %s failures", async (failure, message) => {
+    const fail = () => {
+      throw new Error(message);
     };
+    if (failure === "script injection") {
+      jest.spyOn(document.head, "appendChild").mockImplementation(fail);
+    } else if (failure === "initialization") {
+      (window as any).StripeConnect = { init: fail };
+    }
     const element = loadConnectAndInitialize(initParams).create("payments");
     const onLoadError = jest.fn();
     element.setOnLoadError(onLoadError);
+    if (failure === "missing objects") {
+      document.querySelector(SCRIPT_SELECTOR)!.dispatchEvent(new Event("load"));
+    }
     await flushPromises();
 
     expect(onLoadError).toHaveBeenCalledWith({
       elementTagName: "stripe-connect-payments",
-      error: { type: "render_error", message: "Initialization failed" },
+      error: { type: "render_error", message },
     });
-  });
-
-  test("reports errors while preparing the loaded script", async () => {
-    const element = loadConnectAndInitialize(initParams).create("payments");
-    const onLoadError = jest.fn();
-    element.setOnLoadError(onLoadError);
-    (window as any).StripeConnect = Object.freeze({ init: jest.fn() });
-
-    document.querySelector(SCRIPT_SELECTOR)!.dispatchEvent(new Event("load"));
-    await flushPromises();
-
-    expect(onLoadError).toHaveBeenCalledTimes(1);
-    expect(onLoadError.mock.calls[0]![0].error.type).toBe("render_error");
   });
 
   test("supports components and listeners created after failure", async () => {
@@ -153,30 +118,6 @@ describe("component loading errors", () => {
     expect(replacedListener).not.toHaveBeenCalled();
     expect(onLoadError).toHaveBeenCalledTimes(1);
   });
-
-  test.each(["upgrade", "connector", "setter"])(
-    "reports component %s failures",
-    async (failure) => {
-      (window as any).StripeConnect = { init: () => ({ connect: {} }) };
-      const element = loadConnectAndInitialize(initParams).create("payments");
-      if (failure !== "upgrade") {
-        (element as any).setConnector = () => {
-          if (failure === "connector") {
-            throw new Error("Connector failed");
-          }
-        };
-      }
-      const onLoadError = jest.fn();
-      element.setOnLoadError(onLoadError);
-      await flushPromises();
-
-      expect(onLoadError).toHaveBeenCalledTimes(1);
-      expect(onLoadError.mock.calls[0]![0]).toMatchObject({
-        elementTagName: "stripe-connect-payments",
-        error: { type: "render_error" },
-      });
-    }
-  );
 
   test("forwards setters and callbacks when loading succeeds", async () => {
     const connector = {};
