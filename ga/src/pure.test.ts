@@ -44,10 +44,9 @@ describe("component loading errors", () => {
       balances.setOnLoadError(onBalancesError);
       instance.update({ locale: "en" });
 
-      expect(document.querySelector(SCRIPT_SELECTOR)).not.toBe(null);
-      document
-        .querySelector(SCRIPT_SELECTOR)!
-        .dispatchEvent(new Event("error"));
+      const script = document.querySelector(SCRIPT_SELECTOR);
+      expect(script).not.toBe(null);
+      script!.dispatchEvent(new Event("error"));
       await flushPromises();
 
       expect(onPaymentsError).toHaveBeenCalledTimes(1);
