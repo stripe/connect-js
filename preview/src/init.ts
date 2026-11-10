@@ -3,6 +3,7 @@ import {
   ConnectElementCustomMethodConfig,
   connectElementTagNames,
 } from "./components/componentsAndSetters";
+import type { LoadError } from "./components/componentsAndSetters";
 import type { ConnectHTMLElementRecord } from "./exportedTypes/shared";
 import type {
   ConnectElementTagName,
@@ -77,11 +78,15 @@ export const loadScript = (): Promise<StripeConnectWrapper> => {
       }
 
       script.addEventListener("load", () => {
-        if (isWindowStripeConnectDefined((window as any).StripeConnect)) {
-          const wrapper = createWrapper((window as any).StripeConnect);
-          resolve(wrapper);
-        } else {
-          reject(new Error("Connect.js did not load the necessary objects"));
+        try {
+          if (isWindowStripeConnectDefined((window as any).StripeConnect)) {
+            const wrapper = createWrapper((window as any).StripeConnect);
+            resolve(wrapper);
+          } else {
+            reject(new Error("Connect.js did not load the necessary objects"));
+          }
+        } catch (error) {
+          reject(error);
         }
       });
 
@@ -113,6 +118,8 @@ export const initStripeConnect = (
       return Promise.reject(error);
     }
   })();
+  // Connect.js consumes this promise after loading, which may fail first.
+  eagerClientSecretPromise.catch(() => {});
   const metaOptions = (initParams as any).metaOptions ?? {};
   const stripeConnectInstance = stripePromise.then((wrapper) =>
     wrapper.initialize({
@@ -120,6 +127,9 @@ export const initStripeConnect = (
       metaOptions: { ...metaOptions, eagerClientSecretPromise },
     } as any)
   );
+
+  // Components can be created after initialization has already failed.
+  stripeConnectInstance.catch(() => {});
 
   return {
     create: (tagName) => {
@@ -129,25 +139,32 @@ export const initStripeConnect = (
       }
       const element = document.createElement(htmlName);
 
-      const customMethods = hasCustomMethod(tagName)
-        ? ConnectElementCustomMethodConfig[tagName]
-        : {};
-      const methods = { ...customMethods, ...ConnectElementCommonMethodConfig };
-      for (const method in methods) {
-        (element as any)[method] = function (value: any) {
-          stripeConnectInstance.then(() => {
-            if (!this[`${method}InternalOnly`]) {
-              throw new Error(
-                `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`
-              );
-            }
+      let onLoadError: ((event: LoadError) => void) | undefined;
+      let loadError: LoadError | undefined;
+      let loadErrorReported = false;
+      const notifyLoadError = () => {
+        if (loadError && onLoadError && !loadErrorReported) {
+          loadErrorReported = true;
+          onLoadError(loadError);
+        }
+      };
+      const reportLoadError = (error: unknown) => {
+        if (!loadError) {
+          loadError = {
+            elementTagName: htmlName,
+            error: {
+              type: "render_error",
+              message:
+                error instanceof Error
+                  ? error.message
+                  : "Failed to load Connect.js",
+            },
+          };
+        }
+        notifyLoadError();
+      };
 
-            this[`${method}InternalOnly`](value);
-          });
-        };
-      }
-
-      stripeConnectInstance.then((instance) => {
+      const componentPromise = stripeConnectInstance.then((instance) => {
         if (!element.isConnected && !(element as any).setConnector) {
           // If the element is not connected to the DOM and the `setConnector` method is not
           // defined, this indicates the element was created before connect.js was loaded, and has
@@ -172,13 +189,46 @@ export const initStripeConnect = (
 
         (element as any).setConnector((instance as any).connect);
       });
+      componentPromise.catch(reportLoadError);
+
+      const customMethods = hasCustomMethod(tagName)
+        ? ConnectElementCustomMethodConfig[tagName]
+        : {};
+      const methods = { ...customMethods, ...ConnectElementCommonMethodConfig };
+      for (const method in methods) {
+        (element as any)[method] = function (value: any) {
+          if (method === "setOnLoadError") {
+            onLoadError = value;
+            loadErrorReported = false;
+            // Replay failures asynchronously so listeners can be replaced or removed.
+            Promise.resolve().then(notifyLoadError);
+          }
+          componentPromise
+            .then(
+              () => {
+                if (!this[`${method}InternalOnly`]) {
+                  throw new Error(
+                    `Method ${method} is not available in the ${tagName} HTML element. Are you using a supported version of the "@stripe/connect-js" package? Using version: _NPM_PACKAGE_VERSION_`
+                  );
+                }
+
+                this[`${method}InternalOnly`](value);
+              },
+              () => {}
+            )
+            .catch(reportLoadError);
+        };
+      }
 
       return element as ConnectHTMLElementRecord[typeof tagName];
     },
     update: (updateOptions) => {
-      stripeConnectInstance.then((instance) => {
-        instance.update(updateOptions);
-      });
+      stripeConnectInstance.then(
+        (instance) => {
+          instance.update(updateOptions);
+        },
+        () => {}
+      );
     },
     debugInstance: () => {
       return stripeConnectInstance;
