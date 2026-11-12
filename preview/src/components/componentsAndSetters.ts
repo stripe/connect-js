@@ -11,7 +11,6 @@ export const connectElementTagNames = [
   "payment-method-settings",
   "account-management",
   "notification-banner",
-  "instant-payouts",
   "instant-payouts-promotion",
   "issuing-card",
   "issuing-cards-list",
