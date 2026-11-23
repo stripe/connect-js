@@ -7,6 +7,7 @@ export const connectElementTagNames = [
   "payments",
   "payment-details",
   "payment-disputes",
+  "payment-method-settings",
   "payouts",
   "payouts-list",
   "payout-details",
@@ -235,6 +236,11 @@ export const ConnectElementCommonMethodConfig = {
 };
 
 export const ConnectElementCustomMethodConfig = {
+  "payment-method-settings": {
+    setPaymentMethodConfiguration: (
+      _paymentMethodConfiguration: string | undefined
+    ): void => {},
+  },
   "account-onboarding": {
     setFullTermsOfServiceUrl: (
       _termOfServiceUrl: string | undefined
